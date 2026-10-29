@@ -1,0 +1,6326 @@
+{
+  "meta": {
+    "source": "古诗70首(2).pptx",
+    "poemCount": 70,
+    "generatedAt": "2026-10-23 12:06:31",
+    "version": 1,
+    "imagesOptimized": true,
+    "audioVoice": "zh-CN-XiaoxiaoNeural",
+    "audioEngine": "edge-tts (neural)"
+  },
+  "cover": {
+    "text": "《古诗70首》",
+    "imageIndex": 0,
+    "slide": 1,
+    "images": [
+      {
+        "file": "assets/images/cover.jpg",
+        "size": [
+          1024,
+          724
+        ],
+        "layout": {
+          "x": 0.0,
+          "y": -0.0056,
+          "w": 1.0667,
+          "h": 1.0056
+        }
+      }
+    ]
+  },
+  "poems": [
+    {
+      "id": "p001",
+      "no": 1,
+      "title": "江南",
+      "titlePinyins": [
+        "jiāng",
+        "nán"
+      ],
+      "dynasty": "汉",
+      "author": "乐府",
+      "authorRaw": "汉乐府",
+      "authorPinyins": [
+        "hàn",
+        "yuè",
+        "fǔ"
+      ],
+      "lines": [
+        "江南可采莲，",
+        "莲叶何田田。",
+        "鱼戏莲叶间。",
+        "鱼戏莲叶东，",
+        "鱼戏莲叶西。",
+        "鱼戏莲叶南，",
+        "鱼戏莲叶北。"
+      ],
+      "linePinyins": [
+        [
+          "jiāng",
+          "nán",
+          "kě",
+          "cǎi",
+          "lián",
+          "，"
+        ],
+        [
+          "lián",
+          "yè",
+          "hé",
+          "tián",
+          "tián",
+          "。"
+        ],
+        [
+          "yú",
+          "xì",
+          "lián",
+          "yè",
+          "jiān",
+          "。"
+        ],
+        [
+          "yú",
+          "xì",
+          "lián",
+          "yè",
+          "dōng",
+          "，"
+        ],
+        [
+          "yú",
+          "xì",
+          "lián",
+          "yè",
+          "xī",
+          "。"
+        ],
+        [
+          "yú",
+          "xì",
+          "lián",
+          "yè",
+          "nán",
+          "，"
+        ],
+        [
+          "yú",
+          "xì",
+          "lián",
+          "yè",
+          "běi",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-001.jpg",
+      "imageSize": [
+        267,
+        524
+      ],
+      "imageLayout": {
+        "x": 0.6417,
+        "y": 0.1116,
+        "w": 0.2915,
+        "h": 0.7833
+      },
+      "extraImages": [],
+      "slide": 2,
+      "audio": "assets/audio/p001.m4a",
+      "lineTimes": [
+        2.21,
+        3.55,
+        5.04,
+        6.43,
+        7.6,
+        8.98,
+        10.22
+      ],
+      "audioDuration": 11.76
+    },
+    {
+      "id": "p002",
+      "no": 2,
+      "title": "敕勒歌",
+      "titlePinyins": [
+        "chì",
+        "lè",
+        "gē"
+      ],
+      "dynasty": "北朝",
+      "author": "民歌",
+      "authorRaw": "北朝民歌",
+      "authorPinyins": [
+        "běi",
+        "cháo",
+        "mín",
+        "gē"
+      ],
+      "lines": [
+        "敕勒川，",
+        "阴山下，",
+        "天似穹庐，",
+        "笼盖四野。",
+        "天苍苍，",
+        "野茫茫，",
+        "风吹草低见牛羊。"
+      ],
+      "linePinyins": [
+        [
+          "chì",
+          "lè",
+          "chuān",
+          "，"
+        ],
+        [
+          "yīn",
+          "shān",
+          "xià",
+          "，"
+        ],
+        [
+          "tiān",
+          "sì",
+          "qióng",
+          "lú",
+          "，"
+        ],
+        [
+          "lóng",
+          "gài",
+          "sì",
+          "yě",
+          "。"
+        ],
+        [
+          "tiān",
+          "cāng",
+          "cāng",
+          "，"
+        ],
+        [
+          "yě",
+          "máng",
+          "máng",
+          "，"
+        ],
+        [
+          "fēng",
+          "chuī",
+          "cǎo",
+          "dī",
+          "xiàn",
+          "niú",
+          "yáng",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-002.jpg",
+      "imageSize": [
+        800,
+        320
+      ],
+      "imageLayout": {
+        "x": 0.0668,
+        "y": 0.2479,
+        "w": 0.8819,
+        "h": 0.6512
+      },
+      "extraImages": [],
+      "slide": 3,
+      "audio": "assets/audio/p002.m4a",
+      "lineTimes": [
+        2.56,
+        3.48,
+        4.43,
+        5.59,
+        6.99,
+        7.94,
+        8.85
+      ],
+      "audioDuration": 11.08
+    },
+    {
+      "id": "p003",
+      "no": 3,
+      "title": "咏鹅",
+      "titlePinyins": [
+        "yǒng",
+        "é"
+      ],
+      "dynasty": "唐",
+      "author": "骆宾王",
+      "authorRaw": "（唐）骆宾王",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "luò",
+        "bīn",
+        "wáng"
+      ],
+      "lines": [
+        "鹅，鹅，鹅，",
+        "曲项向天歌。",
+        "白毛浮绿水，",
+        "红掌拨清波。"
+      ],
+      "linePinyins": [
+        [
+          "é",
+          "，",
+          "é",
+          "，",
+          "é",
+          "，"
+        ],
+        [
+          "qū",
+          "xiàng",
+          "xiàng",
+          "tiān",
+          "gē",
+          "。"
+        ],
+        [
+          "bái",
+          "máo",
+          "fú",
+          "lǜ",
+          "shuǐ",
+          "，"
+        ],
+        [
+          "hóng",
+          "zhǎng",
+          "bō",
+          "qīng",
+          "bō",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-003.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.0668,
+        "y": 0.2479,
+        "w": 0.8741,
+        "h": 0.6512
+      },
+      "extraImages": [],
+      "slide": 4,
+      "audio": "assets/audio/p003.m4a",
+      "lineTimes": [
+        2.77,
+        4.47,
+        5.97,
+        7.18
+      ],
+      "audioDuration": 8.73
+    },
+    {
+      "id": "p004",
+      "no": 4,
+      "title": "风",
+      "titlePinyins": [
+        "fēng"
+      ],
+      "dynasty": "唐",
+      "author": "李峤",
+      "authorRaw": "（唐）李峤",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "lǐ",
+        "qiáo"
+      ],
+      "lines": [
+        "解落三秋叶，",
+        "能开二月花。",
+        "过江千尺浪，",
+        "入竹万竿斜。"
+      ],
+      "linePinyins": [
+        [
+          "jiě",
+          "luò",
+          "sān",
+          "qiū",
+          "yè",
+          "，"
+        ],
+        [
+          "néng",
+          "kāi",
+          "èr",
+          "yuè",
+          "huā",
+          "。"
+        ],
+        [
+          "guò",
+          "jiāng",
+          "qiān",
+          "chǐ",
+          "làng",
+          "，"
+        ],
+        [
+          "rù",
+          "zhú",
+          "wàn",
+          "gān",
+          "xié",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-004.jpg",
+      "imageSize": [
+        240,
+        489
+      ],
+      "imageLayout": {
+        "x": 0.5944,
+        "y": 0.1116,
+        "w": 0.3465,
+        "h": 0.7843
+      },
+      "extraImages": [],
+      "slide": 5,
+      "audio": "assets/audio/p004.m4a",
+      "lineTimes": [
+        2.8,
+        4.23,
+        5.87,
+        7.38
+      ],
+      "audioDuration": 9.4
+    },
+    {
+      "id": "p005",
+      "no": 5,
+      "title": "咏柳",
+      "titlePinyins": [
+        "yǒng",
+        "liǔ"
+      ],
+      "dynasty": "唐",
+      "author": "贺知章",
+      "authorRaw": "（唐）贺知章",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "hè",
+        "zhī",
+        "zhāng"
+      ],
+      "lines": [
+        "碧玉妆成一树高，",
+        "万条垂下绿丝绦。",
+        "不知细叶谁裁出，",
+        "二月春风似剪刀。"
+      ],
+      "linePinyins": [
+        [
+          "bì",
+          "yù",
+          "zhuāng",
+          "chéng",
+          "yī",
+          "shù",
+          "gāo",
+          "，"
+        ],
+        [
+          "wàn",
+          "tiáo",
+          "chuí",
+          "xià",
+          "lǜ",
+          "sī",
+          "tāo",
+          "。"
+        ],
+        [
+          "bù",
+          "zhī",
+          "xì",
+          "yè",
+          "shuí",
+          "cái",
+          "chū",
+          "，"
+        ],
+        [
+          "èr",
+          "yuè",
+          "chūn",
+          "fēng",
+          "sì",
+          "jiǎn",
+          "dāo",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-005.jpg",
+      "imageSize": [
+        225,
+        379
+      ],
+      "imageLayout": {
+        "x": 0.6339,
+        "y": 0.059,
+        "w": 0.3149,
+        "h": 0.8412
+      },
+      "extraImages": [],
+      "slide": 6,
+      "audio": "assets/audio/p005.m4a",
+      "lineTimes": [
+        2.85,
+        4.37,
+        6.24,
+        7.89
+      ],
+      "audioDuration": 9.87
+    },
+    {
+      "id": "p006",
+      "no": 6,
+      "title": "凉州词",
+      "titlePinyins": [
+        "liáng",
+        "zhōu",
+        "cí"
+      ],
+      "dynasty": "唐",
+      "author": "王之焕",
+      "authorRaw": "（唐）王之焕",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "wáng",
+        "zhī",
+        "huàn"
+      ],
+      "lines": [
+        "黄河远上白云间，",
+        "一片孤城万仞山。",
+        "羌笛何须怨杨柳，",
+        "春风不度玉门关。"
+      ],
+      "linePinyins": [
+        [
+          "huáng",
+          "hé",
+          "yuǎn",
+          "shàng",
+          "bái",
+          "yún",
+          "jiān",
+          "，"
+        ],
+        [
+          "yī",
+          "piàn",
+          "gū",
+          "chéng",
+          "wàn",
+          "rèn",
+          "shān",
+          "。"
+        ],
+        [
+          "qiāng",
+          "dí",
+          "hé",
+          "xū",
+          "yuàn",
+          "yáng",
+          "liǔ",
+          "，"
+        ],
+        [
+          "chūn",
+          "fēng",
+          "bù",
+          "dù",
+          "yù",
+          "mén",
+          "guān",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-006.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.0668,
+        "y": 0.2375,
+        "w": 0.8819,
+        "h": 0.6639
+      },
+      "extraImages": [],
+      "slide": 7,
+      "audio": "assets/audio/p006.m4a",
+      "lineTimes": [
+        3.18,
+        4.87,
+        6.82,
+        8.59
+      ],
+      "audioDuration": 10.61
+    },
+    {
+      "id": "p007",
+      "no": 7,
+      "title": "登鹳雀楼",
+      "titlePinyins": [
+        "dēng",
+        "guàn",
+        "què",
+        "lóu"
+      ],
+      "dynasty": "唐",
+      "author": "王之焕",
+      "authorRaw": "（唐）王之焕",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "wáng",
+        "zhī",
+        "huàn"
+      ],
+      "lines": [
+        "白日依山尽，",
+        "黄河入海流。",
+        "欲穷千里目，",
+        "更上一层楼。"
+      ],
+      "linePinyins": [
+        [
+          "bái",
+          "rì",
+          "yī",
+          "shān",
+          "jìn",
+          "，"
+        ],
+        [
+          "huáng",
+          "hé",
+          "rù",
+          "hǎi",
+          "liú",
+          "。"
+        ],
+        [
+          "yù",
+          "qióng",
+          "qiān",
+          "lǐ",
+          "mù",
+          "，"
+        ],
+        [
+          "gèng",
+          "shàng",
+          "yī",
+          "céng",
+          "lóu",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-007.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.0668,
+        "y": 0.269,
+        "w": 0.8663,
+        "h": 0.6301
+      },
+      "extraImages": [],
+      "slide": 8,
+      "audio": "assets/audio/p007.m4a",
+      "lineTimes": [
+        3.26,
+        4.51,
+        6.1,
+        7.39
+      ],
+      "audioDuration": 9.1
+    },
+    {
+      "id": "p008",
+      "no": 8,
+      "title": "春晓",
+      "titlePinyins": [
+        "chūn",
+        "xiǎo"
+      ],
+      "dynasty": "唐",
+      "author": "孟浩然",
+      "authorRaw": "（唐）孟浩然",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "mèng",
+        "hào",
+        "rán"
+      ],
+      "lines": [
+        "春眠不觉晓，",
+        "处处闻啼鸟。",
+        "夜来风雨声，",
+        "花落知多少?"
+      ],
+      "linePinyins": [
+        [
+          "chūn",
+          "mián",
+          "bù",
+          "jué",
+          "xiǎo",
+          "，"
+        ],
+        [
+          "chù",
+          "chù",
+          "wén",
+          "tí",
+          "niǎo",
+          "。"
+        ],
+        [
+          "yè",
+          "lái",
+          "fēng",
+          "yǔ",
+          "shēng",
+          "，"
+        ],
+        [
+          "huā",
+          "luò",
+          "zhī",
+          "duō",
+          "shǎo",
+          "?"
+        ]
+      ],
+      "image": "assets/images/poem-008.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.4292,
+        "y": 0.3845,
+        "w": 0.496,
+        "h": 0.5065
+      },
+      "extraImages": [],
+      "slide": 9,
+      "audio": "assets/audio/p008.m4a",
+      "lineTimes": [
+        2.88,
+        4.17,
+        5.61,
+        6.85
+      ],
+      "audioDuration": 8.42
+    },
+    {
+      "id": "p009",
+      "no": 9,
+      "title": "凉州词",
+      "titlePinyins": [
+        "liáng",
+        "zhōu",
+        "cí"
+      ],
+      "dynasty": "唐",
+      "author": "王翰",
+      "authorRaw": "（唐）王翰",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "wáng",
+        "hàn"
+      ],
+      "lines": [
+        "葡萄美酒夜光杯，",
+        "欲饮琵琶马上催。",
+        "醉卧沙场君莫笑，",
+        "古来征战几人回？"
+      ],
+      "linePinyins": [
+        [
+          "pú",
+          "táo",
+          "měi",
+          "jiǔ",
+          "yè",
+          "guāng",
+          "bēi",
+          "，"
+        ],
+        [
+          "yù",
+          "yǐn",
+          "pí",
+          "pá",
+          "mǎ",
+          "shàng",
+          "cuī",
+          "。"
+        ],
+        [
+          "zuì",
+          "wò",
+          "shā",
+          "chǎng",
+          "jūn",
+          "mò",
+          "xiào",
+          "，"
+        ],
+        [
+          "gǔ",
+          "lái",
+          "zhēng",
+          "zhàn",
+          "jǐ",
+          "rén",
+          "huí",
+          "？"
+        ]
+      ],
+      "image": "assets/images/poem-009.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.4764,
+        "y": 0.353,
+        "w": 0.483,
+        "h": 0.4609
+      },
+      "extraImages": [],
+      "slide": 10,
+      "audio": "assets/audio/p009.m4a",
+      "lineTimes": [
+        3.0,
+        4.6,
+        6.44,
+        8.13
+      ],
+      "audioDuration": 10.2
+    },
+    {
+      "id": "p010",
+      "no": 10,
+      "title": "出塞",
+      "titlePinyins": [
+        "chū",
+        "sài"
+      ],
+      "dynasty": "唐",
+      "author": "王昌龄",
+      "authorRaw": "（唐）王昌龄",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "wáng",
+        "chāng",
+        "líng"
+      ],
+      "lines": [
+        "秦时明月汉时关，",
+        "万里长征人未还。",
+        "但使龙城飞将在，",
+        "不教胡马度阴山！"
+      ],
+      "linePinyins": [
+        [
+          "qín",
+          "shí",
+          "míng",
+          "yuè",
+          "hàn",
+          "shí",
+          "guān",
+          "，"
+        ],
+        [
+          "wàn",
+          "lǐ",
+          "cháng",
+          "zhēng",
+          "rén",
+          "wèi",
+          "huán",
+          "。"
+        ],
+        [
+          "dàn",
+          "shǐ",
+          "lóng",
+          "chéng",
+          "fēi",
+          "jiàng",
+          "zài",
+          "，"
+        ],
+        [
+          "bù",
+          "jiào",
+          "hú",
+          "mǎ",
+          "dù",
+          "yīn",
+          "shān",
+          "！"
+        ]
+      ],
+      "image": "assets/images/poem-010.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.5788,
+        "y": 0.2271,
+        "w": 0.37,
+        "h": 0.672
+      },
+      "extraImages": [],
+      "slide": 11,
+      "audio": "assets/audio/p010.m4a",
+      "lineTimes": [
+        2.95,
+        4.67,
+        6.6,
+        8.26
+      ],
+      "audioDuration": 10.29
+    },
+    {
+      "id": "p011",
+      "no": 11,
+      "title": "芙蓉楼送辛渐",
+      "titlePinyins": [
+        "fú",
+        "róng",
+        "lóu",
+        "sòng",
+        "xīn",
+        "jiàn"
+      ],
+      "dynasty": "唐",
+      "author": "王昌龄",
+      "authorRaw": "（唐）王昌龄",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "wáng",
+        "chāng",
+        "líng"
+      ],
+      "lines": [
+        "寒雨连江夜入吴，",
+        "平明送客楚山孤。",
+        "洛阳亲友如相问，",
+        "一片冰心在玉壶。"
+      ],
+      "linePinyins": [
+        [
+          "hán",
+          "yǔ",
+          "lián",
+          "jiāng",
+          "yè",
+          "rù",
+          "wú",
+          "，"
+        ],
+        [
+          "píng",
+          "míng",
+          "sòng",
+          "kè",
+          "chǔ",
+          "shān",
+          "gū",
+          "。"
+        ],
+        [
+          "luò",
+          "yáng",
+          "qīn",
+          "yǒu",
+          "rú",
+          "xiāng",
+          "wèn",
+          "，"
+        ],
+        [
+          "yī",
+          "piàn",
+          "bīng",
+          "xīn",
+          "zài",
+          "yù",
+          "hú",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-011.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.4764,
+        "y": 0.3005,
+        "w": 0.4568,
+        "h": 0.5356
+      },
+      "extraImages": [],
+      "slide": 12,
+      "audio": "assets/audio/p011.m4a",
+      "lineTimes": [
+        4.36,
+        6.5,
+        9.01,
+        11.08
+      ],
+      "audioDuration": 13.86
+    },
+    {
+      "id": "p012",
+      "no": 12,
+      "title": "鹿柴",
+      "titlePinyins": [
+        "lù",
+        "zhài"
+      ],
+      "dynasty": "唐",
+      "author": "王维",
+      "authorRaw": "（唐）王维",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "wáng",
+        "wéi"
+      ],
+      "lines": [
+        "空山不见人，",
+        "但闻人语响。",
+        "返景入深林，",
+        "复照青苔上。"
+      ],
+      "linePinyins": [
+        [
+          "kōng",
+          "shān",
+          "bú",
+          "jiàn",
+          "rén",
+          "，"
+        ],
+        [
+          "dàn",
+          "wén",
+          "rén",
+          "yǔ",
+          "xiǎng",
+          "。"
+        ],
+        [
+          "fǎn",
+          "jǐng",
+          "rù",
+          "shēn",
+          "lín",
+          "，"
+        ],
+        [
+          "fù",
+          "zhào",
+          "qīng",
+          "tái",
+          "shàng",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-012.jpg",
+      "imageSize": [
+        388,
+        700
+      ],
+      "imageLayout": {
+        "x": 0.604,
+        "y": 0.1116,
+        "w": 0.3245,
+        "h": 0.7875
+      },
+      "extraImages": [],
+      "slide": 13,
+      "audio": "assets/audio/p012.m4a",
+      "lineTimes": [
+        2.89,
+        4.34,
+        5.94,
+        7.51
+      ],
+      "audioDuration": 9.47
+    },
+    {
+      "id": "p013",
+      "no": 13,
+      "title": "送元二使安西",
+      "titlePinyins": [
+        "sòng",
+        "yuán",
+        "èr",
+        "shǐ",
+        "ān",
+        "xī"
+      ],
+      "dynasty": "唐",
+      "author": "王维",
+      "authorRaw": "（唐）王维",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "wáng",
+        "wéi"
+      ],
+      "lines": [
+        "渭城朝雨浥轻尘，",
+        "客舍青青柳色新。",
+        "劝君更尽一杯酒，",
+        "西出阳关无故人。"
+      ],
+      "linePinyins": [
+        [
+          "wèi",
+          "chéng",
+          "zhāo",
+          "yǔ",
+          "yì",
+          "qīng",
+          "chén",
+          "，"
+        ],
+        [
+          "kè",
+          "shě",
+          "qīng",
+          "qīng",
+          "liǔ",
+          "sè",
+          "xīn",
+          "。"
+        ],
+        [
+          "quàn",
+          "jūn",
+          "gèng",
+          "jìn",
+          "yī",
+          "bēi",
+          "jiǔ",
+          "，"
+        ],
+        [
+          "xī",
+          "chū",
+          "yáng",
+          "guān",
+          "wú",
+          "gù",
+          "rén",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-013.jpg",
+      "imageSize": [
+        320,
+        212
+      ],
+      "imageLayout": {
+        "x": 0.5078,
+        "y": 0.5315,
+        "w": 0.4253,
+        "h": 0.3625
+      },
+      "extraImages": [],
+      "slide": 14,
+      "audio": "assets/audio/p013.m4a",
+      "lineTimes": [
+        4.07,
+        6.19,
+        8.81,
+        10.84
+      ],
+      "audioDuration": 13.42
+    },
+    {
+      "id": "p014",
+      "no": 14,
+      "title": "九月九日忆山东兄弟",
+      "titlePinyins": [
+        "jiǔ",
+        "yuè",
+        "jiǔ",
+        "rì",
+        "yì",
+        "shān",
+        "dōng",
+        "xiōng",
+        "dì"
+      ],
+      "dynasty": "唐",
+      "author": "王维",
+      "authorRaw": "（唐）王维",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "wáng",
+        "wéi"
+      ],
+      "lines": [
+        "独在异乡为异客，",
+        "每逢佳节倍思亲。",
+        "遥知兄弟登高处，",
+        "遍插茱萸少一人。"
+      ],
+      "linePinyins": [
+        [
+          "dú",
+          "zài",
+          "yì",
+          "xiāng",
+          "wéi",
+          "yì",
+          "kè",
+          "，"
+        ],
+        [
+          "měi",
+          "féng",
+          "jiā",
+          "jié",
+          "bèi",
+          "sī",
+          "qīn",
+          "。"
+        ],
+        [
+          "yáo",
+          "zhī",
+          "xiōng",
+          "dì",
+          "dēng",
+          "gāo",
+          "chù",
+          "，"
+        ],
+        [
+          "biàn",
+          "chā",
+          "zhū",
+          "yú",
+          "shǎo",
+          "yī",
+          "rén",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-014.jpg",
+      "imageSize": [
+        500,
+        358
+      ],
+      "imageLayout": {
+        "x": 0.0668,
+        "y": 0.2375,
+        "w": 0.8741,
+        "h": 0.6583
+      },
+      "extraImages": [],
+      "slide": 15,
+      "audio": "assets/audio/p014.m4a",
+      "lineTimes": [
+        4.85,
+        6.79,
+        9.3,
+        11.39
+      ],
+      "audioDuration": 14.02
+    },
+    {
+      "id": "p015",
+      "no": 15,
+      "title": "静夜思",
+      "titlePinyins": [
+        "jìng",
+        "yè",
+        "sī"
+      ],
+      "dynasty": "唐",
+      "author": "李白",
+      "authorRaw": "（唐）李白",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "lǐ",
+        "bái"
+      ],
+      "lines": [
+        "床前明月光，",
+        "疑是地上霜。",
+        "举头望明月，",
+        "低头思故乡。"
+      ],
+      "linePinyins": [
+        [
+          "chuáng",
+          "qián",
+          "míng",
+          "yuè",
+          "guāng",
+          "，"
+        ],
+        [
+          "yí",
+          "shì",
+          "dì",
+          "shàng",
+          "shuāng",
+          "。"
+        ],
+        [
+          "jǔ",
+          "tóu",
+          "wàng",
+          "míng",
+          "yuè",
+          "，"
+        ],
+        [
+          "dī",
+          "tóu",
+          "sī",
+          "gù",
+          "xiāng",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-015.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.0668,
+        "y": 0.2479,
+        "w": 0.8741,
+        "h": 0.6512
+      },
+      "extraImages": [],
+      "slide": 16,
+      "audio": "assets/audio/p015.m4a",
+      "lineTimes": [
+        3.29,
+        4.96,
+        6.94,
+        8.52
+      ],
+      "audioDuration": 10.7
+    },
+    {
+      "id": "p016",
+      "no": 16,
+      "title": "古朗月行（节录）",
+      "titlePinyins": [
+        "gǔ",
+        "lǎng",
+        "yuè",
+        "xíng",
+        "（",
+        "jié",
+        "lù",
+        "）"
+      ],
+      "dynasty": "唐",
+      "author": "李白",
+      "authorRaw": "（唐）李白",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "lǐ",
+        "bái"
+      ],
+      "lines": [
+        "小时不识月，",
+        "呼作白玉盘。",
+        "又疑瑶台镜，",
+        "飞在青云端。"
+      ],
+      "linePinyins": [
+        [
+          "xiǎo",
+          "shí",
+          "bù",
+          "shí",
+          "yuè",
+          "，"
+        ],
+        [
+          "hū",
+          "zuò",
+          "bái",
+          "yù",
+          "pán",
+          "。"
+        ],
+        [
+          "yòu",
+          "yí",
+          "yáo",
+          "tái",
+          "jìng",
+          "，"
+        ],
+        [
+          "fēi",
+          "zài",
+          "qīng",
+          "yún",
+          "duān",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-016.jpg",
+      "imageSize": [
+        320,
+        430
+      ],
+      "imageLayout": {
+        "x": 0.6102,
+        "y": 0.038,
+        "w": 0.3661,
+        "h": 0.8505
+      },
+      "extraImages": [],
+      "slide": 17,
+      "audio": "assets/audio/p016.m4a",
+      "lineTimes": [
+        3.36,
+        4.55,
+        5.92,
+        7.14
+      ],
+      "audioDuration": 8.71
+    },
+    {
+      "id": "p017",
+      "no": 17,
+      "title": "望庐山瀑布",
+      "titlePinyins": [
+        "wàng",
+        "lú",
+        "shān",
+        "pù",
+        "bù"
+      ],
+      "dynasty": "唐",
+      "author": "李白",
+      "authorRaw": "（唐）李白",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "lǐ",
+        "bái"
+      ],
+      "lines": [
+        "日照香炉生紫烟，",
+        "遥看瀑布挂前川，",
+        "飞流直下三千尺。",
+        "疑是银河落九天。"
+      ],
+      "linePinyins": [
+        [
+          "rì",
+          "zhào",
+          "xiāng",
+          "lú",
+          "shēng",
+          "zǐ",
+          "yān",
+          "，"
+        ],
+        [
+          "yáo",
+          "kàn",
+          "pù",
+          "bù",
+          "guà",
+          "qián",
+          "chuān",
+          "，"
+        ],
+        [
+          "fēi",
+          "liú",
+          "zhí",
+          "xià",
+          "sān",
+          "qiān",
+          "chǐ",
+          "。"
+        ],
+        [
+          "yí",
+          "shì",
+          "yín",
+          "hé",
+          "luò",
+          "jiǔ",
+          "tiān",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-017.jpg",
+      "imageSize": [
+        320,
+        480
+      ],
+      "imageLayout": {
+        "x": 0.5552,
+        "y": 0.1116,
+        "w": 0.3701,
+        "h": 0.7875
+      },
+      "extraImages": [],
+      "slide": 18,
+      "audio": "assets/audio/p017.m4a",
+      "lineTimes": [
+        3.2,
+        4.94,
+        6.66,
+        8.71
+      ],
+      "audioDuration": 10.84
+    },
+    {
+      "id": "p018",
+      "no": 18,
+      "title": "赠汪伦",
+      "titlePinyins": [
+        "zèng",
+        "wāng",
+        "lún"
+      ],
+      "dynasty": "唐",
+      "author": "李白",
+      "authorRaw": "（唐）李白",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "lǐ",
+        "bái"
+      ],
+      "lines": [
+        "李白乘舟将欲行，",
+        "忽闻岸上踏歌声。",
+        "桃花潭水深千尺，",
+        "不及汪伦送我情。"
+      ],
+      "linePinyins": [
+        [
+          "lǐ",
+          "bái",
+          "chéng",
+          "zhōu",
+          "jiāng",
+          "yù",
+          "xíng",
+          "，"
+        ],
+        [
+          "hū",
+          "wén",
+          "àn",
+          "shàng",
+          "tà",
+          "gē",
+          "shēng",
+          "。"
+        ],
+        [
+          "táo",
+          "huā",
+          "tán",
+          "shuǐ",
+          "shēn",
+          "qiān",
+          "chǐ",
+          "，"
+        ],
+        [
+          "bù",
+          "jí",
+          "wāng",
+          "lún",
+          "sòng",
+          "wǒ",
+          "qíng",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-018.jpg",
+      "imageSize": [
+        800,
+        583
+      ],
+      "imageLayout": {
+        "x": 0.0668,
+        "y": 0.2479,
+        "w": 0.8741,
+        "h": 0.6498
+      },
+      "extraImages": [],
+      "slide": 19,
+      "audio": "assets/audio/p018.m4a",
+      "lineTimes": [
+        2.82,
+        4.51,
+        6.31,
+        8.1
+      ],
+      "audioDuration": 10.06
+    },
+    {
+      "id": "p019",
+      "no": 19,
+      "title": "黄鹤楼送孟浩然之广陵",
+      "titlePinyins": [
+        "huáng",
+        "hè",
+        "lóu",
+        "sòng",
+        "mèng",
+        "hào",
+        "rán",
+        "zhī",
+        "guǎng",
+        "líng"
+      ],
+      "dynasty": "唐",
+      "author": "李白",
+      "authorRaw": "（唐）李白",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "lǐ",
+        "bái"
+      ],
+      "lines": [
+        "故人西辞黄鹤楼，",
+        "烟花三月下扬州。",
+        "孤帆远影碧空尽，",
+        "惟见长江天际流。"
+      ],
+      "linePinyins": [
+        [
+          "gù",
+          "rén",
+          "xī",
+          "cí",
+          "huáng",
+          "hè",
+          "lóu",
+          "，"
+        ],
+        [
+          "yān",
+          "huā",
+          "sān",
+          "yuè",
+          "xià",
+          "yáng",
+          "zhōu",
+          "。"
+        ],
+        [
+          "gū",
+          "fān",
+          "yuǎn",
+          "yǐng",
+          "bì",
+          "kōng",
+          "jìn",
+          "，"
+        ],
+        [
+          "wéi",
+          "jiàn",
+          "cháng",
+          "jiāng",
+          "tiān",
+          "jì",
+          "liú",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-019.jpg",
+      "imageSize": [
+        372,
+        521
+      ],
+      "imageLayout": {
+        "x": 0.5314,
+        "y": 0.2794,
+        "w": 0.4214,
+        "h": 0.6083
+      },
+      "extraImages": [],
+      "slide": 20,
+      "audio": "assets/audio/p019.m4a",
+      "lineTimes": [
+        4.98,
+        7.07,
+        9.56,
+        11.63
+      ],
+      "audioDuration": 14.4
+    },
+    {
+      "id": "p020",
+      "no": 20,
+      "title": "早发白帝城",
+      "titlePinyins": [
+        "zǎo",
+        "fā",
+        "bái",
+        "dì",
+        "chéng"
+      ],
+      "dynasty": "唐",
+      "author": "李白",
+      "authorRaw": "（唐）李白",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "lǐ",
+        "bái"
+      ],
+      "lines": [
+        "朝辞白帝彩云间，",
+        "千里江陵一日还。",
+        "两岸猿声啼不住，",
+        "轻舟已过万重山。"
+      ],
+      "linePinyins": [
+        [
+          "zhāo",
+          "cí",
+          "bái",
+          "dì",
+          "cǎi",
+          "yún",
+          "jiān",
+          "，"
+        ],
+        [
+          "qiān",
+          "lǐ",
+          "jiāng",
+          "líng",
+          "yī",
+          "rì",
+          "huán",
+          "。"
+        ],
+        [
+          "liǎng",
+          "àn",
+          "yuán",
+          "shēng",
+          "tí",
+          "bú",
+          "zhù",
+          "，"
+        ],
+        [
+          "qīng",
+          "zhōu",
+          "yǐ",
+          "guò",
+          "wàn",
+          "chóng",
+          "shān",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-020.jpg",
+      "imageSize": [
+        442,
+        692
+      ],
+      "imageLayout": {
+        "x": 0.6102,
+        "y": 0.2271,
+        "w": 0.3266,
+        "h": 0.672
+      },
+      "extraImages": [],
+      "slide": 21,
+      "audio": "assets/audio/p020.m4a",
+      "lineTimes": [
+        3.19,
+        4.77,
+        6.52,
+        8.01
+      ],
+      "audioDuration": 10.05
+    },
+    {
+      "id": "p021",
+      "no": 21,
+      "title": "望天门山",
+      "titlePinyins": [
+        "wàng",
+        "tiān",
+        "mén",
+        "shān"
+      ],
+      "dynasty": "唐",
+      "author": "李白",
+      "authorRaw": "（唐）李白",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "lǐ",
+        "bái"
+      ],
+      "lines": [
+        "天门中断楚江开，",
+        "碧水东流至此回。",
+        "两岸青山相对出，",
+        "孤帆一片日边来。"
+      ],
+      "linePinyins": [
+        [
+          "tiān",
+          "mén",
+          "zhōng",
+          "duàn",
+          "chǔ",
+          "jiāng",
+          "kāi",
+          "，"
+        ],
+        [
+          "bì",
+          "shuǐ",
+          "dōng",
+          "liú",
+          "zhì",
+          "cǐ",
+          "huí",
+          "。"
+        ],
+        [
+          "liǎng",
+          "àn",
+          "qīng",
+          "shān",
+          "xiāng",
+          "duì",
+          "chū",
+          "，"
+        ],
+        [
+          "gū",
+          "fān",
+          "yī",
+          "piàn",
+          "rì",
+          "biān",
+          "lái",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-021.jpg",
+      "imageSize": [
+        300,
+        156
+      ],
+      "imageLayout": {
+        "x": 0.4686,
+        "y": 0.3005,
+        "w": 0.433,
+        "h": 0.441
+      },
+      "extraImages": [],
+      "slide": 22,
+      "audio": "assets/audio/p021.m4a",
+      "lineTimes": [
+        3.06,
+        4.81,
+        6.79,
+        8.54
+      ],
+      "audioDuration": 10.62
+    },
+    {
+      "id": "p022",
+      "no": 22,
+      "title": "别董大",
+      "titlePinyins": [
+        "bié",
+        "dǒng",
+        "dà"
+      ],
+      "dynasty": "唐",
+      "author": "高适",
+      "authorRaw": "（唐）高适",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "gāo",
+        "shì"
+      ],
+      "lines": [
+        "千里黄云白日曛，",
+        "北风吹雁雪纷纷。",
+        "莫愁前路无知己，",
+        "天下谁人不识君？"
+      ],
+      "linePinyins": [
+        [
+          "qiān",
+          "lǐ",
+          "huáng",
+          "yún",
+          "bái",
+          "rì",
+          "xūn",
+          "，"
+        ],
+        [
+          "běi",
+          "fēng",
+          "chuī",
+          "yàn",
+          "xuě",
+          "fēn",
+          "fēn",
+          "。"
+        ],
+        [
+          "mò",
+          "chóu",
+          "qián",
+          "lù",
+          "wú",
+          "zhī",
+          "jǐ",
+          "，"
+        ],
+        [
+          "tiān",
+          "xià",
+          "shuí",
+          "rén",
+          "bù",
+          "shí",
+          "jūn",
+          "？"
+        ]
+      ],
+      "image": "assets/images/poem-022.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.5788,
+        "y": 0.3634,
+        "w": 0.3491,
+        "h": 0.4595
+      },
+      "extraImages": [],
+      "slide": 23,
+      "audio": "assets/audio/p022.m4a",
+      "lineTimes": [
+        2.9,
+        4.6,
+        6.55,
+        8.26
+      ],
+      "audioDuration": 10.43
+    },
+    {
+      "id": "p023",
+      "no": 23,
+      "title": "绝句",
+      "titlePinyins": [
+        "jué",
+        "jù"
+      ],
+      "dynasty": "唐",
+      "author": "杜甫",
+      "authorRaw": "（唐）杜甫",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "dù",
+        "fǔ"
+      ],
+      "lines": [
+        "两个黄鹂鸣翠柳，",
+        "一行白鹭上青天。",
+        "窗含西岭千秋雪，",
+        "门泊东吴万里船。"
+      ],
+      "linePinyins": [
+        [
+          "liǎng",
+          "gè",
+          "huáng",
+          "lí",
+          "míng",
+          "cuì",
+          "liǔ",
+          "，"
+        ],
+        [
+          "yī",
+          "háng",
+          "bái",
+          "lù",
+          "shàng",
+          "qīng",
+          "tiān",
+          "。"
+        ],
+        [
+          "chuāng",
+          "hán",
+          "xī",
+          "lǐng",
+          "qiān",
+          "qiū",
+          "xuě",
+          "，"
+        ],
+        [
+          "mén",
+          "bó",
+          "dōng",
+          "wú",
+          "wàn",
+          "lǐ",
+          "chuán",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-023.jpg",
+      "imageSize": [
+        397,
+        280
+      ],
+      "imageLayout": {
+        "x": 0.4686,
+        "y": 0.269,
+        "w": 0.4648,
+        "h": 0.5986
+      },
+      "extraImages": [],
+      "slide": 24,
+      "audio": "assets/audio/p023.m4a",
+      "lineTimes": [
+        2.75,
+        4.31,
+        6.09,
+        7.85
+      ],
+      "audioDuration": 9.84
+    },
+    {
+      "id": "p024",
+      "no": 24,
+      "title": "春夜喜雨",
+      "titlePinyins": [
+        "chūn",
+        "yè",
+        "xǐ",
+        "yǔ"
+      ],
+      "dynasty": "唐",
+      "author": "杜甫",
+      "authorRaw": "（唐）杜甫",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "dù",
+        "fǔ"
+      ],
+      "lines": [
+        "好雨知时节，",
+        "当春乃发生。",
+        "随风潜入夜，",
+        "润物细无声。",
+        "野径云俱黑，",
+        "江船火独明。",
+        "晓看红湿处，",
+        "花重锦官城。"
+      ],
+      "linePinyins": [
+        [
+          "hǎo",
+          "yǔ",
+          "zhī",
+          "shí",
+          "jié",
+          "，"
+        ],
+        [
+          "dāng",
+          "chūn",
+          "nǎi",
+          "fā",
+          "shēng",
+          "。"
+        ],
+        [
+          "suí",
+          "fēng",
+          "qián",
+          "rù",
+          "yè",
+          "，"
+        ],
+        [
+          "rùn",
+          "wù",
+          "xì",
+          "wú",
+          "shēng",
+          "。"
+        ],
+        [
+          "yě",
+          "jìng",
+          "yún",
+          "jù",
+          "hēi",
+          "，"
+        ],
+        [
+          "jiāng",
+          "chuán",
+          "huǒ",
+          "dú",
+          "míng",
+          "。"
+        ],
+        [
+          "xiǎo",
+          "kàn",
+          "hóng",
+          "shī",
+          "chù",
+          "，"
+        ],
+        [
+          "huā",
+          "zhòng",
+          "jǐn",
+          "guān",
+          "chéng",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-024.jpg",
+      "imageSize": [
+        328,
+        203
+      ],
+      "imageLayout": {
+        "x": 0.3267,
+        "y": 0.437,
+        "w": 0.6339,
+        "h": 0.4475
+      },
+      "extraImages": [],
+      "slide": 25,
+      "audio": "assets/audio/p024.m4a",
+      "lineTimes": [
+        3.43,
+        4.91,
+        6.64,
+        8.19,
+        9.89,
+        11.32,
+        13.1,
+        14.56
+      ],
+      "audioDuration": 16.48
+    },
+    {
+      "id": "p025",
+      "no": 25,
+      "title": "绝句",
+      "titlePinyins": [
+        "jué",
+        "jù"
+      ],
+      "dynasty": "唐",
+      "author": "杜甫",
+      "authorRaw": "（唐）杜甫",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "dù",
+        "fǔ"
+      ],
+      "lines": [
+        "迟日江山丽，",
+        "春风花草香。",
+        "泥融飞燕子，",
+        "沙暖睡鸳鸯。"
+      ],
+      "linePinyins": [
+        [
+          "chí",
+          "rì",
+          "jiāng",
+          "shān",
+          "lì",
+          "，"
+        ],
+        [
+          "chūn",
+          "fēng",
+          "huā",
+          "cǎo",
+          "xiāng",
+          "。"
+        ],
+        [
+          "ní",
+          "róng",
+          "fēi",
+          "yàn",
+          "zi",
+          "，"
+        ],
+        [
+          "shā",
+          "nuǎn",
+          "shuì",
+          "yuān",
+          "yāng",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-025.jpg",
+      "imageSize": [
+        320,
+        240
+      ],
+      "imageLayout": {
+        "x": 0.3583,
+        "y": 0.3426,
+        "w": 0.5668,
+        "h": 0.5039
+      },
+      "extraImages": [],
+      "slide": 26,
+      "audio": "assets/audio/p025.m4a",
+      "lineTimes": [
+        2.75,
+        4.05,
+        5.56,
+        6.86
+      ],
+      "audioDuration": 8.56
+    },
+    {
+      "id": "p026",
+      "no": 26,
+      "title": "江畔独步寻花",
+      "titlePinyins": [
+        "jiāng",
+        "pàn",
+        "dú",
+        "bù",
+        "xún",
+        "huā"
+      ],
+      "dynasty": "唐",
+      "author": "杜甫",
+      "authorRaw": "（唐）杜甫",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "dù",
+        "fǔ"
+      ],
+      "lines": [
+        "黄师塔前江水东，",
+        "春光懒困倚微风。",
+        "桃花一簇开无主，",
+        "可爱深红爱浅红？"
+      ],
+      "linePinyins": [
+        [
+          "huáng",
+          "shī",
+          "tǎ",
+          "qián",
+          "jiāng",
+          "shuǐ",
+          "dōng",
+          "，"
+        ],
+        [
+          "chūn",
+          "guāng",
+          "lǎn",
+          "kùn",
+          "yǐ",
+          "wēi",
+          "fēng",
+          "。"
+        ],
+        [
+          "táo",
+          "huā",
+          "yī",
+          "cù",
+          "kāi",
+          "wú",
+          "zhǔ",
+          "，"
+        ],
+        [
+          "kě",
+          "ài",
+          "shēn",
+          "hóng",
+          "ài",
+          "qiǎn",
+          "hóng",
+          "？"
+        ]
+      ],
+      "image": "assets/images/poem-026.jpg",
+      "imageSize": [
+        320,
+        240
+      ],
+      "imageLayout": {
+        "x": 0.122,
+        "y": 0.2586,
+        "w": 0.7559,
+        "h": 0.609
+      },
+      "extraImages": [],
+      "slide": 27,
+      "audio": "assets/audio/p026.m4a",
+      "lineTimes": [
+        3.51,
+        5.13,
+        6.95,
+        8.55
+      ],
+      "audioDuration": 10.54
+    },
+    {
+      "id": "p027",
+      "no": 27,
+      "title": "枫桥夜泊",
+      "titlePinyins": [
+        "fēng",
+        "qiáo",
+        "yè",
+        "bó"
+      ],
+      "dynasty": "唐",
+      "author": "张继",
+      "authorRaw": "（唐）张继",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "zhāng",
+        "jì"
+      ],
+      "lines": [
+        "月落乌啼霜满天，",
+        "江枫渔火对愁眠。",
+        "姑苏城外寒山寺，",
+        "夜半钟声到客船。"
+      ],
+      "linePinyins": [
+        [
+          "yuè",
+          "luò",
+          "wū",
+          "tí",
+          "shuāng",
+          "mǎn",
+          "tiān",
+          "，"
+        ],
+        [
+          "jiāng",
+          "fēng",
+          "yú",
+          "huǒ",
+          "duì",
+          "chóu",
+          "mián",
+          "。"
+        ],
+        [
+          "gū",
+          "sū",
+          "chéng",
+          "wài",
+          "hán",
+          "shān",
+          "sì",
+          "，"
+        ],
+        [
+          "yè",
+          "bàn",
+          "zhōng",
+          "shēng",
+          "dào",
+          "kè",
+          "chuán",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-027.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.4686,
+        "y": 0.3215,
+        "w": 0.4514,
+        "h": 0.4935
+      },
+      "extraImages": [],
+      "slide": 28,
+      "audio": "assets/audio/p027.m4a",
+      "lineTimes": [
+        3.67,
+        5.82,
+        8.33,
+        10.53
+      ],
+      "audioDuration": 13.34
+    },
+    {
+      "id": "p028",
+      "no": 28,
+      "title": "游子吟",
+      "titlePinyins": [
+        "yóu",
+        "zǐ",
+        "yín"
+      ],
+      "dynasty": "唐",
+      "author": "孟郊",
+      "authorRaw": "（唐）孟郊",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "mèng",
+        "jiāo"
+      ],
+      "lines": [
+        "慈母手中线，",
+        "游子身上衣。",
+        "临行密密缝，",
+        "意恐迟迟归。",
+        "谁言寸草心，",
+        "报得三春晖。"
+      ],
+      "linePinyins": [
+        [
+          "cí",
+          "mǔ",
+          "shǒu",
+          "zhōng",
+          "xiàn",
+          "，"
+        ],
+        [
+          "yóu",
+          "zǐ",
+          "shēn",
+          "shàng",
+          "yī",
+          "。"
+        ],
+        [
+          "lín",
+          "xíng",
+          "mì",
+          "mì",
+          "fèng",
+          "，"
+        ],
+        [
+          "yì",
+          "kǒng",
+          "chí",
+          "chí",
+          "guī",
+          "。"
+        ],
+        [
+          "shuí",
+          "yán",
+          "cùn",
+          "cǎo",
+          "xīn",
+          "，"
+        ],
+        [
+          "bào",
+          "dé",
+          "sān",
+          "chūn",
+          "huī",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-028.jpg",
+      "imageSize": [
+        463,
+        702
+      ],
+      "imageLayout": {
+        "x": 0.6181,
+        "y": 0.0905,
+        "w": 0.3156,
+        "h": 0.7979
+      },
+      "extraImages": [],
+      "slide": 29,
+      "audio": "assets/audio/p028.m4a",
+      "lineTimes": [
+        3.12,
+        4.63,
+        6.37,
+        7.89,
+        9.59,
+        11.15
+      ],
+      "audioDuration": 13.04
+    },
+    {
+      "id": "p029",
+      "no": 29,
+      "title": "江雪",
+      "titlePinyins": [
+        "jiāng",
+        "xuě"
+      ],
+      "dynasty": "唐",
+      "author": "柳宗元",
+      "authorRaw": "（唐）柳宗元",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "liǔ",
+        "zōng",
+        "yuán"
+      ],
+      "lines": [
+        "千山鸟飞绝，",
+        "万径人踪灭。",
+        "孤舟蓑笠翁，",
+        "独钓寒江雪。"
+      ],
+      "linePinyins": [
+        [
+          "qiān",
+          "shān",
+          "niǎo",
+          "fēi",
+          "jué",
+          "，"
+        ],
+        [
+          "wàn",
+          "jìng",
+          "rén",
+          "zōng",
+          "miè",
+          "。"
+        ],
+        [
+          "gū",
+          "zhōu",
+          "suō",
+          "lì",
+          "wēng",
+          "，"
+        ],
+        [
+          "dú",
+          "diào",
+          "hán",
+          "jiāng",
+          "xuě",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-029.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.5552,
+        "y": 0.3111,
+        "w": 0.378,
+        "h": 0.5556
+      },
+      "extraImages": [],
+      "slide": 30,
+      "audio": "assets/audio/p029.m4a",
+      "lineTimes": [
+        3.46,
+        5.33,
+        7.25,
+        8.86
+      ],
+      "audioDuration": 11.07
+    },
+    {
+      "id": "p030",
+      "no": 30,
+      "title": "渔歌子",
+      "titlePinyins": [
+        "yú",
+        "gē",
+        "zǐ"
+      ],
+      "dynasty": "唐",
+      "author": "张志和",
+      "authorRaw": "（唐）张志和",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "zhāng",
+        "zhì",
+        "hé"
+      ],
+      "lines": [
+        "西塞山前白鹭飞，",
+        "桃花流水鳜鱼肥。",
+        "青箬笠，",
+        "绿蓑衣，",
+        "斜风细雨不须归。"
+      ],
+      "linePinyins": [
+        [
+          "xī",
+          "sài",
+          "shān",
+          "qián",
+          "bái",
+          "lù",
+          "fēi",
+          "，"
+        ],
+        [
+          "táo",
+          "huā",
+          "liú",
+          "shuǐ",
+          "guì",
+          "yú",
+          "féi",
+          "。"
+        ],
+        [
+          "qīng",
+          "ruò",
+          "lì",
+          "，"
+        ],
+        [
+          "lǜ",
+          "suō",
+          "yī",
+          "，"
+        ],
+        [
+          "xié",
+          "fēng",
+          "xì",
+          "yǔ",
+          "bù",
+          "xū",
+          "guī",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-030.jpg",
+      "imageSize": [
+        509,
+        710
+      ],
+      "imageLayout": {
+        "x": 0.5708,
+        "y": 0.185,
+        "w": 0.3679,
+        "h": 0.703
+      },
+      "extraImages": [],
+      "slide": 31,
+      "audio": "assets/audio/p030.m4a",
+      "lineTimes": [
+        3.08,
+        4.82,
+        6.69,
+        7.6,
+        8.45
+      ],
+      "audioDuration": 10.44
+    },
+    {
+      "id": "p031",
+      "no": 31,
+      "title": "塞下曲",
+      "titlePinyins": [
+        "sài",
+        "xià",
+        "qǔ"
+      ],
+      "dynasty": "唐",
+      "author": "卢纶",
+      "authorRaw": "（唐）卢纶",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "lú",
+        "lún"
+      ],
+      "lines": [
+        "月黑雁飞高，",
+        "单于夜遁逃。",
+        "欲将轻骑逐，",
+        "大雪满弓刀。"
+      ],
+      "linePinyins": [
+        [
+          "yuè",
+          "hēi",
+          "yàn",
+          "fēi",
+          "gāo",
+          "，"
+        ],
+        [
+          "chán",
+          "yú",
+          "yè",
+          "dùn",
+          "táo",
+          "。"
+        ],
+        [
+          "yù",
+          "jiàng",
+          "qīng",
+          "qí",
+          "zhú",
+          "，"
+        ],
+        [
+          "dà",
+          "xuě",
+          "mǎn",
+          "gōng",
+          "dāo",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-031.jpg",
+      "imageSize": [
+        300,
+        215
+      ],
+      "imageLayout": {
+        "x": 0.4134,
+        "y": 0.4896,
+        "w": 0.5413,
+        "h": 0.3949
+      },
+      "extraImages": [],
+      "slide": 32,
+      "audio": "assets/audio/p031.m4a",
+      "lineTimes": [
+        3.02,
+        4.33,
+        5.87,
+        7.3
+      ],
+      "audioDuration": 9.0
+    },
+    {
+      "id": "p032",
+      "no": 32,
+      "title": "望洞庭",
+      "titlePinyins": [
+        "wàng",
+        "dòng",
+        "tíng"
+      ],
+      "dynasty": "唐",
+      "author": "刘禹锡",
+      "authorRaw": "（唐）刘禹锡",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "liú",
+        "yǔ",
+        "xí"
+      ],
+      "lines": [
+        "湖光秋月两相和，",
+        "潭面无风镜未磨。",
+        "遥望洞庭山水翠，",
+        "白银盘里一青螺。"
+      ],
+      "linePinyins": [
+        [
+          "hú",
+          "guāng",
+          "qiū",
+          "yuè",
+          "liǎng",
+          "xiāng",
+          "hé",
+          "，"
+        ],
+        [
+          "tán",
+          "miàn",
+          "wú",
+          "fēng",
+          "jìng",
+          "wèi",
+          "mó",
+          "。"
+        ],
+        [
+          "yáo",
+          "wàng",
+          "dòng",
+          "tíng",
+          "shān",
+          "shuǐ",
+          "cuì",
+          "，"
+        ],
+        [
+          "bái",
+          "yín",
+          "pán",
+          "lǐ",
+          "yī",
+          "qīng",
+          "luó",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-032.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.4842,
+        "y": 0.3634,
+        "w": 0.449,
+        "h": 0.4935
+      },
+      "extraImages": [],
+      "slide": 33,
+      "audio": "assets/audio/p032.m4a",
+      "lineTimes": [
+        3.37,
+        5.3,
+        7.51,
+        9.5
+      ],
+      "audioDuration": 11.71
+    },
+    {
+      "id": "p033",
+      "no": 33,
+      "title": "浪淘沙",
+      "titlePinyins": [
+        "làng",
+        "táo",
+        "shā"
+      ],
+      "dynasty": "唐",
+      "author": "刘禹锡",
+      "authorRaw": "（唐）刘禹锡",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "liú",
+        "yǔ",
+        "xī"
+      ],
+      "lines": [
+        "九曲黄河万里沙，",
+        "浪淘风簸自天涯。",
+        "如今直上银河去，",
+        "同到牵牛织女家。"
+      ],
+      "linePinyins": [
+        [
+          "jiǔ",
+          "qū",
+          "huáng",
+          "hé",
+          "wàn",
+          "lǐ",
+          "shā",
+          "，"
+        ],
+        [
+          "làng",
+          "táo",
+          "fēng",
+          "bǒ",
+          "zì",
+          "tiān",
+          "yá",
+          "。"
+        ],
+        [
+          "rú",
+          "jīn",
+          "zhí",
+          "shàng",
+          "yín",
+          "hé",
+          "qù",
+          "，"
+        ],
+        [
+          "tóng",
+          "dào",
+          "qiān",
+          "niú",
+          "zhī",
+          "nǚ",
+          "jiā",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-033.jpg",
+      "imageSize": [
+        800,
+        413
+      ],
+      "imageLayout": {
+        "x": 0.4448,
+        "y": 0.4896,
+        "w": 0.5158,
+        "h": 0.3845
+      },
+      "extraImages": [],
+      "slide": 34,
+      "audio": "assets/audio/p033.m4a",
+      "lineTimes": [
+        3.1,
+        4.78,
+        6.8,
+        8.56
+      ],
+      "audioDuration": 10.66
+    },
+    {
+      "id": "p034",
+      "no": 34,
+      "title": "赋得古原草送别",
+      "titlePinyins": [
+        "fù",
+        "dé",
+        "gǔ",
+        "yuán",
+        "cǎo",
+        "sòng",
+        "bié"
+      ],
+      "dynasty": "唐",
+      "author": "白居易",
+      "authorRaw": "唐）白居易",
+      "authorPinyins": [
+        "táng",
+        "）",
+        "bái",
+        "jū",
+        "yì"
+      ],
+      "lines": [
+        "离离原上草，",
+        "一岁一枯荣。",
+        "野火烧不尽，",
+        "春风吹又生。",
+        "远芳侵古道，",
+        "晴翠接荒城。",
+        "又送王孙去，",
+        "萋萋满别情。"
+      ],
+      "linePinyins": [
+        [
+          "lí",
+          "lí",
+          "yuán",
+          "shàng",
+          "cǎo",
+          "，"
+        ],
+        [
+          "yī",
+          "suì",
+          "yī",
+          "kū",
+          "róng",
+          "。"
+        ],
+        [
+          "yě",
+          "huǒ",
+          "shāo",
+          "bù",
+          "jìn",
+          "，"
+        ],
+        [
+          "chūn",
+          "fēng",
+          "chuī",
+          "yòu",
+          "shēng",
+          "。"
+        ],
+        [
+          "yuǎn",
+          "fāng",
+          "qīn",
+          "gǔ",
+          "dào",
+          "，"
+        ],
+        [
+          "qíng",
+          "cuì",
+          "jiē",
+          "huāng",
+          "chéng",
+          "。"
+        ],
+        [
+          "yòu",
+          "sòng",
+          "wáng",
+          "sūn",
+          "qù",
+          "，"
+        ],
+        [
+          "qī",
+          "qī",
+          "mǎn",
+          "bié",
+          "qíng",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-034.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.1141,
+        "y": 0.3377,
+        "w": 0.8137,
+        "h": 0.5613
+      },
+      "extraImages": [],
+      "slide": 35,
+      "audio": "assets/audio/p034.m4a",
+      "lineTimes": [
+        4.51,
+        6.16,
+        8.13,
+        9.73,
+        11.77,
+        13.41,
+        15.58,
+        17.17
+      ],
+      "audioDuration": 19.46
+    },
+    {
+      "id": "p035",
+      "no": 35,
+      "title": "池上",
+      "titlePinyins": [
+        "chí",
+        "shàng"
+      ],
+      "dynasty": "唐",
+      "author": "白居易",
+      "authorRaw": "（唐）白居易",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "bái",
+        "jū",
+        "yì"
+      ],
+      "lines": [
+        "小娃撑小艇，",
+        "偷采白莲回。",
+        "不解藏踪迹，",
+        "浮萍一道开。"
+      ],
+      "linePinyins": [
+        [
+          "xiǎo",
+          "wá",
+          "chēng",
+          "xiǎo",
+          "tǐng",
+          "，"
+        ],
+        [
+          "tōu",
+          "cǎi",
+          "bái",
+          "lián",
+          "huí",
+          "。"
+        ],
+        [
+          "bù",
+          "jiě",
+          "cáng",
+          "zōng",
+          "jì",
+          "，"
+        ],
+        [
+          "fú",
+          "píng",
+          "yī",
+          "dào",
+          "kāi",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-035.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.4056,
+        "y": 0.4789,
+        "w": 0.5394,
+        "h": 0.4056
+      },
+      "extraImages": [],
+      "slide": 36,
+      "audio": "assets/audio/p035.m4a",
+      "lineTimes": [
+        2.79,
+        4.03,
+        5.45,
+        6.65
+      ],
+      "audioDuration": 8.2
+    },
+    {
+      "id": "p036",
+      "no": 36,
+      "title": "忆江南",
+      "titlePinyins": [
+        "yì",
+        "jiāng",
+        "nán"
+      ],
+      "dynasty": "唐",
+      "author": "白居易",
+      "authorRaw": "（唐）白居易",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "bái",
+        "jū",
+        "yì"
+      ],
+      "lines": [
+        "江南好，",
+        "风景旧曾谙。",
+        "日出江花红胜火，",
+        "春来江水绿如蓝。",
+        "能不忆江南？"
+      ],
+      "linePinyins": [
+        [
+          "jiāng",
+          "nán",
+          "hǎo",
+          "，"
+        ],
+        [
+          "fēng",
+          "jǐng",
+          "jiù",
+          "céng",
+          "ān",
+          "。"
+        ],
+        [
+          "rì",
+          "chū",
+          "jiāng",
+          "huā",
+          "hóng",
+          "shèng",
+          "huǒ",
+          "，"
+        ],
+        [
+          "chūn",
+          "lái",
+          "jiāng",
+          "shuǐ",
+          "lǜ",
+          "rú",
+          "lán",
+          "。"
+        ],
+        [
+          "néng",
+          "bù",
+          "yì",
+          "jiāng",
+          "nán",
+          "？"
+        ]
+      ],
+      "image": "assets/images/poem-036.jpg",
+      "imageSize": [
+        796,
+        536
+      ],
+      "imageLayout": {
+        "x": 0.4292,
+        "y": 0.437,
+        "w": 0.4922,
+        "h": 0.4475
+      },
+      "extraImages": [],
+      "slide": 37,
+      "audio": "assets/audio/p036.m4a",
+      "lineTimes": [
+        2.99,
+        3.9,
+        5.34,
+        6.99,
+        8.82
+      ],
+      "audioDuration": 10.32
+    },
+    {
+      "id": "p037",
+      "no": 37,
+      "title": "小儿垂钓",
+      "titlePinyins": [
+        "xiǎo",
+        "ér",
+        "chuí",
+        "diào"
+      ],
+      "dynasty": "唐",
+      "author": "胡令能",
+      "authorRaw": "（唐）胡令能",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "hú",
+        "lìng",
+        "néng"
+      ],
+      "lines": [
+        "蓬头稚子学垂纶，",
+        "侧坐莓苔草映身。",
+        "路人借问遥招手，",
+        "怕得鱼惊不应人。"
+      ],
+      "linePinyins": [
+        [
+          "péng",
+          "tóu",
+          "zhì",
+          "zǐ",
+          "xué",
+          "chuí",
+          "lún",
+          "，"
+        ],
+        [
+          "cè",
+          "zuò",
+          "méi",
+          "tāi",
+          "cǎo",
+          "yìng",
+          "shēn",
+          "。"
+        ],
+        [
+          "lù",
+          "rén",
+          "jiè",
+          "wèn",
+          "yáo",
+          "zhāo",
+          "shǒu",
+          "，"
+        ],
+        [
+          "pà",
+          "dé",
+          "yú",
+          "jīng",
+          "bù",
+          "yìng",
+          "rén",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-037.png",
+      "imageSize": [
+        800,
+        528
+      ],
+      "imageLayout": {
+        "x": 0.4606,
+        "y": 0.5104,
+        "w": 0.4922,
+        "h": 0.3806
+      },
+      "extraImages": [],
+      "slide": 38,
+      "audio": "assets/audio/p037.m4a",
+      "lineTimes": [
+        3.16,
+        4.78,
+        6.64,
+        8.15
+      ],
+      "audioDuration": 9.96
+    },
+    {
+      "id": "p038",
+      "no": 38,
+      "title": "悯农",
+      "titlePinyins": [
+        "mǐn",
+        "nóng"
+      ],
+      "dynasty": "唐",
+      "author": "李绅",
+      "authorRaw": "（唐）李绅",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "lǐ",
+        "shēn"
+      ],
+      "lines": [
+        "锄禾日当午，",
+        "汗滴禾下土。",
+        "谁知盘中餐，",
+        "粒粒皆辛苦。"
+      ],
+      "linePinyins": [
+        [
+          "chú",
+          "hé",
+          "rì",
+          "dāng",
+          "wǔ",
+          "，"
+        ],
+        [
+          "hàn",
+          "dī",
+          "hé",
+          "xià",
+          "tǔ",
+          "。"
+        ],
+        [
+          "shuí",
+          "zhī",
+          "pán",
+          "zhōng",
+          "cān",
+          "，"
+        ],
+        [
+          "lì",
+          "lì",
+          "jiē",
+          "xīn",
+          "kǔ",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-038.jpg",
+      "imageSize": [
+        200,
+        200
+      ],
+      "imageLayout": {
+        "x": 0.626,
+        "y": 0.2271,
+        "w": 0.374,
+        "h": 0.6785
+      },
+      "extraImages": [],
+      "slide": 39,
+      "audio": "assets/audio/p038.m4a",
+      "lineTimes": [
+        2.93,
+        4.38,
+        6.18,
+        7.73
+      ],
+      "audioDuration": 9.66
+    },
+    {
+      "id": "p039",
+      "no": 39,
+      "title": "悯农",
+      "titlePinyins": [
+        "mǐn",
+        "nóng"
+      ],
+      "dynasty": "唐",
+      "author": "李绅",
+      "authorRaw": "（唐）李绅",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "lǐ",
+        "shēn"
+      ],
+      "lines": [
+        "春种一粒粟，",
+        "秋收万颗子。",
+        "四海无闲田，",
+        "农夫犹饿死。"
+      ],
+      "linePinyins": [
+        [
+          "chūn",
+          "zhòng",
+          "yī",
+          "lì",
+          "sù",
+          "，"
+        ],
+        [
+          "qiū",
+          "shōu",
+          "wàn",
+          "kē",
+          "zǐ",
+          "。"
+        ],
+        [
+          "sì",
+          "hǎi",
+          "wú",
+          "xián",
+          "tián",
+          "，"
+        ],
+        [
+          "nóng",
+          "fū",
+          "yóu",
+          "è",
+          "sǐ",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-039.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.4528,
+        "y": 0.2794,
+        "w": 0.475,
+        "h": 0.6123
+      },
+      "extraImages": [],
+      "slide": 40,
+      "audio": "assets/audio/p039.m4a",
+      "lineTimes": [
+        3.16,
+        4.77,
+        6.79,
+        8.55
+      ],
+      "audioDuration": 10.76
+    },
+    {
+      "id": "p040",
+      "no": 40,
+      "title": "寻隐者不遇",
+      "titlePinyins": [
+        "xún",
+        "yǐn",
+        "zhě",
+        "bù",
+        "yù"
+      ],
+      "dynasty": "唐",
+      "author": "贾岛",
+      "authorRaw": "（唐）贾岛",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "jiǎ",
+        "dǎo"
+      ],
+      "lines": [
+        "松下问童子，",
+        "言师采药去。",
+        "只在此山中，",
+        "云深不知处。"
+      ],
+      "linePinyins": [
+        [
+          "sōng",
+          "xià",
+          "wèn",
+          "tóng",
+          "zǐ",
+          "，"
+        ],
+        [
+          "yán",
+          "shī",
+          "cǎi",
+          "yào",
+          "qù",
+          "。"
+        ],
+        [
+          "zhǐ",
+          "zài",
+          "cǐ",
+          "shān",
+          "zhōng",
+          "，"
+        ],
+        [
+          "yún",
+          "shēn",
+          "bù",
+          "zhī",
+          "chù",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-040.jpg",
+      "imageSize": [
+        379,
+        598
+      ],
+      "imageLayout": {
+        "x": 0.6339,
+        "y": 0.2375,
+        "w": 0.305,
+        "h": 0.6509
+      },
+      "extraImages": [],
+      "slide": 41,
+      "audio": "assets/audio/p040.m4a",
+      "lineTimes": [
+        3.53,
+        5.06,
+        6.78,
+        8.29
+      ],
+      "audioDuration": 10.15
+    },
+    {
+      "id": "p041",
+      "no": 41,
+      "title": "山行",
+      "titlePinyins": [
+        "shān",
+        "xíng"
+      ],
+      "dynasty": "唐",
+      "author": "杜牧",
+      "authorRaw": "（唐）杜牧",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "dù",
+        "mù"
+      ],
+      "lines": [
+        "远上寒山石径斜，",
+        "白云深处有人家。",
+        "停车坐爱枫林晚，",
+        "霜叶红于二月花。"
+      ],
+      "linePinyins": [
+        [
+          "yuǎn",
+          "shàng",
+          "hán",
+          "shān",
+          "shí",
+          "jìng",
+          "xié",
+          "，"
+        ],
+        [
+          "bái",
+          "yún",
+          "shēn",
+          "chù",
+          "yǒu",
+          "rén",
+          "jiā",
+          "。"
+        ],
+        [
+          "tíng",
+          "chē",
+          "zuò",
+          "ài",
+          "fēng",
+          "lín",
+          "wǎn",
+          "，"
+        ],
+        [
+          "shuāng",
+          "yè",
+          "hóng",
+          "yú",
+          "èr",
+          "yuè",
+          "huā",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-041.jpg",
+      "imageSize": [
+        200,
+        150
+      ],
+      "imageLayout": {
+        "x": 0.5158,
+        "y": 0.3215,
+        "w": 0.3932,
+        "h": 0.4829
+      },
+      "extraImages": [],
+      "slide": 42,
+      "audio": "assets/audio/p041.m4a",
+      "lineTimes": [
+        2.78,
+        4.53,
+        6.19,
+        7.89
+      ],
+      "audioDuration": 9.9
+    },
+    {
+      "id": "p042",
+      "no": 42,
+      "title": "清明",
+      "titlePinyins": [
+        "qīng",
+        "míng"
+      ],
+      "dynasty": "唐",
+      "author": "杜牧",
+      "authorRaw": "（唐）杜牧",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "dù",
+        "mù"
+      ],
+      "lines": [
+        "清明时节雨纷纷，",
+        "路上行人欲断魂。",
+        "借问酒家何处有？",
+        "牧童遥指杏花村。"
+      ],
+      "linePinyins": [
+        [
+          "qīng",
+          "míng",
+          "shí",
+          "jié",
+          "yǔ",
+          "fēn",
+          "fēn",
+          "，"
+        ],
+        [
+          "lù",
+          "shàng",
+          "xíng",
+          "rén",
+          "yù",
+          "duàn",
+          "hún",
+          "。"
+        ],
+        [
+          "jiè",
+          "wèn",
+          "jiǔ",
+          "jiā",
+          "hé",
+          "chù",
+          "yǒu",
+          "？"
+        ],
+        [
+          "mù",
+          "tóng",
+          "yáo",
+          "zhǐ",
+          "xìng",
+          "huā",
+          "cūn",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-042.jpg",
+      "imageSize": [
+        450,
+        322
+      ],
+      "imageLayout": {
+        "x": 0.4922,
+        "y": 0.4116,
+        "w": 0.4293,
+        "h": 0.4697
+      },
+      "extraImages": [],
+      "slide": 43,
+      "audio": "assets/audio/p042.m4a",
+      "lineTimes": [
+        3.12,
+        5.28,
+        7.74,
+        10.19
+      ],
+      "audioDuration": 12.88
+    },
+    {
+      "id": "p043",
+      "no": 43,
+      "title": "江南春",
+      "titlePinyins": [
+        "jiāng",
+        "nán",
+        "chūn"
+      ],
+      "dynasty": "唐",
+      "author": "杜牧",
+      "authorRaw": "（唐）杜牧",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "dù",
+        "mù"
+      ],
+      "lines": [
+        "千里莺啼绿映红，",
+        "水村山郭酒旗风。",
+        "南朝四百八十寺，",
+        "多少楼台烟雨中。"
+      ],
+      "linePinyins": [
+        [
+          "qiān",
+          "lǐ",
+          "yīng",
+          "tí",
+          "lǜ",
+          "yìng",
+          "hóng",
+          "，"
+        ],
+        [
+          "shuǐ",
+          "cūn",
+          "shān",
+          "guō",
+          "jiǔ",
+          "qí",
+          "fēng",
+          "。"
+        ],
+        [
+          "nán",
+          "cháo",
+          "sì",
+          "bǎi",
+          "bā",
+          "shí",
+          "sì",
+          "，"
+        ],
+        [
+          "duō",
+          "shǎo",
+          "lóu",
+          "tái",
+          "yān",
+          "yǔ",
+          "zhōng",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-043.jpg",
+      "imageSize": [
+        320,
+        236
+      ],
+      "imageLayout": {
+        "x": 0.4764,
+        "y": 0.3426,
+        "w": 0.4592,
+        "h": 0.4903
+      },
+      "extraImages": [],
+      "slide": 44,
+      "audio": "assets/audio/p043.m4a",
+      "lineTimes": [
+        2.89,
+        4.5,
+        6.42,
+        7.98
+      ],
+      "audioDuration": 9.94
+    },
+    {
+      "id": "p044",
+      "no": 44,
+      "title": "乐游原",
+      "titlePinyins": [
+        "lè",
+        "yóu",
+        "yuán"
+      ],
+      "dynasty": "唐",
+      "author": "李商隐",
+      "authorRaw": "（唐）李商隐",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "lǐ",
+        "shāng",
+        "yǐn"
+      ],
+      "lines": [
+        "向晚意不适，",
+        "驱车登古原。",
+        "夕阳无限好，",
+        "只是近黄昏。"
+      ],
+      "linePinyins": [
+        [
+          "xiàng",
+          "wǎn",
+          "yì",
+          "bù",
+          "shì",
+          "，"
+        ],
+        [
+          "qū",
+          "chē",
+          "dēng",
+          "gǔ",
+          "yuán",
+          "。"
+        ],
+        [
+          "xī",
+          "yáng",
+          "wú",
+          "xiàn",
+          "hǎo",
+          "，"
+        ],
+        [
+          "zhǐ",
+          "shì",
+          "jìn",
+          "huáng",
+          "hūn",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-044.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.4606,
+        "y": 0.5,
+        "w": 0.5066,
+        "h": 0.3845
+      },
+      "extraImages": [],
+      "slide": 45,
+      "audio": "assets/audio/p044.m4a",
+      "lineTimes": [
+        3.63,
+        5.27,
+        7.31,
+        8.92
+      ],
+      "audioDuration": 11.12
+    },
+    {
+      "id": "p045",
+      "no": 45,
+      "title": "蜂",
+      "titlePinyins": [
+        "fēng"
+      ],
+      "dynasty": "唐",
+      "author": "罗隐",
+      "authorRaw": "（唐）罗隐",
+      "authorPinyins": [
+        "（",
+        "táng",
+        "）",
+        "luó",
+        "yǐn"
+      ],
+      "lines": [
+        "不论平地与山尖，",
+        "无限风光尽被占。",
+        "采得百花成蜜后，",
+        "为谁辛苦为谁甜？"
+      ],
+      "linePinyins": [
+        [
+          "bù",
+          "lùn",
+          "píng",
+          "dì",
+          "yǔ",
+          "shān",
+          "jiān",
+          "，"
+        ],
+        [
+          "wú",
+          "xiàn",
+          "fēng",
+          "guāng",
+          "jìn",
+          "bèi",
+          "zhàn",
+          "。"
+        ],
+        [
+          "cǎi",
+          "dé",
+          "bǎi",
+          "huā",
+          "chéng",
+          "mì",
+          "hòu",
+          "，"
+        ],
+        [
+          "wèi",
+          "shuí",
+          "xīn",
+          "kǔ",
+          "wèi",
+          "shuí",
+          "tián",
+          "？"
+        ]
+      ],
+      "image": "assets/images/poem-045.jpg",
+      "imageSize": [
+        493,
+        469
+      ],
+      "imageLayout": {
+        "x": 0.4686,
+        "y": 0.2586,
+        "w": 0.4644,
+        "h": 0.6192
+      },
+      "extraImages": [],
+      "slide": 46,
+      "audio": "assets/audio/p045.m4a",
+      "lineTimes": [
+        2.81,
+        4.56,
+        6.64,
+        8.49
+      ],
+      "audioDuration": 10.93
+    },
+    {
+      "id": "p046",
+      "no": 46,
+      "title": "江上渔者",
+      "titlePinyins": [
+        "jiāng",
+        "shàng",
+        "yú",
+        "zhě"
+      ],
+      "dynasty": "宋",
+      "author": "范仲淹",
+      "authorRaw": "（宋）范仲淹",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "fàn",
+        "zhòng",
+        "yān"
+      ],
+      "lines": [
+        "江上往来人，",
+        "但爱鲈鱼美。",
+        "君看一叶舟，",
+        "出没风波里。"
+      ],
+      "linePinyins": [
+        [
+          "jiāng",
+          "shàng",
+          "wǎng",
+          "lái",
+          "rén",
+          "，"
+        ],
+        [
+          "dàn",
+          "ài",
+          "lú",
+          "yú",
+          "měi",
+          "。"
+        ],
+        [
+          "jūn",
+          "kàn",
+          "yī",
+          "yè",
+          "zhōu",
+          "，"
+        ],
+        [
+          "chū",
+          "mò",
+          "fēng",
+          "bō",
+          "lǐ",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-046.jpg",
+      "imageSize": [
+        400,
+        626
+      ],
+      "imageLayout": {
+        "x": 0.6188,
+        "y": 0.2479,
+        "w": 0.3045,
+        "h": 0.6354
+      },
+      "extraImages": [],
+      "slide": 47,
+      "audio": "assets/audio/p046.m4a",
+      "lineTimes": [
+        3.86,
+        5.5,
+        7.36,
+        8.97
+      ],
+      "audioDuration": 11.09
+    },
+    {
+      "id": "p047",
+      "no": 47,
+      "title": "元日",
+      "titlePinyins": [
+        "yuán",
+        "rì"
+      ],
+      "dynasty": "宋",
+      "author": "王安石",
+      "authorRaw": "（宋）王安石",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "wáng",
+        "ān",
+        "shí"
+      ],
+      "lines": [
+        "爆竹声中一岁除，",
+        "春风送暖入屠苏。",
+        "千门万户瞳瞳日，",
+        "总把新桃换旧符。"
+      ],
+      "linePinyins": [
+        [
+          "bào",
+          "zhú",
+          "shēng",
+          "zhōng",
+          "yī",
+          "suì",
+          "chú",
+          "，"
+        ],
+        [
+          "chūn",
+          "fēng",
+          "sòng",
+          "nuǎn",
+          "rù",
+          "tú",
+          "sū",
+          "。"
+        ],
+        [
+          "qiān",
+          "mén",
+          "wàn",
+          "hù",
+          "tóng",
+          "tóng",
+          "rì",
+          "，"
+        ],
+        [
+          "zǒng",
+          "bǎ",
+          "xīn",
+          "táo",
+          "huàn",
+          "jiù",
+          "fú",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-047.jpg",
+      "imageSize": [
+        400,
+        363
+      ],
+      "imageLayout": {
+        "x": 0.5944,
+        "y": 0.2586,
+        "w": 0.3273,
+        "h": 0.609
+      },
+      "extraImages": [],
+      "slide": 48,
+      "audio": "assets/audio/p047.m4a",
+      "lineTimes": [
+        2.94,
+        4.63,
+        6.53,
+        8.21
+      ],
+      "audioDuration": 10.35
+    },
+    {
+      "id": "p048",
+      "no": 48,
+      "title": "泊船瓜洲",
+      "titlePinyins": [
+        "bó",
+        "chuán",
+        "guā",
+        "zhōu"
+      ],
+      "dynasty": "宋",
+      "author": "王安石",
+      "authorRaw": "（宋）王安石",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "wáng",
+        "ān",
+        "shí"
+      ],
+      "lines": [
+        "京口瓜洲一水间，",
+        "钟山只隔数重山。",
+        "春风又绿江南岸，",
+        "明月何时照我还。"
+      ],
+      "linePinyins": [
+        [
+          "jīng",
+          "kǒu",
+          "guā",
+          "zhōu",
+          "yī",
+          "shuǐ",
+          "jiān",
+          "，"
+        ],
+        [
+          "zhōng",
+          "shān",
+          "zhǐ",
+          "gé",
+          "shù",
+          "chóng",
+          "shān",
+          "。"
+        ],
+        [
+          "chūn",
+          "fēng",
+          "yòu",
+          "lǜ",
+          "jiāng",
+          "nán",
+          "àn",
+          "，"
+        ],
+        [
+          "míng",
+          "yuè",
+          "hé",
+          "shí",
+          "zhào",
+          "wǒ",
+          "huán",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-048.jpg",
+      "imageSize": [
+        320,
+        240
+      ],
+      "imageLayout": {
+        "x": 0.4686,
+        "y": 0.3111,
+        "w": 0.4514,
+        "h": 0.538
+      },
+      "extraImages": [],
+      "slide": 49,
+      "audio": "assets/audio/p048.m4a",
+      "lineTimes": [
+        3.98,
+        6.11,
+        8.61,
+        10.72
+      ],
+      "audioDuration": 13.3
+    },
+    {
+      "id": "p049",
+      "no": 49,
+      "title": "书湖阴先生壁",
+      "titlePinyins": [
+        "shū",
+        "hú",
+        "yīn",
+        "xiān",
+        "shēng",
+        "bì"
+      ],
+      "dynasty": "宋",
+      "author": "王安石",
+      "authorRaw": "（宋）王安石",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "wáng",
+        "ān",
+        "shí"
+      ],
+      "lines": [
+        "茅檐长扫净无苔，",
+        "花木成畦手自栽。",
+        "一水护田将绿绕，",
+        "两山排闼送青来。"
+      ],
+      "linePinyins": [
+        [
+          "máo",
+          "yán",
+          "cháng",
+          "sǎo",
+          "jìng",
+          "wú",
+          "tái",
+          "，"
+        ],
+        [
+          "huā",
+          "mù",
+          "chéng",
+          "qí",
+          "shǒu",
+          "zì",
+          "zāi",
+          "。"
+        ],
+        [
+          "yī",
+          "shuǐ",
+          "hù",
+          "tián",
+          "jiāng",
+          "lǜ",
+          "rào",
+          "，"
+        ],
+        [
+          "liǎng",
+          "shān",
+          "pái",
+          "tà",
+          "sòng",
+          "qīng",
+          "lái",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-049.jpg",
+      "imageSize": [
+        1000,
+        386
+      ],
+      "imageLayout": {
+        "x": 0.0748,
+        "y": 0.2479,
+        "w": 0.8802,
+        "h": 0.647
+      },
+      "extraImages": [],
+      "slide": 50,
+      "audio": "assets/audio/p049.m4a",
+      "lineTimes": [
+        4.11,
+        6.03,
+        8.14,
+        9.97
+      ],
+      "audioDuration": 12.36
+    },
+    {
+      "id": "p050",
+      "no": 50,
+      "title": "六月二十七日望湖楼醉书",
+      "titlePinyins": [
+        "liù",
+        "yuè",
+        "èr",
+        "shí",
+        "qī",
+        "rì",
+        "wàng",
+        "hú",
+        "lóu",
+        "zuì",
+        "shū"
+      ],
+      "dynasty": "宋",
+      "author": "苏轼",
+      "authorRaw": "（宋）苏轼",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "sū",
+        "shì"
+      ],
+      "lines": [
+        "黑云翻墨未遮山，",
+        "白雨跳珠乱入船。",
+        "卷地风来忽吹散，",
+        "望湖楼下水如天。"
+      ],
+      "linePinyins": [
+        [
+          "hēi",
+          "yún",
+          "fān",
+          "mò",
+          "wèi",
+          "zhē",
+          "shān",
+          "，"
+        ],
+        [
+          "bái",
+          "yǔ",
+          "tiào",
+          "zhū",
+          "luàn",
+          "rù",
+          "chuán",
+          "。"
+        ],
+        [
+          "juǎn",
+          "dì",
+          "fēng",
+          "lái",
+          "hū",
+          "chuī",
+          "sàn",
+          "，"
+        ],
+        [
+          "wàng",
+          "hú",
+          "lóu",
+          "xià",
+          "shuǐ",
+          "rú",
+          "tiān",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-050.jpg",
+      "imageSize": [
+        565,
+        415
+      ],
+      "imageLayout": {
+        "x": 0.4686,
+        "y": 0.2977,
+        "w": 0.4606,
+        "h": 0.5384
+      },
+      "extraImages": [],
+      "slide": 51,
+      "audio": "assets/audio/p050.m4a",
+      "lineTimes": [
+        4.49,
+        6.16,
+        8.11,
+        9.81
+      ],
+      "audioDuration": 11.94
+    },
+    {
+      "id": "p051",
+      "no": 51,
+      "title": "饮湖上初晴后雨",
+      "titlePinyins": [
+        "yǐn",
+        "hú",
+        "shàng",
+        "chū",
+        "qíng",
+        "hòu",
+        "yǔ"
+      ],
+      "dynasty": "宋",
+      "author": "苏轼",
+      "authorRaw": "（宋）苏轼",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "sū",
+        "shì"
+      ],
+      "lines": [
+        "水光潋艳晴方好，",
+        "山色空朦雨欲奇。",
+        "欲把西湖比西子，",
+        "淡妆浓抹总相宜。"
+      ],
+      "linePinyins": [
+        [
+          "shuǐ",
+          "guāng",
+          "liàn",
+          "yàn",
+          "qíng",
+          "fāng",
+          "hǎo",
+          "，"
+        ],
+        [
+          "shān",
+          "sè",
+          "kōng",
+          "méng",
+          "yǔ",
+          "yù",
+          "qí",
+          "。"
+        ],
+        [
+          "yù",
+          "bǎ",
+          "xī",
+          "hú",
+          "bǐ",
+          "xī",
+          "zǐ",
+          "，"
+        ],
+        [
+          "dàn",
+          "zhuāng",
+          "nóng",
+          "mǒ",
+          "zǒng",
+          "xiāng",
+          "yí",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-051.jpg",
+      "imageSize": [
+        320,
+        430
+      ],
+      "imageLayout": {
+        "x": 0.5944,
+        "y": 0.2586,
+        "w": 0.3352,
+        "h": 0.6287
+      },
+      "extraImages": [],
+      "slide": 52,
+      "audio": "assets/audio/p051.m4a",
+      "lineTimes": [
+        3.73,
+        5.39,
+        7.32,
+        8.89
+      ],
+      "audioDuration": 10.95
+    },
+    {
+      "id": "p052",
+      "no": 52,
+      "title": "惠崇《春江晚景》",
+      "titlePinyins": [
+        "huì",
+        "chóng",
+        "《",
+        "chūn",
+        "jiāng",
+        "wǎn",
+        "jǐng",
+        "》"
+      ],
+      "dynasty": "宋",
+      "author": "苏轼",
+      "authorRaw": "（宋）苏轼",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "sū",
+        "shì"
+      ],
+      "lines": [
+        "竹外桃花三两枝，",
+        "春江水暖鸭先知。",
+        "蒌蒿满地芦芽短，",
+        "正是河豚欲上时。"
+      ],
+      "linePinyins": [
+        [
+          "zhú",
+          "wài",
+          "táo",
+          "huā",
+          "sān",
+          "liǎng",
+          "zhī",
+          "，"
+        ],
+        [
+          "chūn",
+          "jiāng",
+          "shuǐ",
+          "nuǎn",
+          "yā",
+          "xiān",
+          "zhī",
+          "。"
+        ],
+        [
+          "lóu",
+          "hāo",
+          "mǎn",
+          "dì",
+          "lú",
+          "yá",
+          "duǎn",
+          "，"
+        ],
+        [
+          "zhèng",
+          "shì",
+          "hé",
+          "tún",
+          "yù",
+          "shàng",
+          "shí",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-052.jpg",
+      "imageSize": [
+        600,
+        322
+      ],
+      "imageLayout": {
+        "x": 0.5158,
+        "y": 0.5736,
+        "w": 0.4134,
+        "h": 0.3005
+      },
+      "extraImages": [],
+      "slide": 53,
+      "audio": "assets/audio/p052.m4a",
+      "lineTimes": [
+        3.56,
+        5.19,
+        7.11,
+        8.7
+      ],
+      "audioDuration": 10.76
+    },
+    {
+      "id": "p053",
+      "no": 53,
+      "title": "题西林壁",
+      "titlePinyins": [
+        "tí",
+        "xī",
+        "lín",
+        "bì"
+      ],
+      "dynasty": "宋",
+      "author": "苏轼",
+      "authorRaw": "（宋）苏轼",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "sū",
+        "shì"
+      ],
+      "lines": [
+        "横看成岭侧成峰，",
+        "远近高低各不同。",
+        "不识庐山真面目，",
+        "只缘身在此山中。"
+      ],
+      "linePinyins": [
+        [
+          "héng",
+          "kàn",
+          "chéng",
+          "lǐng",
+          "cè",
+          "chéng",
+          "fēng",
+          "，"
+        ],
+        [
+          "yuǎn",
+          "jìn",
+          "gāo",
+          "dī",
+          "gè",
+          "bù",
+          "tóng",
+          "。"
+        ],
+        [
+          "bù",
+          "shí",
+          "lú",
+          "shān",
+          "zhēn",
+          "miàn",
+          "mù",
+          "，"
+        ],
+        [
+          "zhǐ",
+          "yuán",
+          "shēn",
+          "zài",
+          "cǐ",
+          "shān",
+          "zhōng",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-053.jpg",
+      "imageSize": [
+        533,
+        295
+      ],
+      "imageLayout": {
+        "x": 0.4842,
+        "y": 0.2479,
+        "w": 0.4385,
+        "h": 0.6405
+      },
+      "extraImages": [],
+      "slide": 54,
+      "audio": "assets/audio/p053.m4a",
+      "lineTimes": [
+        3.44,
+        5.41,
+        7.45,
+        9.28
+      ],
+      "audioDuration": 11.62
+    },
+    {
+      "id": "p054",
+      "no": 54,
+      "title": "夏日绝句",
+      "titlePinyins": [
+        "xià",
+        "rì",
+        "jué",
+        "jù"
+      ],
+      "dynasty": "宋",
+      "author": "李清照",
+      "authorRaw": "（宋）李清照",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "lǐ",
+        "qīng",
+        "zhào"
+      ],
+      "lines": [
+        "生当作人杰，",
+        "死亦为鬼雄。",
+        "至今思项羽，",
+        "不肯过江东。"
+      ],
+      "linePinyins": [
+        [
+          "shēng",
+          "dāng",
+          "zuò",
+          "rén",
+          "jié",
+          "，"
+        ],
+        [
+          "sǐ",
+          "yì",
+          "wéi",
+          "guǐ",
+          "xióng",
+          "。"
+        ],
+        [
+          "zhì",
+          "jīn",
+          "sī",
+          "xiàng",
+          "yǔ",
+          "，"
+        ],
+        [
+          "bù",
+          "kěn",
+          "guò",
+          "jiāng",
+          "dōng",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-054.jpg",
+      "imageSize": [
+        275,
+        503
+      ],
+      "imageLayout": {
+        "x": 0.6339,
+        "y": 0.2586,
+        "w": 0.2915,
+        "h": 0.6083
+      },
+      "extraImages": [],
+      "slide": 55,
+      "audio": "assets/audio/p054.m4a",
+      "lineTimes": [
+        3.34,
+        4.71,
+        6.33,
+        7.67
+      ],
+      "audioDuration": 9.3
+    },
+    {
+      "id": "p055",
+      "no": 55,
+      "title": "示儿",
+      "titlePinyins": [
+        "shì",
+        "ér"
+      ],
+      "dynasty": "宋",
+      "author": "陆游",
+      "authorRaw": "（宋）陆游",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "lù",
+        "yóu"
+      ],
+      "lines": [
+        "死去元知万事空，",
+        "但悲不见九州同。",
+        "王师北定中原日，",
+        "家祭无忘告乃翁。"
+      ],
+      "linePinyins": [
+        [
+          "sǐ",
+          "qù",
+          "yuán",
+          "zhī",
+          "wàn",
+          "shì",
+          "kōng",
+          "，"
+        ],
+        [
+          "dàn",
+          "bēi",
+          "bú",
+          "jiàn",
+          "jiǔ",
+          "zhōu",
+          "tóng",
+          "。"
+        ],
+        [
+          "wáng",
+          "shī",
+          "běi",
+          "dìng",
+          "zhōng",
+          "yuán",
+          "rì",
+          "，"
+        ],
+        [
+          "jiā",
+          "jì",
+          "wú",
+          "wàng",
+          "gào",
+          "nǎi",
+          "wēng",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-055.jpg",
+      "imageSize": [
+        304,
+        480
+      ],
+      "imageLayout": {
+        "x": 0.5944,
+        "y": 0.2479,
+        "w": 0.3017,
+        "h": 0.6352
+      },
+      "extraImages": [],
+      "slide": 56,
+      "audio": "assets/audio/p055.m4a",
+      "lineTimes": [
+        3.0,
+        5.15,
+        7.67,
+        9.76
+      ],
+      "audioDuration": 12.27
+    },
+    {
+      "id": "p056",
+      "no": 56,
+      "title": "秋夜将晓出篱门迎凉有感",
+      "titlePinyins": [
+        "qiū",
+        "yè",
+        "jiāng",
+        "xiǎo",
+        "chū",
+        "lí",
+        "mén",
+        "yíng",
+        "liáng",
+        "yǒu",
+        "gǎn"
+      ],
+      "dynasty": "宋",
+      "author": "陆游",
+      "authorRaw": "（宋）陆游",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "lù",
+        "yóu"
+      ],
+      "lines": [
+        "三万里河东入海，",
+        "五千仞岳上摩天。",
+        "遗民泪尽胡尘里，",
+        "难望王师又一年。"
+      ],
+      "linePinyins": [
+        [
+          "sān",
+          "wàn",
+          "lǐ",
+          "hé",
+          "dōng",
+          "rù",
+          "hǎi",
+          "，"
+        ],
+        [
+          "wǔ",
+          "qiān",
+          "rèn",
+          "yuè",
+          "shàng",
+          "mó",
+          "tiān",
+          "。"
+        ],
+        [
+          "yí",
+          "mín",
+          "lèi",
+          "jìn",
+          "hú",
+          "chén",
+          "lǐ",
+          "，"
+        ],
+        [
+          "nán",
+          "wàng",
+          "wáng",
+          "shī",
+          "yòu",
+          "yī",
+          "nián",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-056.jpg",
+      "imageSize": [
+        302,
+        184
+      ],
+      "imageLayout": {
+        "x": 0.5,
+        "y": 0.6051,
+        "w": 0.4326,
+        "h": 0.294
+      },
+      "extraImages": [],
+      "slide": 57,
+      "audio": "assets/audio/p056.m4a",
+      "lineTimes": [
+        4.47,
+        6.14,
+        8.07,
+        9.81
+      ],
+      "audioDuration": 11.76
+    },
+    {
+      "id": "p057",
+      "no": 57,
+      "title": "四时田园杂兴",
+      "titlePinyins": [
+        "sì",
+        "shí",
+        "tián",
+        "yuán",
+        "zá",
+        "xìng"
+      ],
+      "dynasty": "宋",
+      "author": "范成大",
+      "authorRaw": "（宋）范成大",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "fàn",
+        "chéng",
+        "dà"
+      ],
+      "lines": [
+        "昼出耘田夜绩麻，",
+        "村庄儿女各当家。",
+        "童孙未解供耕织，",
+        "也傍桑阴学种瓜。"
+      ],
+      "linePinyins": [
+        [
+          "zhòu",
+          "chū",
+          "yún",
+          "tián",
+          "yè",
+          "jì",
+          "má",
+          "，"
+        ],
+        [
+          "cūn",
+          "zhuāng",
+          "ér",
+          "nǚ",
+          "gè",
+          "dāng",
+          "jiā",
+          "。"
+        ],
+        [
+          "tóng",
+          "sūn",
+          "wèi",
+          "jiě",
+          "gòng",
+          "gēng",
+          "zhī",
+          "，"
+        ],
+        [
+          "yě",
+          "bàng",
+          "sāng",
+          "yīn",
+          "xué",
+          "zhòng",
+          "guā",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-057.jpg",
+      "imageSize": [
+        559,
+        800
+      ],
+      "imageLayout": {
+        "x": 0.5852,
+        "y": 0.2586,
+        "w": 0.3293,
+        "h": 0.6285
+      },
+      "extraImages": [],
+      "slide": 58,
+      "audio": "assets/audio/p057.m4a",
+      "lineTimes": [
+        3.7,
+        5.29,
+        7.03,
+        8.66
+      ],
+      "audioDuration": 10.59
+    },
+    {
+      "id": "p058",
+      "no": 58,
+      "title": "四时田园杂兴",
+      "titlePinyins": [
+        "sì",
+        "shí",
+        "tián",
+        "yuán",
+        "zá",
+        "xìng"
+      ],
+      "dynasty": "宋",
+      "author": "范成大",
+      "authorRaw": "（宋）范成大",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "fàn",
+        "chéng",
+        "dà"
+      ],
+      "lines": [
+        "梅子金黄杏子肥，",
+        "麦花雪白菜花稀。",
+        "日长篱落无人过，",
+        "唯有蜻蜓蛱蝶飞。"
+      ],
+      "linePinyins": [
+        [
+          "méi",
+          "zi",
+          "jīn",
+          "huáng",
+          "xìng",
+          "zi",
+          "féi",
+          "，"
+        ],
+        [
+          "mài",
+          "huā",
+          "xuě",
+          "bái",
+          "cài",
+          "huā",
+          "xī",
+          "。"
+        ],
+        [
+          "rì",
+          "cháng",
+          "lí",
+          "luò",
+          "wú",
+          "rén",
+          "guò",
+          "，"
+        ],
+        [
+          "wéi",
+          "yǒu",
+          "qīng",
+          "tíng",
+          "jiá",
+          "dié",
+          "fēi",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-058.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.563,
+        "y": 0.269,
+        "w": 0.3752,
+        "h": 0.609
+      },
+      "extraImages": [],
+      "slide": 59,
+      "audio": "assets/audio/p058.m4a",
+      "lineTimes": [
+        3.7,
+        5.36,
+        7.22,
+        8.76
+      ],
+      "audioDuration": 10.65
+    },
+    {
+      "id": "p059",
+      "no": 59,
+      "title": "小池",
+      "titlePinyins": [
+        "xiǎo",
+        "chí"
+      ],
+      "dynasty": "宋",
+      "author": "杨万里",
+      "authorRaw": "（宋）杨万里",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "yáng",
+        "wàn",
+        "lǐ"
+      ],
+      "lines": [
+        "泉眼无声惜细流，",
+        "树阴照水爱晴柔。",
+        "小荷才露尖尖角，",
+        "早有蜻蜓立上头。"
+      ],
+      "linePinyins": [
+        [
+          "quán",
+          "yǎn",
+          "wú",
+          "shēng",
+          "xī",
+          "xì",
+          "liú",
+          "，"
+        ],
+        [
+          "shù",
+          "yīn",
+          "zhào",
+          "shuǐ",
+          "ài",
+          "qíng",
+          "róu",
+          "。"
+        ],
+        [
+          "xiǎo",
+          "hé",
+          "cái",
+          "lù",
+          "jiān",
+          "jiān",
+          "jiǎo",
+          "，"
+        ],
+        [
+          "zǎo",
+          "yǒu",
+          "qīng",
+          "tíng",
+          "lì",
+          "shàng",
+          "tóu",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-059.jpg",
+      "imageSize": [
+        650,
+        487
+      ],
+      "imageLayout": {
+        "x": 0.122,
+        "y": 0.2586,
+        "w": 0.7717,
+        "h": 0.6292
+      },
+      "extraImages": [],
+      "slide": 60,
+      "audio": "assets/audio/p059.m4a",
+      "lineTimes": [
+        2.96,
+        4.67,
+        6.55,
+        8.24
+      ],
+      "audioDuration": 10.14
+    },
+    {
+      "id": "p060",
+      "no": 60,
+      "title": "晓出净慈寺送林子方",
+      "titlePinyins": [
+        "xiǎo",
+        "chū",
+        "jìng",
+        "cí",
+        "sì",
+        "sòng",
+        "lín",
+        "zi",
+        "fāng"
+      ],
+      "dynasty": "宋",
+      "author": "杨万里",
+      "authorRaw": "（宋）杨万里",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "yáng",
+        "wàn",
+        "lǐ"
+      ],
+      "lines": [
+        "毕竟西湖六月中，",
+        "风光不与四时同。",
+        "接天莲叶无穷碧，",
+        "映日荷花别样红。"
+      ],
+      "linePinyins": [
+        [
+          "bì",
+          "jìng",
+          "xī",
+          "hú",
+          "liù",
+          "yuè",
+          "zhōng",
+          "，"
+        ],
+        [
+          "fēng",
+          "guāng",
+          "bù",
+          "yǔ",
+          "sì",
+          "shí",
+          "tóng",
+          "。"
+        ],
+        [
+          "jiē",
+          "tiān",
+          "lián",
+          "yè",
+          "wú",
+          "qióng",
+          "bì",
+          "，"
+        ],
+        [
+          "yìng",
+          "rì",
+          "hé",
+          "huā",
+          "bié",
+          "yàng",
+          "hóng",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-060.gif",
+      "imageSize": [
+        240,
+        160
+      ],
+      "imageLayout": {
+        "x": 0.4686,
+        "y": 0.29,
+        "w": 0.4625,
+        "h": 0.5565
+      },
+      "extraImages": [],
+      "slide": 61,
+      "audio": "assets/audio/p060.m4a",
+      "lineTimes": [
+        4.44,
+        6.13,
+        8.01,
+        9.7
+      ],
+      "audioDuration": 11.9
+    },
+    {
+      "id": "p061",
+      "no": 61,
+      "title": "春日",
+      "titlePinyins": [
+        "chūn",
+        "rì"
+      ],
+      "dynasty": "宋",
+      "author": "朱熹",
+      "authorRaw": "（宋）朱熹",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "zhū",
+        "xī"
+      ],
+      "lines": [
+        "胜日寻芳泗水滨，",
+        "无边光景一时新。",
+        "等闲识得东风面，",
+        "万紫千红总是春。"
+      ],
+      "linePinyins": [
+        [
+          "shèng",
+          "rì",
+          "xún",
+          "fāng",
+          "sì",
+          "shuǐ",
+          "bīn",
+          "，"
+        ],
+        [
+          "wú",
+          "biān",
+          "guāng",
+          "jǐng",
+          "yī",
+          "shí",
+          "xīn",
+          "。"
+        ],
+        [
+          "děng",
+          "xián",
+          "shí",
+          "dé",
+          "dōng",
+          "fēng",
+          "miàn",
+          "，"
+        ],
+        [
+          "wàn",
+          "zǐ",
+          "qiān",
+          "hóng",
+          "zǒng",
+          "shì",
+          "chūn",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-061.jpg",
+      "imageSize": [
+        600,
+        294
+      ],
+      "imageLayout": {
+        "x": 0.4686,
+        "y": 0.4475,
+        "w": 0.5078,
+        "h": 0.437
+      },
+      "extraImages": [],
+      "slide": 62,
+      "audio": "assets/audio/p061.m4a",
+      "lineTimes": [
+        2.67,
+        4.35,
+        6.09,
+        7.69
+      ],
+      "audioDuration": 9.75
+    },
+    {
+      "id": "p062",
+      "no": 62,
+      "title": "题临安邸",
+      "titlePinyins": [
+        "tí",
+        "lín",
+        "ān",
+        "dǐ"
+      ],
+      "dynasty": "宋",
+      "author": "林升",
+      "authorRaw": "（宋）林升",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "lín",
+        "shēng"
+      ],
+      "lines": [
+        "山外青山楼外楼，",
+        "西湖歌舞几时休？",
+        "暖风熏得游人醉，",
+        "直把杭州做汴州。"
+      ],
+      "linePinyins": [
+        [
+          "shān",
+          "wài",
+          "qīng",
+          "shān",
+          "lóu",
+          "wài",
+          "lóu",
+          "，"
+        ],
+        [
+          "xī",
+          "hú",
+          "gē",
+          "wǔ",
+          "jǐ",
+          "shí",
+          "xiū",
+          "？"
+        ],
+        [
+          "nuǎn",
+          "fēng",
+          "xūn",
+          "dé",
+          "yóu",
+          "rén",
+          "zuì",
+          "，"
+        ],
+        [
+          "zhí",
+          "bǎ",
+          "háng",
+          "zhōu",
+          "zuò",
+          "biàn",
+          "zhōu",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-062.jpg",
+      "imageSize": [
+        550,
+        815
+      ],
+      "imageLayout": {
+        "x": 0.6102,
+        "y": 0.122,
+        "w": 0.3708,
+        "h": 0.7729
+      },
+      "extraImages": [],
+      "slide": 63,
+      "audio": "assets/audio/p062.m4a",
+      "lineTimes": [
+        3.64,
+        5.84,
+        8.23,
+        10.36
+      ],
+      "audioDuration": 12.89
+    },
+    {
+      "id": "p063",
+      "no": 63,
+      "title": "游园不值",
+      "titlePinyins": [
+        "yóu",
+        "yuán",
+        "bù",
+        "zhí"
+      ],
+      "dynasty": "宋",
+      "author": "叶绍翁",
+      "authorRaw": "（宋）叶绍翁",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "yè",
+        "shào",
+        "wēng"
+      ],
+      "lines": [
+        "应怜屐齿印苍苔，",
+        "小扣柴扉久不开。",
+        "春色满园关不住，",
+        "一枝红杏出墙来。"
+      ],
+      "linePinyins": [
+        [
+          "yīng",
+          "lián",
+          "jī",
+          "chǐ",
+          "yìn",
+          "cāng",
+          "tái",
+          "，"
+        ],
+        [
+          "xiǎo",
+          "kòu",
+          "chái",
+          "fēi",
+          "jiǔ",
+          "bù",
+          "kāi",
+          "。"
+        ],
+        [
+          "chūn",
+          "sè",
+          "mǎn",
+          "yuán",
+          "guān",
+          "bú",
+          "zhù",
+          "，"
+        ],
+        [
+          "yī",
+          "zhī",
+          "hóng",
+          "xìng",
+          "chū",
+          "qiáng",
+          "lái",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-063.jpg",
+      "imageSize": [
+        306,
+        480
+      ],
+      "imageLayout": {
+        "x": 0.6024,
+        "y": 0.2479,
+        "w": 0.3385,
+        "h": 0.64
+      },
+      "extraImages": [],
+      "slide": 64,
+      "audio": "assets/audio/p063.m4a",
+      "lineTimes": [
+        3.2,
+        4.92,
+        6.78,
+        8.33
+      ],
+      "audioDuration": 10.34
+    },
+    {
+      "id": "p064",
+      "no": 64,
+      "title": "乡村四月",
+      "titlePinyins": [
+        "xiāng",
+        "cūn",
+        "sì",
+        "yuè"
+      ],
+      "dynasty": "宋",
+      "author": "翁卷",
+      "authorRaw": "（宋）翁卷",
+      "authorPinyins": [
+        "（",
+        "sòng",
+        "）",
+        "wēng",
+        "juǎn"
+      ],
+      "lines": [
+        "绿满山原白满川，",
+        "子规声里雨如烟。",
+        "乡村四月闲人少，",
+        "才了蚕桑又插田。"
+      ],
+      "linePinyins": [
+        [
+          "lǜ",
+          "mǎn",
+          "shān",
+          "yuán",
+          "bái",
+          "mǎn",
+          "chuān",
+          "，"
+        ],
+        [
+          "zǐ",
+          "guī",
+          "shēng",
+          "lǐ",
+          "yǔ",
+          "rú",
+          "yān",
+          "。"
+        ],
+        [
+          "xiāng",
+          "cūn",
+          "sì",
+          "yuè",
+          "xián",
+          "rén",
+          "shǎo",
+          "，"
+        ],
+        [
+          "cái",
+          "liǎo",
+          "cán",
+          "sāng",
+          "yòu",
+          "chā",
+          "tián",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-064.jpg",
+      "imageSize": [
+        320,
+        229
+      ],
+      "imageLayout": {
+        "x": 0.4528,
+        "y": 0.3319,
+        "w": 0.4488,
+        "h": 0.5102
+      },
+      "extraImages": [],
+      "slide": 65,
+      "audio": "assets/audio/p064.m4a",
+      "lineTimes": [
+        3.08,
+        4.78,
+        6.57,
+        8.23
+      ],
+      "audioDuration": 10.3
+    },
+    {
+      "id": "p065",
+      "no": 65,
+      "title": "墨梅",
+      "titlePinyins": [
+        "mò",
+        "méi"
+      ],
+      "dynasty": "元",
+      "author": "王冕",
+      "authorRaw": "（元）王冕",
+      "authorPinyins": [
+        "（",
+        "yuán",
+        "）",
+        "wáng",
+        "miǎn"
+      ],
+      "lines": [
+        "我家洗砚池头树，",
+        "朵朵花开淡墨痕。",
+        "不要人夸颜色好，",
+        "只留清气满乾坤。"
+      ],
+      "linePinyins": [
+        [
+          "wǒ",
+          "jiā",
+          "xǐ",
+          "yàn",
+          "chí",
+          "tóu",
+          "shù",
+          "，"
+        ],
+        [
+          "duǒ",
+          "duǒ",
+          "huā",
+          "kāi",
+          "dàn",
+          "mò",
+          "hén",
+          "。"
+        ],
+        [
+          "bú",
+          "yào",
+          "rén",
+          "kuā",
+          "yán",
+          "sè",
+          "hǎo",
+          "，"
+        ],
+        [
+          "zhǐ",
+          "liú",
+          "qīng",
+          "qì",
+          "mǎn",
+          "qián",
+          "kūn",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-065.jpg",
+      "imageSize": [
+        140,
+        105
+      ],
+      "imageLayout": {
+        "x": 0.626,
+        "y": 0.2586,
+        "w": 0.2835,
+        "h": 0.5775
+      },
+      "extraImages": [],
+      "slide": 66,
+      "audio": "assets/audio/p065.m4a",
+      "lineTimes": [
+        2.72,
+        4.34,
+        6.26,
+        7.82
+      ],
+      "audioDuration": 9.96
+    },
+    {
+      "id": "p066",
+      "no": 66,
+      "title": "石灰吟",
+      "titlePinyins": [
+        "shí",
+        "huī",
+        "yín"
+      ],
+      "dynasty": "明",
+      "author": "于谦",
+      "authorRaw": "（明）于谦",
+      "authorPinyins": [
+        "（",
+        "míng",
+        "）",
+        "yú",
+        "qiān"
+      ],
+      "lines": [
+        "千锤万凿出深山，",
+        "烈火焚烧若等闲，",
+        "粉身碎骨浑不怕，",
+        "要留清白在人间。"
+      ],
+      "linePinyins": [
+        [
+          "qiān",
+          "chuí",
+          "wàn",
+          "záo",
+          "chū",
+          "shēn",
+          "shān",
+          "，"
+        ],
+        [
+          "liè",
+          "huǒ",
+          "fén",
+          "shāo",
+          "ruò",
+          "děng",
+          "xián",
+          "，"
+        ],
+        [
+          "fěn",
+          "shēn",
+          "suì",
+          "gǔ",
+          "hún",
+          "bù",
+          "pà",
+          "，"
+        ],
+        [
+          "yào",
+          "liú",
+          "qīng",
+          "bái",
+          "zài",
+          "rén",
+          "jiān",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-066.jpg",
+      "imageSize": [
+        348,
+        557
+      ],
+      "imageLayout": {
+        "x": 0.6102,
+        "y": 0.2586,
+        "w": 0.3149,
+        "h": 0.6266
+      },
+      "extraImages": [],
+      "slide": 67,
+      "audio": "assets/audio/p066.m4a",
+      "lineTimes": [
+        2.99,
+        4.78,
+        6.55,
+        8.25
+      ],
+      "audioDuration": 10.34
+    },
+    {
+      "id": "p067",
+      "no": 67,
+      "title": "竹石",
+      "titlePinyins": [
+        "zhú",
+        "shí"
+      ],
+      "dynasty": "明",
+      "author": "郑燮",
+      "authorRaw": "（明）郑燮",
+      "authorPinyins": [
+        "（",
+        "míng",
+        "）",
+        "zhèng",
+        "xiè"
+      ],
+      "lines": [
+        "咬定青山不放松，",
+        "立根原在破岩中。",
+        "千磨万击还坚韧，",
+        "任尔东西南北风。"
+      ],
+      "linePinyins": [
+        [
+          "yǎo",
+          "dìng",
+          "qīng",
+          "shān",
+          "bù",
+          "fàng",
+          "sōng",
+          "，"
+        ],
+        [
+          "lì",
+          "gēn",
+          "yuán",
+          "zài",
+          "pò",
+          "yán",
+          "zhōng",
+          "。"
+        ],
+        [
+          "qiān",
+          "mó",
+          "wàn",
+          "jī",
+          "hái",
+          "jiān",
+          "rèn",
+          "，"
+        ],
+        [
+          "rèn",
+          "ěr",
+          "dōng",
+          "xī",
+          "nán",
+          "běi",
+          "fēng",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-067.jpg",
+      "imageSize": [
+        800,
+        572
+      ],
+      "imageLayout": {
+        "x": 0.3898,
+        "y": 0.3741,
+        "w": 0.567,
+        "h": 0.509
+      },
+      "extraImages": [],
+      "slide": 68,
+      "audio": "assets/audio/p067.m4a",
+      "lineTimes": [
+        2.79,
+        4.48,
+        6.47,
+        8.13
+      ],
+      "audioDuration": 10.2
+    },
+    {
+      "id": "p068",
+      "no": 68,
+      "title": "所见",
+      "titlePinyins": [
+        "suǒ",
+        "jiàn"
+      ],
+      "dynasty": "清",
+      "author": "袁枚",
+      "authorRaw": "（清）袁枚",
+      "authorPinyins": [
+        "（",
+        "qīng",
+        "）",
+        "yuán",
+        "méi"
+      ],
+      "lines": [
+        "牧童骑黄牛，",
+        "歌声振林樾。",
+        "意欲捕鸣蝉，",
+        "忽然闭口立。"
+      ],
+      "linePinyins": [
+        [
+          "mù",
+          "tóng",
+          "qí",
+          "huáng",
+          "niú",
+          "，"
+        ],
+        [
+          "gē",
+          "shēng",
+          "zhèn",
+          "lín",
+          "yuè",
+          "。"
+        ],
+        [
+          "yì",
+          "yù",
+          "bǔ",
+          "míng",
+          "chán",
+          "，"
+        ],
+        [
+          "hū",
+          "rán",
+          "bì",
+          "kǒu",
+          "lì",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-068.jpg",
+      "imageSize": [
+        572,
+        818
+      ],
+      "imageLayout": {
+        "x": 0.626,
+        "y": 0.2375,
+        "w": 0.3069,
+        "h": 0.6509
+      },
+      "extraImages": [],
+      "slide": 69,
+      "audio": "assets/audio/p068.m4a",
+      "lineTimes": [
+        2.71,
+        3.92,
+        5.28,
+        6.45
+      ],
+      "audioDuration": 7.97
+    },
+    {
+      "id": "p069",
+      "no": 69,
+      "title": "村居",
+      "titlePinyins": [
+        "cūn",
+        "jū"
+      ],
+      "dynasty": "清",
+      "author": "高鼎",
+      "authorRaw": "（清）高鼎",
+      "authorPinyins": [
+        "（",
+        "qīng",
+        "）",
+        "gāo",
+        "dǐng"
+      ],
+      "lines": [
+        "草长莺飞二月天，",
+        "拂堤杨柳醉春烟。",
+        "儿童散学归来早，",
+        "忙趁东风放纸鸢。"
+      ],
+      "linePinyins": [
+        [
+          "cǎo",
+          "zhǎng",
+          "yīng",
+          "fēi",
+          "èr",
+          "yuè",
+          "tiān",
+          "，"
+        ],
+        [
+          "fú",
+          "dī",
+          "yáng",
+          "liǔ",
+          "zuì",
+          "chūn",
+          "yān",
+          "。"
+        ],
+        [
+          "ér",
+          "tóng",
+          "sàn",
+          "xué",
+          "guī",
+          "lái",
+          "zǎo",
+          "，"
+        ],
+        [
+          "máng",
+          "chèn",
+          "dōng",
+          "fēng",
+          "fàng",
+          "zhǐ",
+          "yuān",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-069.jpg",
+      "imageSize": [
+        582,
+        785
+      ],
+      "imageLayout": {
+        "x": 0.5788,
+        "y": 0.2271,
+        "w": 0.3583,
+        "h": 0.6704
+      },
+      "extraImages": [],
+      "slide": 70,
+      "audio": "assets/audio/p069.m4a",
+      "lineTimes": [
+        2.71,
+        4.39,
+        6.22,
+        7.82
+      ],
+      "audioDuration": 9.83
+    },
+    {
+      "id": "p070",
+      "no": 70,
+      "title": "己亥杂诗",
+      "titlePinyins": [
+        "yǐ",
+        "hài",
+        "zá",
+        "shī"
+      ],
+      "dynasty": "清",
+      "author": "龚自珍",
+      "authorRaw": "（清）龚自珍",
+      "authorPinyins": [
+        "（",
+        "qīng",
+        "）",
+        "gōng",
+        "zì",
+        "zhēn"
+      ],
+      "lines": [
+        "浩荡离愁白日斜，",
+        "吟鞭东指即天涯。",
+        "落红不是无情物，",
+        "化作春泥更护花。"
+      ],
+      "linePinyins": [
+        [
+          "hào",
+          "dàng",
+          "lí",
+          "chóu",
+          "bái",
+          "rì",
+          "xié",
+          "，"
+        ],
+        [
+          "yín",
+          "biān",
+          "dōng",
+          "zhǐ",
+          "jí",
+          "tiān",
+          "yá",
+          "。"
+        ],
+        [
+          "luò",
+          "hóng",
+          "bú",
+          "shì",
+          "wú",
+          "qíng",
+          "wù",
+          "，"
+        ],
+        [
+          "huà",
+          "zuò",
+          "chūn",
+          "ní",
+          "gèng",
+          "hù",
+          "huā",
+          "。"
+        ]
+      ],
+      "image": "assets/images/poem-070.jpg",
+      "imageSize": [
+        299,
+        422
+      ],
+      "imageLayout": {
+        "x": 0.5866,
+        "y": 0.2586,
+        "w": 0.3339,
+        "h": 0.628
+      },
+      "extraImages": [],
+      "slide": 71,
+      "audio": "assets/audio/p070.m4a",
+      "lineTimes": [
+        3.29,
+        4.98,
+        6.94,
+        8.53
+      ],
+      "audioDuration": 10.58
+    }
+  ]
+}

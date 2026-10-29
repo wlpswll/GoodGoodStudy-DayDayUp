@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#f3ead7">
+<meta name="description" content="一年级必背古诗70首：看图、听朗读、跟着读。上滑下一首，下滑上一首。">
+<title>一年级必背古诗|70首</title>
+<script>
+/* 平台对已发布应用的子资源做 sharecode 校验：
+   浏览器请求 css/js/图片/音频 时不会自动带上该参数，若 cookie 未种上就会 403 导致白屏。
+   这里把地址栏上的 sharecode 透传给每一个子资源请求，不再依赖 cookie。 */
+window.__SCQ = (function () {
+  try {
+    var m = location.href.match(/[?&]sharecode=([^&#]+)/);
+    return m ? 'sharecode=' + m[1] : '';
+  } catch (e) { return ''; }
+})();
+window.__withSC = function (url) {
+  if (!url || !window.__SCQ) return url;
+  return url + (url.indexOf('?') >= 0 ? '&' : '?') + window.__SCQ;
+};
+(function () {
+  var l = document.createElement('link');
+  l.rel = 'stylesheet';
+  l.href = window.__withSC('css/style.css');
+  document.head.appendChild(l);
+})();
+</script>
+</head>
+<body style="background:#f3ead7">
+<div id="app">
+
+  <!-- 首页 -->
+  <section class="view cover active" id="cover">
+    <div class="cover-wash"></div>
+    <div class="cover-clouds" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="cover-inner">
+      <div class="cover-seal">诗</div>
+      <h1 class="cover-title">古诗<span>70</span>首</h1>
+      <p class="cover-sub">一年级必背 · 看图 · 听朗读</p>
+      <div class="cover-rule"></div>
+      <button class="start-btn" id="startBtn">开始诵读</button>
+      <p class="cover-hint">上滑翻下一首，下滑回到上一首</p>
+    </div>
+    <div class="cover-foot">共 70 首 · 点目录可快速选诗</div>
+  </section>
+
+  <!-- 诗页 -->
+  <section class="view poem" id="poem">
+    <div class="scene" id="scene" aria-hidden="true">
+      <div class="scene-particles" id="particles"></div>
+    </div>
+
+    <header class="topbar">
+      <button class="top-btn" id="catalogBtn" aria-label="打开目录">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <span>目录</span>
+      </button>
+      <span class="counter" id="counter">1 / 70</span>
+      <button class="top-btn top-btn-icon" id="homeBtn" aria-label="回到首页">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </button>
+    </header>
+
+    <div class="poem-scroll" id="poemScroll">
+      <div class="artwork" id="artwork">
+        <div class="art-blur" id="artBlur"></div>
+        <img id="artImg" alt="本诗配图">
+        <div class="art-frame"></div>
+      </div>
+      <div class="poem-body" id="poemBody">
+        <h2 class="poem-title" id="poemTitle"></h2>
+        <p class="poem-author" id="poemAuthor"></p>
+        <div class="poem-lines" id="poemLines"></div>
+      </div>
+    </div>
+
+    <footer class="controls" id="controls">
+      <div class="transport">
+        <button class="step-btn" id="prevBtn" aria-label="上一首">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2.4v14H6zm12 0v14l-9-7z"/></svg>
+        </button>
+        <button class="play-btn" id="playBtn" aria-label="播放朗读">
+          <svg class="ico-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+          <svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 4.5h4v15h-4zm7 0h4v15h-4z"/></svg>
+        </button>
+        <button class="step-btn" id="nextBtn" aria-label="下一首">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.6 5H18v14h-2.4zM6 5v14l9-7z"/></svg>
+        </button>
+      </div>
+      <div class="seek-row">
+        <span class="time" id="curTime">0:00</span>
+        <input type="range" id="seek" min="0" max="100" value="0" step="0.1" aria-label="朗读进度，可拖动">
+        <span class="time" id="durTime">0:00</span>
+        <button class="speed-btn" id="speedBtn" aria-label="点击切换朗读语速">0.85×</button>
+      </div>
+    </footer>
+  </section>
+
+  <!-- 目录 -->
+  <div class="catalog" id="catalog" aria-hidden="true">
+    <div class="catalog-panel">
+      <div class="catalog-head">
+        <h3>目录 <em id="catCount">70 首</em></h3>
+        <button class="close-btn" id="closeCatalog" aria-label="关闭目录">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="catalog-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input type="search" id="searchInput" placeholder="搜诗名、作者或朝代" autocomplete="off">
+      </div>
+      <div class="catalog-list" id="catalogList"></div>
+    </div>
+  </div>
+
+  <audio id="audio" preload="metadata" playsinline webkit-playsinline></audio>
+  <div class="loading" id="loading" style="position:absolute;inset:0;z-index:50;background:#f3ead7;display:flex;align-items:center;justify-content:center"><div class="loading-inner" style="font-size:15px;letter-spacing:.25em;color:#9a8264">正在展开诗卷…</div></div>
+</div>
+<script>
+(function () {
+  var s = document.createElement('script');
+  s.src = window.__withSC('js/app.js');
+  document.body.appendChild(s);
+})();
+</script>
+</body>
+</html>
