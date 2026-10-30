@@ -1,0 +1,13 @@
+{
+  "feature_id": "english-media-player",
+  "status": "pass",
+  "release_allowed": true,
+  "verify": {
+    "summary": "Summary: 7 PASS / 0 WARN / 0 FAIL / 3 SKIP (total 10)",
+    "result": "Result:  PASSED"
+  },
+  "code_review": "> 结论：APPROVE",
+  "testing": "**PASS**",
+  "traceability": "Result: TRACEABILITY_PASS",
+  "warnings": []
+}

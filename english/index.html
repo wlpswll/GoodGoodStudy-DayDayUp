@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#f3ead7">
+<meta name="description" content="一年级上册英语跟读：音频和视频分开列出，记住上次播放的位置。">
+<title>英语跟读</title>
+<script>
+window.__SCQ = (function () {
+  try {
+    var match = location.href.match(/[?&]sharecode=([^&#]+)/);
+    return match ? 'sharecode=' + match[1] : '';
+  } catch (err) { return ''; }
+})();
+window.__withSC = function (url) {
+  if (!url || !window.__SCQ) return url;
+  return url + (url.indexOf('?') >= 0 ? '&' : '?') + window.__SCQ;
+};
+(function () {
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = window.__withSC('css/style.css?v=5');
+  document.head.appendChild(link);
+})();
+</script>
+</head>
+<body>
+<div id="app">
+  <section class="view library active" id="library">
+    <header class="lib-head">
+      <div class="cover-seal" aria-hidden="true">英</div>
+      <div class="lib-copy">
+        <h1>英语跟读</h1>
+        <p id="libSub">一年级上册 · 音频与视频分开</p>
+      </div>
+    </header>
+    <button type="button" class="resume-card" id="resumeCard" hidden>
+      <span>继续播放</span>
+      <strong id="resumeTitle"></strong>
+      <em id="resumeTime"></em>
+    </button>
+    <div class="catalog-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input type="search" id="librarySearch" placeholder="搜课名或文件夹" autocomplete="off" enterkeyhint="search">
+    </div>
+    <div class="catalog-list" id="libraryList"></div>
+  </section>
+
+  <section class="view player" id="player">
+    <header class="topbar">
+      <button type="button" class="top-btn" id="catalogBtn" aria-label="打开目录">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <span>目录</span>
+      </button>
+      <span class="counter" id="counter">音频 0 / 0</span>
+      <button type="button" class="top-btn top-btn-icon" id="maxBtn" hidden aria-pressed="false" aria-label="全屏">
+        <svg class="ico-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+        <svg class="ico-exit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8H3V3M16 8h5V3M8 16H3v5M16 16h5v5"/></svg>
+      </button>
+      <button type="button" class="top-btn top-btn-icon" id="homeBtn" aria-label="回到列表">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </button>
+    </header>
+
+    <div class="stage is-audio" id="stage">
+      <video id="video" class="stage-video" playsinline webkit-playsinline preload="metadata"></video>
+      <div class="stage-audio" id="stageAudio">
+        <div class="disc" id="disc" aria-hidden="true"><b>英</b></div>
+      </div>
+    </div>
+
+    <div class="now">
+      <p class="now-kind" id="nowKind">音频</p>
+      <h2 id="nowTitle">选择一课</h2>
+      <p class="now-folder" id="nowFolder"></p>
+      <p class="resume-hint" id="resumeHint" hidden>已回到上次播放的位置</p>
+      <p class="media-error" id="mediaError" hidden></p>
+    </div>
+
+    <footer class="controls">
+      <div class="transport">
+        <button type="button" class="step-btn" id="prevBtn" aria-label="上一个">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h2.4v14H6zm12 0v14l-9-7z"/></svg>
+        </button>
+        <button type="button" class="play-btn" id="playBtn" aria-label="播放">
+          <svg class="ico-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
+          <svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 4.5h4v15h-4zm7 0h4v15h-4z"/></svg>
+        </button>
+        <button type="button" class="step-btn" id="nextBtn" aria-label="下一个">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.6 5H18v14h-2.4zM6 5v14l9-7z"/></svg>
+        </button>
+      </div>
+      <div class="seek-row">
+        <span class="time" id="curTime">0:00</span>
+        <input type="range" id="seek" min="0" max="100" value="0" step="0.1" aria-label="播放进度，可拖动">
+        <span class="time" id="durTime">0:00</span>
+        <div class="speed-wrap" id="speedWrap">
+          <button type="button" class="speed-btn" id="speedBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="选择倍速，当前 1 倍">1×</button>
+          <div class="speed-menu" id="speedMenu" role="listbox" aria-label="倍速" hidden></div>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <div class="catalog" id="catalog" aria-hidden="true">
+    <div class="catalog-panel">
+      <div class="catalog-head">
+        <h3>目录 <em id="catCount">0</em></h3>
+        <button type="button" class="close-btn" id="closeCatalog" aria-label="关闭目录">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="catalog-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input type="search" id="catalogSearch" placeholder="搜课名或文件夹" autocomplete="off">
+      </div>
+      <div class="catalog-list" id="catalogList"></div>
+    </div>
+  </div>
+
+  <div class="loading" id="loading"><div class="loading-inner">正在打开课本…</div></div>
+</div>
+<script>
+(function () {
+  var files = ['js/platform.js', 'js/catalog.js', 'js/progress.js?v=6', 'js/app.js?v=7'];
+  function load(index) {
+    if (index >= files.length) return;
+    var script = document.createElement('script');
+    script.src = window.__withSC(files[index]);
+    script.onload = function () { load(index + 1); };
+    script.onerror = function () {
+      var loading = document.getElementById('loading');
+      if (loading) loading.innerHTML = '<div class="loading-inner">脚本没有加载出来</div>';
+    };
+    document.body.appendChild(script);
+  }
+  load(0);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "version": "4.0.0",
+  "stack": "static-html",
+  "eslint_error_limit": 0,
+  "tsc_error_limit": 0,
+  "test_count": 16,
+  "test_coverage_pct": 0,
+  "test_config": {
+    "skip_allowed": true,
+    "skip_reason": "initial baseline — no tests yet"
+  },
+  "harness_process": {
+    "gate": "warn",
+    "min_requirement_chars": 200
+  },
+  "baselines": {
+    "eslint_error_count": 0,
+    "tsc_error_count": 0,
+    "lint_error_count": 0,
+    "build_error_count": 0,
+    "test_count": 16,
+    "test_coverage_pct": 0
+  }
+}

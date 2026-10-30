@@ -1,0 +1,22 @@
+# 英语学习静态页：显式命令优先于技术栈插件
+stack: static-html
+
+lint:
+  enabled: false
+  command: ""
+  reason: "无打包器与 lint 配置；播放逻辑由 node:test 覆盖"
+
+build:
+  enabled: true
+  command: "python3 english/scripts/build-catalog.py"
+  reason: "扫描 english 媒体目录并重写 data/media.json"
+
+test:
+  enabled: true
+  command: "node --test tests/*.test.js"
+  count_pattern: "^ok [0-9]+ -"
+  reason: "目录分组与断点进度为纯函数，用 Node 内置测试运行"
+
+baseline:
+  skip_test_allowed: false
+  skip_test_reason: ""

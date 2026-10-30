@@ -1,0 +1,38 @@
+# harness/repo-topology.yaml — 多仓 / 跨仓治理拓扑
+#
+# 本文件是机器可读的参与仓库索引，解决“治理根”和“实际代码仓库”不一致的问题。
+# 不记录个人本地绝对路径；本地 checkout 由 registry、.impl-cache.yaml、项目自有 resolver 或用户显式参数解析。
+
+schema_version: 1
+
+governance_root:
+  type: same-repo  # same-repo | monorepo-root | governance-repo | attached-to-target
+  description: "SOP 产物所在根目录；独立治理仓请改为 governance-repo"
+
+local_resolution:
+  strategy: registry  # registry | impl-cache | project-resolver | explicit
+  resolver_command: ""  # 例如: scripts/resolve-dep-path.sh weixin-search-main --quiet
+  note: "禁止在本文件写 /Users/... 等个人本地路径"
+
+platform_context:
+  required: false
+  note: "代码托管、CI/CD、部署平台均为可选接入；项目无统一平台时填 optional/unknown 并记录替代验证方式"
+
+repos:
+  - id: root
+    role: primary  # primary | participant | dependency | readonly
+    git: ""
+    default_branch: ""
+    path: "."  # 仓库内相对路径或逻辑 target root
+    scope: "."
+    governance: same-root  # same-root | monorepo-root | governance-repo | attached-to-target
+    verification:
+      lint: ""
+      build: ""
+      test: ""
+    platform:
+      code_host: optional
+      ci: optional
+      deploy: optional
+      rollback: optional
+

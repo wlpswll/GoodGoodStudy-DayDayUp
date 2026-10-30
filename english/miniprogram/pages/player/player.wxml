@@ -1,0 +1,51 @@
+<view class="page">
+  <view class="head">
+    <text class="seal">英</text>
+    <view>
+      <text class="title">英语跟读</text>
+      <text class="sub">音频和视频分开 · {{hint}}</text>
+    </view>
+  </view>
+
+  <video
+    wx:if="{{kind === '视频'}}"
+    id="english-video"
+    class="stage"
+    src="{{videoSrc}}"
+    controls="{{false}}"
+    bindtimeupdate="onVideoTime"
+    bindfullscreenchange="onFullScreenChange"
+  ></video>
+  <view wx:else class="disc">英</view>
+
+  <view class="now">
+    <text class="kind">{{kind}}</text>
+    <text class="lesson">{{title}}</text>
+    <text class="folder">{{folder}}</text>
+  </view>
+
+  <view class="transport">
+    <button bindtap="onPlay">播放</button>
+    <button bindtap="onPause">暂停</button>
+    <button wx:if="{{kind === '视频'}}" bindtap="onMax">{{maxLabel}}</button>
+    <text>{{rateLabel}}</text>
+  </view>
+  <view class="rates">
+    <button wx:for="{{rates}}" wx:key="*this" data-rate="{{item}}" bindtap="onRate">{{item}}×</button>
+  </view>
+
+  <block wx:for="{{groups}}" wx:key="kind">
+    <view class="kind-title">{{item.label}} {{item.count}}</view>
+    <block wx:for="{{item.folders}}" wx:for-item="folder" wx:key="name">
+      <view class="folder-title">{{folder.name}}</view>
+      <view
+        class="row"
+        wx:for="{{folder.items}}"
+        wx:for-item="media"
+        wx:key="id"
+        data-id="{{media.id}}"
+        bindtap="onPick"
+      >{{media.title}}</view>
+    </block>
+  </block>
+</view>

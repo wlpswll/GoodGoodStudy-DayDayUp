@@ -1,0 +1,23 @@
+TRACEABILITY_REPORT feature=english-media-player
+repo=/Users/yangqingxiang/Desktop/goodgoodstudy-daydayup
+
+| AC/ACC | development.md | code-review.md | testing.md | eval-report.md | status |
+|--------|----------------|----------------|------------|----------------|--------|
+| AC-01 | YES | YES | YES | NO | PASS |
+PASS AC-01 covered by: development.md code-review.md testing.md
+| AC-02 | NO | YES | YES | NO | PASS |
+PASS AC-02 covered by: code-review.md testing.md
+| AC-03 | NO | YES | YES | NO | PASS |
+PASS AC-03 covered by: code-review.md testing.md
+| AC-04 | NO | YES | YES | NO | PASS |
+PASS AC-04 covered by: code-review.md testing.md
+| AC-05 | NO | YES | YES | NO | PASS |
+PASS AC-05 covered by: code-review.md testing.md
+| AC-06 | NO | YES | YES | NO | PASS |
+PASS AC-06 covered by: code-review.md testing.md
+| AC-07 | YES | YES | YES | NO | PASS |
+PASS AC-07 covered by: development.md code-review.md testing.md
+| AC-08 | YES | YES | YES | NO | PASS |
+PASS AC-08 covered by: development.md code-review.md testing.md
+
+Result: TRACEABILITY_PASS
