@@ -20,7 +20,7 @@ window.__withSC = function (url) {
 (function () {
   var link = document.createElement('link');
   link.rel = 'stylesheet';
-  link.href = window.__withSC('css/style.css?v=5');
+  link.href = window.__withSC('css/style.css?v=6');
   document.head.appendChild(link);
 })();
 </script>
@@ -34,6 +34,9 @@ window.__withSC = function (url) {
         <h1>英语跟读</h1>
         <p id="libSub">一年级上册 · 音频与视频分开</p>
       </div>
+      <a class="top-btn top-btn-icon lib-home" href="../" aria-label="返回首页" title="返回首页">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg>
+      </a>
     </header>
     <button type="button" class="resume-card" id="resumeCard" hidden>
       <span>继续播放</span>
@@ -61,6 +64,9 @@ window.__withSC = function (url) {
       <button type="button" class="top-btn top-btn-icon" id="homeBtn" aria-label="回到列表">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
       </button>
+      <a class="top-btn top-btn-icon" href="../" aria-label="返回首页" title="返回首页">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg>
+      </a>
     </header>
 
     <div class="stage is-audio" id="stage">
