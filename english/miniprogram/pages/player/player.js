@@ -1,14 +1,15 @@
 /* 小程序示例页。拷到小程序工程后，把 mediaBaseUrl 换成可访问的媒体目录。
  * 进度键、字段和分组规则与网页 english/js 相同。
  */
-var catalog = require('../../../js/catalog.js');
-var progress = require('../../../js/progress.js');
-var platform = require('../../../js/platform.js');
+var catalog = require('../../shared/catalog.js');
+var progress = require('../../shared/progress.js');
+var platform = require('../../shared/platform.js');
+var mediaData = require('../../shared/media-data.js');
 var adapter = require('../../player-adapter.js');
 
 Page({
   data: {
-    mediaBaseUrl: '',
+    mediaBaseUrl: 'http://127.0.0.1:8765/english',
     groups: [],
     title: '',
     folder: '',
@@ -40,8 +41,7 @@ Page({
   },
 
   loadCatalog: function () {
-    var items = [];
-    try { items = require('../../../data/media.json').items || []; } catch (err) { items = []; }
+    var items = (mediaData && mediaData.items) || [];
     var resume = progress.resolveResume(this.saved, items);
     this.items = items;
     this.setData({

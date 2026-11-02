@@ -3,7 +3,7 @@
   "stack": "static-html",
   "eslint_error_limit": 0,
   "tsc_error_limit": 0,
-  "test_count": 16,
+  "test_count": 17,
   "test_coverage_pct": 0,
   "test_config": {
     "skip_allowed": true,
@@ -18,7 +18,7 @@
     "tsc_error_count": 0,
     "lint_error_count": 0,
     "build_error_count": 0,
-    "test_count": 16,
+    "test_count": 17,
     "test_coverage_pct": 0
   }
 }

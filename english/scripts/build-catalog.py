@@ -7,11 +7,15 @@
 
 import json
 import re
+import shutil
 from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "media.json"
+MP_ROOT = ROOT / "miniprogram"
+MP_SHARED = MP_ROOT / "shared"
+SHARED_JS = ("catalog.js", "progress.js", "platform.js")
 SKIP_DIRS = {"css", "js", "data", "scripts", "miniprogram"}
 AUDIO_EXTS = {"mp3", "m4a", "aac", "wav", "ogg", "oga", "flac", "opus", "weba"}
 VIDEO_EXTS = {"mp4", "m4v", "webm", "ogv", "mov", "mkv"}
@@ -69,9 +73,18 @@ def main():
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    sync_miniprogram(payload)
     videos = sum(1 for item in items if item["kind"] == "video")
     audios = sum(1 for item in items if item["kind"] == "audio")
-    print(f"wrote {OUT.name}: {videos} videos, {audios} audios")
+    print(f"wrote {OUT.name} & miniprogram/shared: {videos} videos, {audios} audios")
+
+
+def sync_miniprogram(payload):
+    MP_SHARED.mkdir(parents=True, exist_ok=True)
+    for name in SHARED_JS:
+        shutil.copyfile(ROOT / "js" / name, MP_SHARED / name)
+    media_js = "module.exports = " + json.dumps(payload, ensure_ascii=False, indent=2) + ";\n"
+    (MP_SHARED / "media-data.js").write_text(media_js, encoding="utf-8")
 
 
 if __name__ == "__main__":

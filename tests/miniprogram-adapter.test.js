@@ -98,3 +98,44 @@ test('小程序视频用页面回调记住时间，非法倍速保持为 1', fun
   assert.ok(wxApi.calls.indexOf('full:0') >= 0);
   assert.ok(wxApi.calls.indexOf('exit-full') >= 0);
 });
+
+test('小程序页面可直接被微信环境加载，且不跨越小程序目录边界', function () {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const mpRoot = path.join(__dirname, '..', 'english', 'miniprogram');
+
+  assert.ok(fs.existsSync(path.join(mpRoot, 'project.config.json')));
+  assert.ok(fs.existsSync(path.join(mpRoot, 'shared', 'catalog.js')));
+  assert.ok(fs.existsSync(path.join(mpRoot, 'shared', 'progress.js')));
+  assert.ok(fs.existsSync(path.join(mpRoot, 'shared', 'platform.js')));
+  assert.ok(fs.existsSync(path.join(mpRoot, 'shared', 'media-data.js')));
+
+  const pageSrc = fs.readFileSync(path.join(mpRoot, 'pages', 'player', 'player.js'), 'utf8');
+  assert.equal(pageSrc.indexOf('require(\'../../../'), -1);
+
+  let pageConfig = null;
+  global.wx = {
+    getStorageSync: function () { return null; },
+    setStorageSync: function () {},
+    createInnerAudioContext: fakeWx().createInnerAudioContext,
+    createVideoContext: fakeWx().createVideoContext
+  };
+  global.Page = function (cfg) { pageConfig = cfg; };
+  try {
+    delete require.cache[require.resolve('../english/miniprogram/pages/player/player.js')];
+    require('../english/miniprogram/pages/player/player.js');
+    assert.ok(pageConfig);
+    const state = Object.assign({}, pageConfig.data);
+    const ctx = Object.assign({}, pageConfig, {
+      data: state,
+      setData: function (patch) { Object.assign(state, patch); }
+    });
+    ctx.onLoad();
+    assert.equal(state.groups.length, 2);
+    assert.ok(state.mediaBaseUrl.indexOf('http://127.0.0.1:8765/english') === 0);
+  } finally {
+    delete global.wx;
+    delete global.Page;
+  }
+});
+
