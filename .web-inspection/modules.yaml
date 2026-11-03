@@ -1,0 +1,28 @@
+modules:
+  - id: english-offline
+    name: 英语跟读离线再播
+    category: 英语
+    priority: P0
+    url_path: /english/
+    sop_file: 英语--english-offline.md
+    source_path: english/js/app.js
+    hidden: false
+    executor: browser
+    notes: 播过后留下，再次打开使用本机缓存
+  - id: gushi-offline
+    name: 古诗朗读离线再播
+    category: 古诗
+    priority: P0
+    url_path: /gushi/
+    sop_file: 古诗--gushi-offline.md
+    source_path: gushi/js/app.js
+    hidden: false
+    executor: browser
+    notes: 开始诵读后留下，再次打开同一首使用本机缓存
+
+priority_definition:
+  P0: 核心功能，直接影响主要工作流（默认巡检）
+  P1: 重要功能，影响日常使用效率
+  P3: 辅助功能，影响范围有限
+
+updated_at: '2026-11-03'

@@ -8,6 +8,7 @@
     groups: [],
     current: null,
     rate: progressApi.DEFAULT_RATE,
+    playMode: progressApi.DEFAULT_PLAY_MODE,
     storage: platform.createStorage(),
     pendingSeek: null,
     scrubbing: false,
@@ -57,8 +58,8 @@
   function cache() {
     ['library', 'player', 'loading', 'libraryList', 'librarySearch', 'catalogList', 'catalogSearch',
       'catalog', 'catalogBtn', 'closeCatalog', 'catCount', 'homeBtn', 'counter', 'stage', 'video',
-      'audio', 'playBtn', 'prevBtn', 'nextBtn', 'seek', 'curTime', 'durTime', 'speedBtn', 'speedMenu',
-      'speedWrap', 'maxBtn', 'nowTitle', 'nowFolder', 'nowKind', 'resumeHint', 'mediaError', 'resumeCard',
+      'audio', 'playBtn', 'prevBtn', 'nextBtn', 'seek', 'curTime', 'durTime', 'modeBtn', 'speedBtn', 'speedMenu',
+      'speedWrap', 'maxBtn', 'nowTitle', 'nowFolder', 'nowKind', 'resumeHint', 'mediaError', 'offlineHint', 'mediaLoader', 'resumeCard',
       'resumeTitle', 'resumeTime', 'libSub'].forEach(function (id) {
       el[id] = $(id);
     });
@@ -142,7 +143,7 @@
     var now = Date.now();
     if (!force && now - state.lastWrite < 1000) return;
     state.lastWrite = now;
-    progressApi.writeProgress(state.storage, progressApi.createSnapshot(state.current, saveTime(), state.rate, now));
+    progressApi.writeProgress(state.storage, progressApi.createSnapshot(state.current, saveTime(), state.rate, now, state.playMode));
     updateResumeCard();
   }
   function updateResumeCard() {
@@ -161,9 +162,31 @@
     el.mediaError.hidden = true;
     el.mediaError.textContent = '';
   }
+  function showOffline(text) {
+    if (!el.offlineHint) return;
+    el.offlineHint.hidden = !text;
+    el.offlineHint.textContent = text || '';
+  }
+  function retainCurrent() {
+    if (!window.OfflineMedia || !state.current) return;
+    var remote = withSC(catalog.resolveSrc(state.current, ''));
+    window.OfflineMedia.retain(remote, {
+      id: remote,
+      app: 'english',
+      kind: state.current.kind
+    }).then(function (saved) {
+      if (saved) showOffline('已保存到本机，断网后仍可播放');
+    });
+  }
   function showError(message) {
     el.mediaError.hidden = false;
     el.mediaError.textContent = message;
+  }
+  function setMediaLoading(loading) {
+    var active = Boolean(loading && state.current);
+    el.stage.classList.toggle('is-loading', active);
+    el.stage.setAttribute('aria-busy', active ? 'true' : 'false');
+    el.mediaLoader.hidden = !active;
   }
   function setPlaying(playing) {
     el.playBtn.classList.toggle('playing', playing);
@@ -195,8 +218,9 @@
     }
     var label = state.current && state.current.kind === 'video' ? '视频' : '音频';
     el.counter.textContent = label + ' ' + (index + 1) + ' / ' + queue.length;
-    el.prevBtn.disabled = index <= 0;
-    el.nextBtn.disabled = index < 0 || index >= queue.length - 1;
+    var loopOrRandom = state.playMode !== 'sequence' && queue.length > 1;
+    el.prevBtn.disabled = !loopOrRandom && index <= 0;
+    el.nextBtn.disabled = !loopOrRandom && (index < 0 || index >= queue.length - 1);
   }
   function renderMeta(item) {
     el.nowKind.textContent = item.kind === 'video' ? '视频' : '音频';
@@ -334,7 +358,7 @@
     applyingSeek = false;
   }
 
-  function loadSource(item, seekTime) {
+  function loadSource(item, seekTime, autoplay) {
     var media = item.kind === 'video' ? el.video : el.audio;
     var other = item.kind === 'video' ? el.audio : el.video;
     try { other.pause(); } catch (err) { /* 另一路可能还没有地址 */ }
@@ -345,10 +369,36 @@
     el.stage.classList.toggle('is-video', item.kind === 'video');
     el.stage.classList.toggle('is-audio', item.kind === 'audio');
     clearError();
+    setMediaLoading(true);
     setPlaying(false);
     media.playbackRate = state.rate;
-    media.src = withSC(catalog.resolveSrc(item, ''));
-    try { media.load(); } catch (err) { /* 部分浏览器在赋值 src 时已经开始加载 */ }
+    var remote = withSC(catalog.resolveSrc(item, ''));
+    state.loadToken = (state.loadToken || 0) + 1;
+    var token = state.loadToken;
+    var known = window.OfflineMedia && window.OfflineMedia.has(remote);
+    var apply = function (src, cached) {
+      if (token !== state.loadToken) return;
+      showOffline(cached ? '正在使用本机缓存' : '');
+      if (media.getAttribute('src') === src) {
+        if (autoplay && media.paused) tryPlay();
+        return;
+      }
+      media.src = src;
+      try { media.load(); } catch (err) { /* 部分浏览器在赋值 src 时已经开始加载 */ }
+      if (autoplay) tryPlay();
+    };
+    if (!known) {
+      media.src = remote;
+      try { media.load(); } catch (err) { /* 先用网络地址，保证点击手势里能开始播放 */ }
+      if (autoplay) tryPlay();
+    }
+    if (window.OfflineMedia) {
+      window.OfflineMedia.resolve(remote).then(function (src) {
+        apply(src, src !== remote);
+      }).catch(function () { apply(remote, false); });
+    } else if (known) {
+      apply(remote, false);
+    }
   }
 
   function openItem(item, options) {
@@ -361,7 +411,7 @@
     state.restored = Number(seekTime) > 0.2 && (!!opts.restored || opts.seekTime == null);
     showPlayer();
     renderMeta(item);
-    if (!same) loadSource(item, seekTime || 0);
+    if (!same) loadSource(item, seekTime || 0, !!opts.autoplay);
     else if (opts.seekTime != null) {
       state.pendingSeek = opts.seekTime;
       applyPendingSeek();
@@ -372,18 +422,40 @@
     closeSpeed();
     if (!item || item.kind !== 'video') exitMax();
     else updateMaxButton();
-    if (opts.autoplay) tryPlay();
+    if (opts.autoplay && same) tryPlay();
     saveNow(true);
   }
 
-  function step(delta) {
+  function step(delta, fromEnded) {
     var queue = kindQueue();
+    if (!queue.length || !state.current) return;
     var index = -1;
     for (var i = 0; i < queue.length; i++) {
       if (queue[i].id === state.current.id) index = i;
     }
-    var next = queue[index + delta];
-    if (next) openItem(next, { autoplay: !activeMedia().paused });
+    var reason = fromEnded ? 'ended' : (delta < 0 ? 'prev' : 'next');
+    var decision = progressApi.pickNextIndex(index, queue.length, state.playMode, reason);
+    if (decision.index < 0) return;
+    if (decision.replay) {
+      var media = activeMedia();
+      try { media.currentTime = 0; } catch (err) {}
+      tryPlay();
+      return;
+    }
+    var next = queue[decision.index];
+    if (next) openItem(next, { seekTime: fromEnded ? 0 : undefined, autoplay: fromEnded ? true : !activeMedia().paused });
+  }
+  function applyPlayMode(mode, persist) {
+    state.playMode = progressApi.normalizePlayMode(mode);
+    if (el.modeBtn) {
+      var label = progressApi.formatPlayMode(state.playMode);
+      el.modeBtn.setAttribute('data-mode', state.playMode);
+      el.modeBtn.setAttribute('aria-label', '播放模式：' + label);
+      el.modeBtn.setAttribute('title', label);
+      el.modeBtn.classList.toggle('active', state.playMode !== 'sequence');
+    }
+    updateNav();
+    if (persist) saveNow(true);
   }
   function tryPlay() {
     var pending = activeMedia().play();
@@ -514,6 +586,11 @@
     el.stage.addEventListener('click', togglePlay);
     el.prevBtn.addEventListener('click', function () { step(-1); });
     el.nextBtn.addEventListener('click', function () { step(1); });
+    if (el.modeBtn) {
+      el.modeBtn.addEventListener('click', function () {
+        applyPlayMode(progressApi.nextPlayMode(state.playMode), true);
+      });
+    }
     el.speedBtn.addEventListener('click', function (event) {
       event.stopPropagation();
       toggleSpeed();
@@ -552,7 +629,16 @@
       applyPendingSeek();
       updateProgress();
     });
-    onMediaEvent('canplay', applyPendingSeek);
+    onMediaEvent('loadstart', function () {
+      setMediaLoading(true);
+    });
+    onMediaEvent('canplay', function () {
+      setMediaLoading(false);
+      applyPendingSeek();
+    });
+    onMediaEvent('waiting', function () {
+      setMediaLoading(true);
+    });
     onMediaEvent('progress', applyPendingSeek);
     onMediaEvent('timeupdate', function () {
       if (!state.scrubbing) updateProgress();
@@ -565,7 +651,9 @@
     onMediaEvent('play', function () {
       state.restored = false;
       el.resumeHint.hidden = true;
+      setMediaLoading(false);
       setPlaying(true);
+      retainCurrent();
     });
     onMediaEvent('pause', function () {
       setPlaying(false);
@@ -573,10 +661,12 @@
     });
     onMediaEvent('ended', function () {
       setPlaying(false);
-      updateProgress();
+      updateProgress(0);
       saveNow(true);
+      step(1, true);
     });
     onMediaEvent('error', function () {
+      setMediaLoading(false);
       showError('这个格式当前浏览器播不了，可以换一个课，或换用支持该格式的环境');
     });
 
@@ -638,7 +728,9 @@
     var saved = progressApi.readProgress(state.storage);
     var resume = progressApi.resolveResume(saved, state.items);
     state.rate = resume ? resume.playbackRate : progressApi.DEFAULT_RATE;
+    state.playMode = resume ? resume.playMode : progressApi.DEFAULT_PLAY_MODE;
     applyRate(state.rate, false);
+    applyPlayMode(state.playMode, false);
     renderLists();
     updateResumeCard();
     if (resume && resume.media) {

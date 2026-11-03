@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const adapter = require('../english/miniprogram/player-adapter.js');
+const adapter = require('../miniprogram/player-adapter.js');
 const progress = require('../english/js/progress.js');
 const catalog = require('../english/js/catalog.js');
 
@@ -87,6 +87,8 @@ test('小程序视频用页面回调记住时间，非法倍速保持为 1', fun
     kind: 'video',
     src: '一上英语课本跟读视频/U1跟读.mp4'
   });
+  assert.equal(wxApi.calls.indexOf('video:english-video'), -1);
+  session.attachVideo();
   session.noteVideoTime(8);
   assert.equal(session.getCurrentTime(), 8);
   assert.equal(session.setRate(0.85), 1);
@@ -102,28 +104,90 @@ test('小程序视频用页面回调记住时间，非法倍速保持为 1', fun
 test('小程序页面可直接被微信环境加载，且不跨越小程序目录边界', function () {
   const fs = require('node:fs');
   const path = require('node:path');
-  const mpRoot = path.join(__dirname, '..', 'english', 'miniprogram');
+  const mpRoot = path.join(__dirname, '..', 'miniprogram');
 
   assert.ok(fs.existsSync(path.join(mpRoot, 'project.config.json')));
   assert.ok(fs.existsSync(path.join(mpRoot, 'shared', 'catalog.js')));
   assert.ok(fs.existsSync(path.join(mpRoot, 'shared', 'progress.js')));
   assert.ok(fs.existsSync(path.join(mpRoot, 'shared', 'platform.js')));
   assert.ok(fs.existsSync(path.join(mpRoot, 'shared', 'media-data.js')));
+  assert.ok(fs.existsSync(path.join(mpRoot, 'shared', 'gushi-catalog.js')));
+  assert.ok(fs.existsSync(path.join(mpRoot, 'shared', 'poems-data.js')));
+
+  const appJson = JSON.parse(fs.readFileSync(path.join(mpRoot, 'app.json'), 'utf8'));
+  assert.deepEqual(appJson.pages, ['pages/home/home', 'pages/gushi/gushi', 'pages/player/player', 'pages/games/games']);
+  assert.equal(appJson.lazyCodeLoading, undefined);
 
   const pageSrc = fs.readFileSync(path.join(mpRoot, 'pages', 'player', 'player.js'), 'utf8');
   assert.equal(pageSrc.indexOf('require(\'../../../'), -1);
+  const playerWxml = fs.readFileSync(path.join(mpRoot, 'pages', 'player', 'player.wxml'), 'utf8');
+  assert.match(playerWxml, /mediaStatus === 'loading'/);
+  assert.match(playerWxml, /onRetryMedia/);
+  assert.match(playerWxml, /step="1"/);
+  assert.match(playerWxml, /videoFitted/);
+  assert.equal(playerWxml.indexOf('cover-view'), -1);
+  const gushiWxml = fs.readFileSync(path.join(mpRoot, 'pages', 'gushi', 'gushi.wxml'), 'utf8');
+  assert.match(gushiWxml, /is-punct/);
+  assert.match(gushiWxml, /rt-hold/);
 
   let pageConfig = null;
+  const navCalls = [];
   global.wx = {
     getStorageSync: function () { return null; },
     setStorageSync: function () {},
+    navigateTo: function (opts) { navCalls.push('to:' + opts.url); },
+    navigateBack: function () { navCalls.push('back'); },
+    reLaunch: function (opts) { navCalls.push('relaunch:' + opts.url); },
+    navigateToMiniProgram: function (opts) { navCalls.push('miniapp:' + opts.appId); },
+    setClipboardData: function (opts) { navCalls.push('clip:' + opts.data); if (opts.success) opts.success(); },
+    showToast: function () {},
     createInnerAudioContext: fakeWx().createInnerAudioContext,
     createVideoContext: fakeWx().createVideoContext
   };
+  global.getCurrentPages = function () { return [{}]; };
   global.Page = function (cfg) { pageConfig = cfg; };
   try {
-    delete require.cache[require.resolve('../english/miniprogram/pages/player/player.js')];
-    require('../english/miniprogram/pages/player/player.js');
+    // 1. 首页加载、两扇门跳转、内置益智游戏跳转与外部微信小游戏跳转
+    delete require.cache[require.resolve('../miniprogram/pages/home/home.js')];
+    require('../miniprogram/pages/home/home.js');
+    assert.ok(pageConfig);
+    assert.equal(pageConfig.data.games.length, 5);
+    pageConfig.goGushi();
+    pageConfig.goEnglish();
+    pageConfig.onOpenGame({ currentTarget: { dataset: { id: 'weiqi' } } });
+    pageConfig.onJumpMiniApp({ currentTarget: { dataset: { id: 'xiangqi', appid: 'wx7db5c3d985e2b0ff' } } });
+    assert.deepEqual(navCalls, [
+      'to:/pages/gushi/gushi',
+      'to:/pages/player/player',
+      'to:/pages/games/games?id=weiqi',
+      'miniapp:wx7db5c3d985e2b0ff'
+    ]);
+
+    // 2. 古诗 70 首页面加载、选诗、逐句点读与语速切换
+    delete require.cache[require.resolve('../miniprogram/pages/gushi/gushi.js')];
+    require('../miniprogram/pages/gushi/gushi.js');
+    assert.ok(pageConfig);
+    const gushiState = Object.assign({}, pageConfig.data);
+    const gushiCtx = Object.assign({}, pageConfig, {
+      data: gushiState,
+      setData: function (patch) { Object.assign(gushiState, patch); }
+    });
+    gushiCtx.onLoad({});
+    assert.equal(gushiState.total, 70);
+    gushiCtx.onStart();
+    assert.equal(gushiState.view, 'poem');
+    assert.equal(gushiState.poem.title, '江南');
+    assert.equal(gushiState.poem.scene, 'lotus');
+    assert.ok(gushiState.poem.imageUrl.indexOf('/gushi/assets/images/poem-001.jpg') > 0);
+    gushiCtx.onCycleRate();
+    assert.equal(gushiState.rate, 1);
+    gushiCtx.onLineTap({ currentTarget: { dataset: { index: 2 } } });
+    assert.equal(gushiState.activeLine, 2);
+    gushiCtx.onUnload();
+
+    // 3. 英语跟读页面加载
+    delete require.cache[require.resolve('../miniprogram/pages/player/player.js')];
+    require('../miniprogram/pages/player/player.js');
     assert.ok(pageConfig);
     const state = Object.assign({}, pageConfig.data);
     const ctx = Object.assign({}, pageConfig, {
@@ -132,9 +196,75 @@ test('小程序页面可直接被微信环境加载，且不跨越小程序目�
     });
     ctx.onLoad();
     assert.equal(state.groups.length, 2);
-    assert.ok(state.mediaBaseUrl.indexOf('http://127.0.0.1:8765/english') === 0);
+    assert.ok(state.mediaBaseUrl.indexOf('https://goodgoodstudy-daydayup.pages.dev/english') === 0);
+    // 验证播放模式切换、目录折叠与列表/播放器视图切换
+    assert.equal(state.playMode, 'sequence');
+    ctx.onCyclePlayMode();
+    assert.equal(state.playMode, 'loop-all');
+    ctx.onPick({ currentTarget: { dataset: { id: '一上英语课本跟读视频/U1跟读.mp4' } } });
+    assert.equal(state.view, 'player');
+    ctx.showLibrary();
+    assert.equal(state.view, 'library');
+
+    // 4. 5 合 1 益智小游戏页面（围棋、五子棋、象棋、飞行棋、小钢琴）交互验证
+    delete require.cache[require.resolve('../miniprogram/pages/games/games.js')];
+    require('../miniprogram/pages/games/games.js');
+    assert.ok(pageConfig);
+    const gameState = Object.assign({}, pageConfig.data);
+    const gameCtx = Object.assign({}, pageConfig, {
+      data: gameState,
+      setData: function (patch) { Object.assign(gameState, patch); }
+    });
+    gameCtx.onLoad({ id: 'gomoku' });
+    assert.equal(gameState.activeGame, 'gomoku');
+    gameCtx.onGomokuTap({ currentTarget: { dataset: { r: 5, c: 5 } } });
+    assert.equal(gameState.gomokuBoard[5][5].color, 1);
+
+    gameCtx.onSwitchGame({ currentTarget: { dataset: { id: 'weiqi' } } });
+    gameCtx.onWeiqiTap({ currentTarget: { dataset: { r: 4, c: 4 } } });
+    assert.equal(gameState.weiqiBoard[4][4].color, 1);
+
+    // 验证围棋切换 13 路与 19 路、自由围空模式与三级难度切换
+    gameCtx.onSetDifficulty({ currentTarget: { dataset: { diff: 3 } } });
+    assert.equal(gameState.difficulty, 3);
+    gameCtx.onSetWeiqiSize({ currentTarget: { dataset: { size: 19 } } });
+    assert.equal(gameState.weiqiSize, 19);
+    assert.equal(gameState.weiqiBoard.length, 19);
+    gameCtx.onSetWeiqiRule({ currentTarget: { dataset: { rule: 'free' } } });
+    assert.equal(gameState.weiqiRule, 'free');
+
+    // 验证五子棋切换 15 路标准棋盘
+    gameCtx.onSwitchGame({ currentTarget: { dataset: { id: 'gomoku' } } });
+    gameCtx.onSetGomokuSize({ currentTarget: { dataset: { size: 15 } } });
+    assert.equal(gameState.gomokuSize, 15);
+    assert.equal(gameState.gomokuBoard.length, 15);
+
+    gameCtx.onSwitchGame({ currentTarget: { dataset: { id: 'xiangqi' } } });
+    gameCtx.onXiangqiTap({ currentTarget: { dataset: { r: 6, c: 0 } } }); // 选兵
+    gameCtx.onXiangqiTap({ currentTarget: { dataset: { r: 5, c: 0 } } }); // 兵进一步
+    assert.equal(gameState.xiangqiBoard[5][0].code, 'rP');
+
+    // 验证飞行棋四色十字航道、4 机编队与同色连跳
+    gameCtx.onSwitchGame({ currentTarget: { dataset: { id: 'ludo' } } });
+    assert.equal(gameState.ludoRedPlanes.length, 4);
+    assert.equal(gameState.ludoBluePlanes.length, 4);
+    const engine = require('../miniprogram/shared/games-engine.js');
+    assert.equal(engine.LUDO_RING_COORDS.length, 40);
+    engine.applyLudoDice(gameCtx.ludo, 6);
+    engine.moveLudoToken(gameCtx.ludo, 0); // 1号机起飞至第1步
+    assert.equal(gameCtx.ludo.tokens.r[0], 1);
+    engine.applyLudoDice(gameCtx.ludo, 4);
+    engine.moveLudoToken(gameCtx.ludo, 0); // 1 + 4 = 5（红格），触发同色连跳 +4 -> 9
+    assert.equal(gameCtx.ludo.tokens.r[0], 9);
+
+    gameCtx.onSwitchGame({ currentTarget: { dataset: { id: 'piano' } } });
+    assert.equal(gameState.expectedNote, 1);
+    gameCtx.onPressKey({ currentTarget: { dataset: { note: 1 } } });
+    assert.equal(gameState.pianoStep, 1);
+    gameCtx.onUnload();
   } finally {
     delete global.wx;
+    delete global.getCurrentPages;
     delete global.Page;
   }
 });

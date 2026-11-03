@@ -1,0 +1,320 @@
+<view class="page">
+  <!-- 顶部书卷式游戏切换栏 -->
+  <scroll-view scroll-x="true" class="tabs-scroll">
+    <view class="tabs">
+      <view
+        class="tab {{activeGame === item.id ? 'active' : ''}}"
+        wx:for="{{games}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onSwitchGame"
+      >
+        <view class="tab-medal m-{{item.id}}">{{item.shortLabel || item.icon}}</view>
+        <text class="tab-name">{{item.name}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 顶部状态与模式条 + 难度选择 -->
+  <view class="toolbar">
+    <view class="mode-group" wx:if="{{activeGame !== 'piano'}}">
+      <view class="mode-btn {{vsAi ? 'active' : ''}}" data-ai="1" bindtap="onSetMode">书童陪练</view>
+      <view class="mode-btn {{!vsAi ? 'active' : ''}}" data-ai="0" bindtap="onSetMode">双人同屏</view>
+    </view>
+
+    <!-- 三级难度切换（人机模式显示） -->
+    <view class="diff-group" wx:if="{{activeGame !== 'piano' && vsAi}}">
+      <view
+        class="diff-pill {{difficulty === item.id ? 'active' : ''}}"
+        wx:for="{{difficulties}}"
+        wx:key="id"
+        data-diff="{{item.id}}"
+        bindtap="onSetDifficulty"
+      >{{item.name}}</view>
+    </view>
+
+    <view class="mode-group" wx:if="{{activeGame === 'piano'}}">
+      <view class="mode-btn {{!pianoBlind ? 'active' : ''}}" data-blind="0" bindtap="onSetPianoMode">跟弹引导</view>
+      <view class="mode-btn {{pianoBlind ? 'active' : ''}}" data-blind="1" bindtap="onSetPianoMode">盲弹挑战</view>
+    </view>
+
+    <view class="right-tools">
+      <view class="home-btn" hover-class="btn-press" bindtap="goHome">⌂ 首页</view>
+    </view>
+  </view>
+
+  <!-- ==================== 1. 围棋（9 / 13 / 19 路真木纹 Canvas 棋盘） ==================== -->
+  <view wx:if="{{activeGame === 'weiqi'}}" class="arena">
+    <!-- 棋盘路数与赛制选择栏 -->
+    <view class="sub-options">
+      <view class="opt-seg">
+        <view
+          class="seg-item {{weiqiSize === item ? 'active' : ''}}"
+          wx:for="{{[9, 13, 19]}}"
+          wx:key="*this"
+          data-size="{{item}}"
+          bindtap="onSetWeiqiSize"
+        >{{item}}路棋盘</view>
+      </view>
+      <view class="opt-seg">
+        <view
+          class="seg-item {{weiqiRule === 'capture' ? 'active' : ''}}"
+          data-rule="capture"
+          bindtap="onSetWeiqiRule"
+        >吃子赛({{weiqiTarget}}子)</view>
+        <view
+          class="seg-item {{weiqiRule === 'free' ? 'active' : ''}}"
+          data-rule="free"
+          bindtap="onSetWeiqiRule"
+        >自由围空</view>
+      </view>
+    </view>
+
+    <view class="score-strip">
+      <view class="score-pill">
+        <view class="mini-stone black"></view>
+        <text wx:if="{{weiqiRule === 'capture'}}">黑方提子：{{weiqiCaptures[1]}} / {{weiqiTarget}}</text>
+        <text wx:else>黑方子数：{{weiqiTerritory.blackTotal}}（提{{weiqiCaptures[1]}}）</text>
+      </view>
+      <view class="score-pill">
+        <view class="mini-stone white"></view>
+        <text wx:if="{{weiqiRule === 'capture'}}">白方提子：{{weiqiCaptures[2]}} / {{weiqiTarget}}</text>
+        <text wx:else>白方子数：{{weiqiTerritory.whiteTotal}}（提{{weiqiCaptures[2]}}）</text>
+      </view>
+    </view>
+
+    <view class="status-banner">{{weiqiStatus}}</view>
+
+    <!-- 高清榧木纹理 Canvas 棋盘 -->
+    <view class="canvas-board-wrap">
+      <canvas
+        canvas-id="weiqiCanvas"
+        class="board-canvas"
+        style="width: {{boardPx}}px; height: {{boardPx}}px;"
+        bindtap="onWeiqiCanvasTap"
+      ></canvas>
+    </view>
+
+    <text class="rule-tip" wx:if="{{weiqiRule === 'capture'}}">
+      吃子规则：把对方棋子的上下左右四个空位（气）堵满即可提走，先提满 {{weiqiTarget}} 颗获胜
+    </text>
+    <text class="rule-tip" wx:else>
+      自由对弈：支持 9/13/19 路标准气与打劫规则，实时统计盘面子数与提子数
+    </text>
+
+    <view class="action-bar">
+      <view class="act-btn" hover-class="btn-press" bindtap="onWeiqiUndo">悔棋一步</view>
+      <view class="act-btn primary" hover-class="btn-press" bindtap="onWeiqiReset">重新开局</view>
+    </view>
+  </view>
+
+  <!-- ==================== 2. 五子棋（13 / 15 路真木纹 Canvas 棋盘） ==================== -->
+  <view wx:if="{{activeGame === 'gomoku'}}" class="arena">
+    <view class="sub-options">
+      <view class="opt-seg">
+        <view
+          class="seg-item {{gomokuSize === 13 ? 'active' : ''}}"
+          data-size="13"
+          bindtap="onSetGomokuSize"
+        >13路快棋</view>
+        <view
+          class="seg-item {{gomokuSize === 15 ? 'active' : ''}}"
+          data-size="15"
+          bindtap="onSetGomokuSize"
+        >15路标准</view>
+      </view>
+    </view>
+
+    <view class="status-banner">{{gomokuStatus}}</view>
+
+    <view class="canvas-board-wrap">
+      <canvas
+        canvas-id="gomokuCanvas"
+        class="board-canvas"
+        style="width: {{boardPx}}px; height: {{boardPx}}px;"
+        bindtap="onGomokuCanvasTap"
+      ></canvas>
+    </view>
+
+    <view class="action-bar">
+      <view class="act-btn" hover-class="btn-press" bindtap="onGomokuUndo">悔棋一步</view>
+      <view class="act-btn primary" hover-class="btn-press" bindtap="onGomokuReset">重新开局</view>
+    </view>
+  </view>
+
+  <!-- ==================== 3. 中国象棋（标准九宫米字斜线 + 楚河汉界真木纹 Canvas 棋盘） ==================== -->
+  <view wx:if="{{activeGame === 'xiangqi'}}" class="arena">
+    <view class="status-banner">{{xiangqiStatus}}</view>
+
+    <view class="canvas-board-wrap">
+      <canvas
+        canvas-id="xiangqiCanvas"
+        class="board-canvas"
+        style="width: {{boardPx}}px; height: {{xqHeightPx}}px;"
+        bindtap="onXiangqiCanvasTap"
+      ></canvas>
+    </view>
+
+    <view class="action-bar">
+      <view class="act-btn" hover-class="btn-press" bindtap="onXiangqiUndo">悔棋一步</view>
+      <view class="act-btn primary" hover-class="btn-press" bindtap="onXiangqiReset">重新摆盘</view>
+    </view>
+  </view>
+
+  <!-- ==================== 4. 飞行棋（经典四色十字跑道 + 四角停机坪 + 中央大本营 Canvas 棋盘） ==================== -->
+  <view wx:if="{{activeGame === 'ludo'}}" class="arena">
+    <view class="status-banner">{{ludoLog}}</view>
+
+    <!-- 经典十字四色飞行棋 Canvas 棋盘（可直接点击棋盘上的发光飞机起飞/前进） -->
+    <view class="canvas-board-wrap ludo-board-wrap">
+      <canvas
+        canvas-id="ludoCanvas"
+        class="board-canvas"
+        style="width: {{boardPx}}px; height: {{boardPx}}px;"
+        bindtap="onLudoCanvasTap"
+      ></canvas>
+    </view>
+
+    <!-- 编队快捷调遣条（掷出点数且有多架飞机可飞时，也可点此选择） -->
+    <view class="ludo-fleet-bar">
+      <view class="fleet-group {{ludoTurn === 'r' ? 'active-turn' : ''}}">
+        <text class="fleet-label">红方编队</text>
+        <view class="fleet-pills">
+          <view
+            class="fleet-pill red {{item.movable ? 'movable' : ''}}"
+            wx:for="{{ludoRedPlanes}}"
+            wx:key="idx"
+            data-idx="{{item.idx}}"
+            bindtap="onLudoMovePlane"
+          >{{item.idx + 1}}号·{{item.shortStatus}}</view>
+        </view>
+      </view>
+
+      <view class="fleet-group {{ludoTurn === 'b' ? 'active-turn' : ''}}">
+        <text class="fleet-label">蓝方{{vsAi ? '(书童)' : ''}}</text>
+        <view class="fleet-pills">
+          <view
+            class="fleet-pill blue {{item.movable ? 'movable' : ''}}"
+            wx:for="{{ludoBluePlanes}}"
+            wx:key="idx"
+            data-idx="{{item.idx}}"
+            bindtap="onLudoMovePlane"
+          >{{item.idx + 1}}号·{{item.shortStatus}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 拟真六面色子与控制栏 -->
+    <view class="ludo-controls">
+      <view class="die-face d-{{ludoDice || 0}}" bindtap="onLudoRoll">
+        <view class="die-pip p1"></view>
+        <view class="die-pip p2"></view>
+        <view class="die-pip p3"></view>
+        <view class="die-pip p4"></view>
+        <view class="die-pip p5"></view>
+        <view class="die-pip p6"></view>
+        <text wx:if="{{!ludoDice}}" class="die-idle">骰</text>
+      </view>
+      <view
+        class="act-btn primary dice-btn {{(ludoWinner || ludoRolled) ? 'disabled' : ''}}"
+        hover-class="btn-press"
+        bindtap="onLudoRoll"
+      >{{ludoTurn === 'r' ? '红方掷骰子' : (vsAi ? '书童掷骰中' : '蓝方掷骰子')}}</view>
+      <view class="act-btn" hover-class="btn-press" bindtap="onLudoReset">重开</view>
+    </view>
+  </view>
+
+  <!-- ==================== 5. 八音盒钢琴 ==================== -->
+  <view wx:if="{{activeGame === 'piano'}}" class="arena">
+    <view class="song-tabs">
+      <view
+        class="song-pill {{pianoSongId === item.id ? 'active' : ''}}"
+        wx:for="{{pianoSongs}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onSelectSong"
+      >
+        <text class="song-lvl">{{item.level}}</text>
+        <text>《{{item.title}}》</text>
+      </view>
+    </view>
+
+    <view class="sheet-card">
+      <view class="sheet-head">
+        <text class="sheet-title">《{{currentSong.title}}》{{pianoBlind ? '盲弹挑战' : '简谱跟弹'}}</text>
+        <text class="sheet-progress">第 {{pianoStep + 1}} / {{currentSong.notes.length}} 音</text>
+      </view>
+      <view class="sheet-notes">
+        <view
+          class="note-chip {{idx === pianoStep ? 'current' : (idx < pianoStep ? 'done' : '')}}"
+          wx:for="{{currentSong.notes}}"
+          wx:for-index="idx"
+          wx:key="idx"
+        >
+          <text class="n-num">{{pianoBlind && idx >= pianoStep ? '?' : item}}</text>
+          <text class="n-lyr">{{currentSong.lyrics[idx]}}</text>
+        </view>
+      </view>
+      <view class="sheet-hint" wx:if="{{!pianoBlind}}">
+        下一音请按：<text class="highlight-note">{{expectedNote}}（{{expectedLyric}}）</text>
+      </view>
+      <view class="sheet-hint" wx:else>
+        凭记忆弹出下一字：<text class="highlight-note">「{{expectedLyric}}」</text>
+      </view>
+    </view>
+
+    <view class="piano-cabinet">
+      <view class="cabinet-trim"></view>
+      <view class="piano-keys">
+        <view
+          class="piano-key {{(!pianoBlind && expectedNote === item.note) ? 'guide' : ''}} {{lastPressedNote === item.note ? 'pressed' : ''}}"
+          wx:for="{{pianoKeys}}"
+          wx:key="note"
+          data-note="{{item.note}}"
+          bindtap="onPressKey"
+        >
+          <view class="key-guide-dot" wx:if="{{!pianoBlind && expectedNote === item.note}}"></view>
+          <text class="key-num" style="color: {{item.color}}">{{item.label}}</text>
+          <text class="key-sol">{{item.solfege}}</text>
+          <view class="key-bar" style="background: {{item.color}}"></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="action-bar">
+      <view class="act-btn" hover-class="btn-press" bindtap="onAutoDemo">
+        {{autoPlaying ? '停止示范' : '▶ 自动演奏示范'}}
+      </view>
+      <view class="act-btn primary" hover-class="btn-press" bindtap="onResetSong">从头开始</view>
+    </view>
+  </view>
+
+  <!-- ==================== 底部：更多优质同款推荐（专业小程序 / 精品 H5） ==================== -->
+  <view class="rec-section" wx:if="{{currentMeta && currentMeta.recommendations && currentMeta.recommendations.length}}">
+    <view class="rec-head">
+      <text class="rec-title">想挑战更高段位？精选专业平台</text>
+      <text class="rec-sub">支持一键跳转微信官方小游戏或复制精品对弈网</text>
+    </view>
+    <view class="rec-list">
+      <view
+        class="rec-card"
+        hover-class="btn-press"
+        wx:for="{{currentMeta.recommendations}}"
+        wx:key="name"
+        data-appid="{{item.appId || ''}}"
+        data-url="{{item.url || ''}}"
+        data-name="{{item.name}}"
+        bindtap="onTapRecommendation"
+      >
+        <view class="rec-info">
+          <view class="rec-title-row">
+            <text class="rec-name">{{item.name}}</text>
+            <text class="rec-badge {{item.appId ? 'b-wx' : 'b-web'}}">{{item.type}}</text>
+          </view>
+          <text class="rec-desc">{{item.desc}}</text>
+        </view>
+        <text class="rec-action">{{item.appId ? '跳转小程序 ↗' : '复制网址 ⎘'}}</text>
+      </view>
+    </view>
+  </view>
+</view>

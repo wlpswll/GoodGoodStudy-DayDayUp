@@ -2,7 +2,6 @@
  * 与网页共用 catalog.js、progress.js 和进度键 english-player-progress-v1。
  * 音频使用 wx.createInnerAudioContext。
  * 视频使用页面里的 <video>，当前时间由 bindtimeupdate 回写，跳转用 VideoContext.seek。
- * 媒体地址建议走 CDN：把 mediaBaseUrl 设为可访问的目录前缀，不要把现有视频打进安装包。
  */
 (function (root, factory) {
   var api = factory();
@@ -19,10 +18,13 @@
     var item = null;
     var mode = '';
     var rate = progress ? progress.normalizeRate(opts.playbackRate) : 1;
+    var playMode = progress && progress.normalizePlayMode ? progress.normalizePlayMode(opts.playMode) : 'sequence';
     var videoTime = 0;
+    var videoDuration = 0;
     var lastTick = 0;
 
     function srcOf(media) {
+      if (media && media.offlineSrc) return media.offlineSrc;
       if (catalog && catalog.resolveSrc) return catalog.resolveSrc(media, opts.mediaBaseUrl || '');
       return media && media.src || '';
     }
@@ -39,12 +41,17 @@
       var now = Date.now();
       if (!force && now - lastTick < 1000) return;
       lastTick = now;
-      opts.onProgress(progress.createSnapshot(item, currentTime(), rate, now));
+      opts.onProgress(progress.createSnapshot(item, currentTime(), rate, now, playMode));
     }
 
     function currentTime() {
       if (mode === 'audio' && audio) return Number(audio.currentTime) || 0;
       return videoTime;
+    }
+
+    function duration() {
+      if (mode === 'audio' && audio) return Number(audio.duration) || 0;
+      return videoDuration;
     }
 
     function applyRate() {
@@ -62,6 +69,7 @@
         note(true);
         item = media;
         videoTime = 0;
+        videoDuration = 0;
         if (media.kind === 'audio') {
           if (!wxApi || typeof wxApi.createInnerAudioContext !== 'function') {
             throw new Error('当前环境没有音频上下文');
@@ -70,13 +78,47 @@
           audio = wxApi.createInnerAudioContext();
           audio.src = srcOf(media);
           audio.autoplay = false;
+          if (typeof audio.onPlay === 'function') {
+            audio.onPlay(function () {
+              if (opts.onStateChange) opts.onStateChange(true);
+            });
+          }
+          if (typeof audio.onPause === 'function') {
+            audio.onPause(function () {
+              if (opts.onStateChange) opts.onStateChange(false);
+            });
+          }
+          if (typeof audio.onStop === 'function') {
+            audio.onStop(function () {
+              if (opts.onStateChange) opts.onStateChange(false);
+            });
+          }
+          if (typeof audio.onCanplay === 'function') {
+            audio.onCanplay(function () {
+              if (opts.onCanplay) opts.onCanplay(duration());
+            });
+          }
+          if (typeof audio.onWaiting === 'function') {
+            audio.onWaiting(function () {
+              if (opts.onWaiting) opts.onWaiting();
+            });
+          }
           if (typeof audio.onTimeUpdate === 'function') {
-            audio.onTimeUpdate(function () { note(false); });
+            audio.onTimeUpdate(function () {
+              note(false);
+              if (opts.onTimeUpdate) opts.onTimeUpdate(currentTime(), duration());
+            });
           }
           if (typeof audio.onEnded === 'function') {
             audio.onEnded(function () {
               note(true);
+              if (opts.onStateChange) opts.onStateChange(false);
               if (opts.onEnded) opts.onEnded();
+            });
+          }
+          if (typeof audio.onError === 'function') {
+            audio.onError(function (err) {
+              if (opts.onError) opts.onError(err);
             });
           }
           mode = 'audio';
@@ -86,15 +128,28 @@
         }
         destroyAudio();
         mode = 'video';
-        if (wxApi && typeof wxApi.createVideoContext === 'function') {
-          video = wxApi.createVideoContext(opts.videoId || 'english-video');
-        }
-        applyRate();
+        video = null;
         if (opts.onVideoSrc) opts.onVideoSrc(srcOf(media));
       },
+      attachVideo: function () {
+        if (mode !== 'video' || !wxApi || typeof wxApi.createVideoContext !== 'function') return false;
+        if (video) return true;
+        video = wxApi.createVideoContext(opts.videoId || 'english-video');
+        applyRate();
+        return Boolean(video);
+      },
       play: function () {
-        if (mode === 'audio' && audio) audio.play();
-        else if (video) video.play();
+        if (mode === 'audio' && audio) {
+          applyRate();
+          audio.play();
+          return true;
+        }
+        if (mode === 'video' && video && typeof video.play === 'function') {
+          applyRate();
+          video.play();
+          return true;
+        }
+        return false;
       },
       pause: function () {
         if (mode === 'audio' && audio) audio.pause();
@@ -116,8 +171,14 @@
         note(true);
         return rate;
       },
-      noteVideoTime: function (time) {
+      setPlayMode: function (nextMode) {
+        playMode = progress && progress.normalizePlayMode ? progress.normalizePlayMode(nextMode) : nextMode;
+        note(true);
+        return playMode;
+      },
+      noteVideoTime: function (time, dur) {
         videoTime = Math.max(0, Number(time) || 0);
+        if (dur != null && Number(dur) > 0) videoDuration = Number(dur);
         note(false);
       },
       setMaxWindow: function (on) {
@@ -133,7 +194,9 @@
         return false;
       },
       getCurrentTime: currentTime,
+      getDuration: duration,
       getRate: function () { return rate; },
+      getPlayMode: function () { return playMode; },
       getItem: function () { return item; },
       save: function () { note(true); },
       destroy: function () {

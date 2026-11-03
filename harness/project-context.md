@@ -56,14 +56,16 @@
 ## 3. 核心目录结构
 
 ```
+index.html              # Web 端总首页（好好学习 · 天天向上）
+gushi/                  # Web 端必背古诗 70 首 + 音画资源
 english/
 ├── index.html
 ├── css/style.css
 ├── js/                 # 播放页、目录分组、进度、平台存储
 ├── data/media.json     # 由脚本扫描媒体目录生成
-├── scripts/            # 目录扫描
-├── miniprogram/        # 小程序侧播放适配，复用同一进度契约
+├── scripts/            # 目录扫描与小程序模块同步
 └── 一上英语课本跟读*/   # 原始音视频，按扩展名分入音频或视频
+miniprogram/            # 微信小程序端（整合首页、古诗 70 首、英语跟读）
 harness/                # 治理上下文
 features/               # 需求包
 tests/                  # node:test
@@ -77,7 +79,8 @@ tests/                  # node:test
 | media-catalog | `english/js/catalog.js` | 按扩展名区分音视频，再按所在目录分组 |
 | progress-store | `english/js/progress.js` | 上次媒体、进度、倍速的读写与恢复 |
 | platform | `english/js/platform.js` | localStorage 与微信存储的适配 |
-| miniprogram-adapter | `english/miniprogram/player-adapter.js` | 小程序 InnerAudio / VideoContext 适配同一会话接口 |
+| gushi-catalog | `gushi/js/gushi-catalog.js` | 古诗注音分词、意境场景、朝代分组与时间戳匹配 |
+| miniprogram-adapter | `miniprogram/player-adapter.js` | 小程序 InnerAudio / VideoContext 适配同一会话接口 |
 
 ## 5. 开发流程
 

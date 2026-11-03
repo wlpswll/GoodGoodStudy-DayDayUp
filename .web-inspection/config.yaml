@@ -1,0 +1,43 @@
+platform:
+  id: goodgoodstudy
+  name: 好好学习天天向上
+app:
+  type: web
+tech_stack:
+  framework: vanilla
+  language: javascript
+  ui_library: generic
+  router: static-html
+  router_mode: history
+  build_tool: none
+  backend_framework: none
+  backend_language: none
+  api_spec: ''
+  api_idl: ''
+environments:
+- name: local
+  label: 本地静态服务
+  base_url: http://127.0.0.1:8765
+  is_default: true
+login:
+  method: none
+  login_domain: ''
+  quick_login_selectors: []
+  credentials:
+    username_env: WI_LOGIN_USERNAME
+    password_env: WI_LOGIN_PASSWORD
+    code_env: WI_LOGIN_CODE
+    username_selector: ''
+    password_selector: ''
+    code_selector: ''
+    submit_selectors: []
+  probe_path: /english/
+  description: 英语页和古诗页都不需要登录
+route_config_files:
+- english/index.html
+- gushi/index.html
+reports:
+  location: project
+  keep_last: 50
+created_at: '2026-11-03'
+updated_at: '2026-11-03'

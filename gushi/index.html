@@ -23,7 +23,7 @@ window.__withSC = function (url) {
 (function () {
   var l = document.createElement('link');
   l.rel = 'stylesheet';
-  l.href = window.__withSC('css/style.css?v=2');
+  l.href = window.__withSC('css/style.css?v=3');
   document.head.appendChild(l);
 })();
 </script>
@@ -78,6 +78,7 @@ window.__withSC = function (url) {
       <div class="poem-body" id="poemBody">
         <h2 class="poem-title" id="poemTitle"></h2>
         <p class="poem-author" id="poemAuthor"></p>
+        <p class="poem-note" id="offlineHint" hidden></p>
         <div class="poem-lines" id="poemLines"></div>
       </div>
     </div>
@@ -96,6 +97,12 @@ window.__withSC = function (url) {
         </button>
       </div>
       <div class="seek-row">
+        <button type="button" class="mode-btn" id="modeBtn" data-mode="sequence" aria-label="播放模式：顺序播放" title="顺序播放">
+          <svg class="ico-mode ico-sequence" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h13M14 4l3 3-3 3"/><path d="M4 17h13M14 14l3 3-3 3"/></svg>
+          <svg class="ico-mode ico-loop-all" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          <svg class="ico-mode ico-loop-one" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/><path d="M11 10h1v4"/></svg>
+          <svg class="ico-mode ico-shuffle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+        </button>
         <span class="time" id="curTime">0:00</span>
         <input type="range" id="seek" min="0" max="100" value="0" step="0.1" aria-label="朗读进度，可拖动">
         <span class="time" id="durTime">0:00</span>
@@ -126,9 +133,15 @@ window.__withSC = function (url) {
 </div>
 <script>
 (function () {
-  var s = document.createElement('script');
-  s.src = window.__withSC('js/app.js');
-  document.body.appendChild(s);
+  var files = ['../shared/offline-policy.js?v=2', '../shared/offline-media.js?v=2', 'js/gushi-catalog.js?v=2', 'js/app.js?v=5'];
+  function load(i) {
+    if (i >= files.length) return;
+    var s = document.createElement('script');
+    s.src = window.__withSC(files[i]);
+    s.onload = function () { load(i + 1); };
+    document.body.appendChild(s);
+  }
+  load(0);
 })();
 </script>
 </body>

@@ -11,7 +11,8 @@
 
   var SPEEDS = [1, 1.25, 0.75, 0.85];  // 点击语速按钮依次循环
   var DEFAULT_RATE = 0.85;             // 默认语速
-  var state = { data: null, poems: [], noIndex: {}, index: -1, catalogOpen: false, scrubbing: false, rate: DEFAULT_RATE };
+  var gushiApi = window.GushiCatalog;
+  var state = { data: null, poems: [], noIndex: {}, index: -1, catalogOpen: false, scrubbing: false, rate: DEFAULT_RATE, playMode: 'sequence' };
   var el = {};
 
   function $(id) { return document.getElementById(id); }
@@ -45,8 +46,8 @@
   function cache() {
     ['cover', 'poem', 'loading', 'startBtn', 'homeBtn', 'catalogBtn', 'catalog', 'closeCatalog',
       'catalogList', 'catCount', 'searchInput', 'counter', 'artwork', 'artImg', 'artBlur',
-      'poemTitle', 'poemAuthor', 'poemLines', 'poemScroll', 'scene', 'particles', 'playBtn',
-      'prevBtn', 'nextBtn', 'seek', 'curTime', 'durTime', 'speedBtn', 'audio'].forEach(function (id) {
+      'poemTitle', 'poemAuthor', 'offlineHint', 'poemLines', 'poemScroll', 'scene', 'particles', 'playBtn',
+      'prevBtn', 'nextBtn', 'seek', 'curTime', 'durTime', 'modeBtn', 'speedBtn', 'audio'].forEach(function (id) {
         el[id] = $(id);
       });
   }
@@ -93,11 +94,34 @@
     setHash('#/p/' + state.poems[index].no);
     showPoem(index, dir, autoplay);
   }
-  function navNext() {
-    if (state.index < state.poems.length - 1) navTo(state.index + 1, 'next', isPlaying());
+  function navNext(fromEnded) {
+    if (!state.poems.length) return;
+    if (gushiApi && gushiApi.pickNextIndex) {
+      var dec = gushiApi.pickNextIndex(state.index, state.poems.length, state.playMode, fromEnded ? 'ended' : 'next');
+      if (dec.index < 0) return;
+      if (dec.replay) {
+        try { el.audio.currentTime = 0; } catch (e) {}
+        tryPlay();
+        return;
+      }
+      navTo(dec.index, 'next', fromEnded ? true : isPlaying());
+      return;
+    }
+    if (state.index < state.poems.length - 1) navTo(state.index + 1, 'next', fromEnded ? true : isPlaying());
   }
   function navPrev() {
+    if (!state.poems.length) return;
+    if (gushiApi && gushiApi.pickNextIndex) {
+      var dec = gushiApi.pickNextIndex(state.index, state.poems.length, state.playMode, 'prev');
+      if (dec.index >= 0) navTo(dec.index, 'prev', isPlaying());
+      return;
+    }
     if (state.index > 0) navTo(state.index - 1, 'prev', isPlaying());
+  }
+  function updateNavButtons() {
+    var loopOrRandom = state.playMode !== 'sequence' && state.poems.length > 1;
+    el.prevBtn.disabled = !loopOrRandom && state.index <= 0;
+    el.nextBtn.disabled = !loopOrRandom && state.index >= state.poems.length - 1;
   }
   function goCover() { setHash('#/'); showCover(); }
 
@@ -139,12 +163,39 @@
     el.artImg.src = imgSrc;
     el.artBlur.style.backgroundImage = 'url("' + imgSrc + '")';
 
-    el.audio.src = withSC(p.audio);
-    el.audio.load();
+    var remote = withSC(p.audio);
+    state.loadToken = (state.loadToken || 0) + 1;
+    var token = state.loadToken;
+    var known = window.OfflineMedia && window.OfflineMedia.has(remote);
+    var applySrc = function (src, cached) {
+      if (token !== state.loadToken) return;
+      if (el.offlineHint) {
+        el.offlineHint.hidden = !cached;
+        el.offlineHint.textContent = cached ? '正在使用本机缓存' : '';
+      }
+      if (el.audio.getAttribute('src') === src) {
+        if (autoplay && el.audio.paused) tryPlay();
+        return;
+      }
+      el.audio.src = src;
+      el.audio.load();
+      if (autoplay) tryPlay();
+    };
+    if (!known) {
+      el.audio.src = remote;
+      el.audio.load();
+      if (autoplay) tryPlay();
+    }
+    if (window.OfflineMedia) {
+      window.OfflineMedia.resolve(remote).then(function (src) {
+        applySrc(src, src !== remote);
+      }).catch(function () { applySrc(remote, false); });
+    } else if (known) {
+      applySrc(remote, false);
+    }
     resetProgress();
 
-    el.prevBtn.disabled = index <= 0;
-    el.nextBtn.disabled = index >= state.poems.length - 1;
+    updateNavButtons();
     updateCatalogCurrent();
 
     if (changed) {
@@ -155,7 +206,6 @@
       if (dir) el.poem.classList.add(dir === 'next' ? 'enter-next' : 'enter-prev');
       closeCatalog();
     }
-    if (autoplay) tryPlay();
   }
 
   function resetProgress() {
@@ -379,6 +429,31 @@
       applyRate(DEFAULT_RATE);
     }
 
+    function applyPlayMode(mode) {
+      state.playMode = (gushiApi && gushiApi.normalizePlayMode) ? gushiApi.normalizePlayMode(mode) : (mode || 'sequence');
+      if (el.modeBtn) {
+        var label = (gushiApi && gushiApi.formatPlayMode) ? gushiApi.formatPlayMode(state.playMode) : '顺序播放';
+        el.modeBtn.setAttribute('data-mode', state.playMode);
+        el.modeBtn.setAttribute('aria-label', '播放模式：' + label);
+        el.modeBtn.setAttribute('title', label);
+        if (state.playMode === 'sequence') el.modeBtn.classList.remove('active');
+        else el.modeBtn.classList.add('active');
+      }
+      updateNavButtons();
+      try { localStorage.setItem('gushi_play_mode', state.playMode); } catch (e) {}
+    }
+    if (el.modeBtn) {
+      el.modeBtn.addEventListener('click', function () {
+        var next = (gushiApi && gushiApi.nextPlayMode) ? gushiApi.nextPlayMode(state.playMode) : 'sequence';
+        applyPlayMode(next);
+      });
+    }
+    try {
+      applyPlayMode(localStorage.getItem('gushi_play_mode') || 'sequence');
+    } catch (e) {
+      applyPlayMode('sequence');
+    }
+
     el.seek.addEventListener('input', function () {
       if (!el.audio.duration) return;
       state.scrubbing = true;
@@ -401,6 +476,16 @@
     el.audio.addEventListener('play', function () {
       el.playBtn.classList.add('playing');
       el.playBtn.setAttribute('aria-label', '暂停朗读');
+      var current = state.poems[state.index];
+      if (window.OfflineMedia && current) {
+        var remote = withSC(current.audio);
+        window.OfflineMedia.retain(remote, { id: remote, app: 'gushi', kind: 'audio' }).then(function (saved) {
+          if (saved && el.offlineHint) {
+            el.offlineHint.hidden = false;
+            el.offlineHint.textContent = '已保存到本机，断网后仍可播放';
+          }
+        });
+      }
     });
     el.audio.addEventListener('pause', function () {
       el.playBtn.classList.remove('playing');
@@ -410,6 +495,7 @@
       el.playBtn.classList.remove('playing');
       updateProgress();
       updateHighlight();
+      navNext(true);
     });
 
     bindTouch();

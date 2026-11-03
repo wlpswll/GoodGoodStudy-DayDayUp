@@ -1,0 +1,358 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  background: #f3ead7;
+  color: #2f2a24;
+  padding-bottom: 72rpx;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* 宣纸底色与流动云气 */
+.mist-bg {
+  position: fixed;
+  top: -20%;
+  left: -20%;
+  right: -20%;
+  bottom: -20%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255,251,238,0.88), rgba(255,251,238,0) 62%),
+    radial-gradient(circle at 82% 28%, rgba(233,220,195,0.82), rgba(233,220,195,0) 65%),
+    radial-gradient(circle at 50% 82%, rgba(180,69,47,0.08), rgba(180,69,47,0) 65%),
+    radial-gradient(circle at 78% 78%, rgba(63,107,98,0.10), rgba(63,107,98,0) 65%);
+  animation: mistMove 18s ease-in-out infinite alternate;
+}
+@keyframes mistMove {
+  from { transform: translate3d(-16rpx, -12rpx, 0) scale(1); }
+  to { transform: translate3d(16rpx, 14rpx, 0) scale(1.05); }
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  padding: 64rpx 36rpx 40rpx;
+  text-align: center;
+}
+.sun {
+  position: absolute;
+  top: 22rpx;
+  right: 36rpx;
+  width: 156rpx;
+  height: 156rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(180,69,47,0.82), rgba(180,69,47,0.28) 55%, rgba(180,69,47,0) 72%);
+  animation: sunPulse 8s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes sunPulse {
+  0%, 100% { transform: scale(1); opacity: 0.78; }
+  50% { transform: scale(1.1); opacity: 0.96; }
+}
+
+.seal {
+  position: absolute;
+  top: 28rpx;
+  left: 36rpx;
+  width: 82rpx;
+  height: 82rpx;
+  border: 4rpx solid #b4452f;
+  border-radius: 18rpx;
+  color: #b4452f;
+  font-family: var(--kai);
+  font-size: 40rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-8deg);
+  box-shadow: 0 6rpx 0 rgba(180,69,47,0.18), inset 0 0 0 5rpx rgba(180,69,47,0.12);
+  background: rgba(255,250,238,0.65);
+}
+
+.motto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32rpx;
+}
+.glyphs {
+  display: flex;
+  gap: 10rpx;
+}
+.ch {
+  font-family: var(--kai);
+  font-size: 64rpx;
+  font-weight: 600;
+  color: #2f2a24;
+  text-shadow: 0 4rpx 0 rgba(255,255,255,0.65);
+  animation: riseIn 0.65s cubic-bezier(0.2, 0.75, 0.3, 1) both;
+}
+.c1 { animation-delay: 0.05s; }
+.c2 { animation-delay: 0.12s; }
+.c3 { animation-delay: 0.19s; }
+.c4 { animation-delay: 0.26s; }
+.c5 { animation-delay: 0.34s; }
+.c6 { animation-delay: 0.41s; }
+.c7 { animation-delay: 0.48s; }
+.c8 { animation-delay: 0.55s; }
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(24rpx) rotate(-4deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+.gap {
+  width: 28rpx;
+}
+.sub {
+  display: block;
+  margin-top: 22rpx;
+  font-family: var(--sans);
+  font-size: 24rpx;
+  letter-spacing: 4rpx;
+  color: #6b6154;
+}
+.rule {
+  width: 72%;
+  height: 2rpx;
+  margin: 30rpx auto 0;
+  background: linear-gradient(90deg, transparent, #d8c9ac 20%, #b4452f 50%, #d8c9ac 80%, transparent);
+}
+
+/* 两扇书房门 */
+.doors {
+  position: relative;
+  z-index: 1;
+  padding: 12rpx 32rpx 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22rpx;
+}
+.door {
+  position: relative;
+  background: linear-gradient(160deg, #fffaf0, #f5ead4);
+  border: 2rpx solid rgba(120,100,75,0.24);
+  border-radius: 32rpx;
+  padding: 36rpx 28rpx 30rpx;
+  box-shadow: 0 18rpx 42rpx rgba(80,50,25,0.11), inset 0 0 0 2rpx rgba(255,255,255,0.65);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.door-hover {
+  transform: translateY(-4rpx) scale(0.99);
+  box-shadow: 0 24rpx 48rpx rgba(80,50,25,0.18);
+}
+.badge {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+  font-family: var(--kai);
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #b4452f;
+  border: 3rpx solid #b4452f;
+  border-radius: 14rpx;
+  padding: 4rpx 12rpx;
+  transform: rotate(6deg);
+  background: rgba(255,250,238,0.75);
+}
+.door-title {
+  display: block;
+  font-family: var(--kai);
+  font-size: 40rpx;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  margin-bottom: 10rpx;
+}
+.door.gushi .door-title { color: #7d4f22; }
+.door.english .door-title { color: #3f6b62; }
+.door-desc {
+  display: block;
+  font-family: var(--sans);
+  font-size: 23rpx;
+  line-height: 1.58;
+  color: #6b6154;
+}
+.go {
+  display: inline-flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-top: 22rpx;
+  font-family: var(--sans);
+  font-size: 24rpx;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  color: #7d4f22;
+}
+.door.english .go { color: #3f6b62; }
+.arrow {
+  font-size: 26rpx;
+}
+
+/* 轻松一刻 */
+.fun {
+  position: relative;
+  z-index: 1;
+  padding: 52rpx 32rpx 0;
+}
+.fun-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16rpx;
+  margin-bottom: 22rpx;
+}
+.fun-title {
+  font-family: var(--kai);
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #b4452f;
+  letter-spacing: 3rpx;
+}
+.fun-sub {
+  font-family: var(--sans);
+  font-size: 22rpx;
+  color: #6b6154;
+  letter-spacing: 1rpx;
+}
+.fun-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+.game {
+  background: linear-gradient(165deg, #fffdf7, #f7eedb);
+  border: 2rpx solid rgba(120,100,75,0.22);
+  border-radius: 28rpx;
+  padding: 26rpx 24rpx 22rpx;
+  box-shadow: 0 12rpx 28rpx rgba(80,50,25,0.09), inset 0 0 0 2rpx rgba(255,255,255,0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.16s ease;
+}
+.game-hover {
+  transform: scale(0.98);
+}
+.game.piano-card {
+  grid-column: span 2;
+  background: linear-gradient(150deg, #2d4c46, #3f6b62 58%, #528479);
+  border-color: #294741;
+  color: #f6efe0;
+  box-shadow: 0 14rpx 32rpx rgba(45,76,70,0.24);
+}
+.game.piano-card .chip-title { color: #fffaf0; }
+.game.piano-card .note { color: rgba(246,239,224,0.86); }
+.game.piano-card .tag {
+  background: rgba(255,250,240,0.18);
+  color: #f7e6c4;
+}
+.game.piano-card .play-now { color: #ffd98e; }
+
+.game-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8rpx;
+}
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  min-width: 0;
+}
+.chip-medal {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--kai);
+  font-size: 22rpx;
+  font-weight: 700;
+  flex: none;
+  box-shadow: 0 4rpx 10rpx rgba(0,0,0,0.16);
+}
+.m-weiqi {
+  background: radial-gradient(circle at 32% 30%, #4d4d4d, #141414 78%);
+  color: #f6efe0;
+}
+.m-gomoku {
+  background: radial-gradient(circle at 32% 30%, #ffffff, #dcd4c6 82%);
+  color: #3a2e22;
+  border: 2rpx solid rgba(90,70,45,0.28);
+}
+.m-xiangqi {
+  background: #fdf6e6;
+  color: #b43525;
+  border: 3rpx solid #b43525;
+}
+.m-ludo {
+  background: linear-gradient(135deg, #d9534f, #3b8ec2);
+  color: #fff;
+}
+.m-piano {
+  background: #fffaf0;
+  color: #2d4c46;
+}
+
+.chip-title {
+  font-family: var(--kai);
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2f2a24;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tag {
+  font-family: var(--sans);
+  font-size: 18rpx;
+  color: #9c6b3f;
+  background: rgba(156,107,63,0.12);
+  padding: 4rpx 12rpx;
+  border-radius: 16rpx;
+  flex: none;
+}
+.note {
+  display: block;
+  margin-top: 14rpx;
+  font-family: var(--sans);
+  font-size: 22rpx;
+  line-height: 1.55;
+  color: #6b6154;
+}
+.game-actions {
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8rpx;
+}
+.play-now {
+  font-family: var(--sans);
+  font-size: 22rpx;
+  font-weight: 600;
+  color: #b4452f;
+}
+.miniapp-btn {
+  font-family: var(--sans);
+  font-size: 18rpx;
+  color: #3f6b62;
+  background: rgba(63,107,98,0.1);
+  border: 1rpx solid rgba(63,107,98,0.28);
+  padding: 4rpx 12rpx;
+  border-radius: 18rpx;
+}
+
+.foot {
+  position: relative;
+  z-index: 1;
+  margin-top: 52rpx;
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+  color: #6b6154;
+}
+.foot .em { color: #b4452f; }

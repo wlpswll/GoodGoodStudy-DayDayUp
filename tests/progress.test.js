@@ -113,3 +113,26 @@ test('检测到 wx 时走小程序存储，否则走 localStorage', function () 
   assert.equal(local.kind, 'local');
   assert.deepEqual(local.get('k'), { ok: 1 });
 });
+
+test('播放模式支持顺序、列表循环、单曲循环与随机播放切换', function () {
+  assert.equal(progress.DEFAULT_PLAY_MODE, 'sequence');
+  assert.equal(progress.normalizePlayMode('unknown'), 'sequence');
+  assert.equal(progress.nextPlayMode('sequence'), 'loop-all');
+  assert.equal(progress.nextPlayMode('loop-all'), 'loop-one');
+  assert.equal(progress.nextPlayMode('loop-one'), 'shuffle');
+  assert.equal(progress.nextPlayMode('shuffle'), 'sequence');
+
+  // 顺序播放到最后一首自然结束时停止（返回 -1）
+  assert.deepEqual(progress.pickNextIndex(2, 3, 'sequence', 'ended'), { index: -1, replay: false });
+  // 列表循环到最后一首自然结束时回到第 0 首
+  assert.deepEqual(progress.pickNextIndex(2, 3, 'loop-all', 'ended'), { index: 0, replay: false });
+  // 单曲循环自然结束时重播当前曲目
+  assert.deepEqual(progress.pickNextIndex(1, 3, 'loop-one', 'ended'), { index: 1, replay: true });
+  // 单曲循环下手动点下一首仍切到下一首
+  assert.deepEqual(progress.pickNextIndex(1, 3, 'loop-one', 'next'), { index: 2, replay: false });
+  // 随机播放不会原地踏步（总数 > 1 时）
+  const picked = progress.pickNextIndex(1, 4, 'shuffle', 'ended', function () { return 0.5; });
+  assert.notEqual(picked.index, 1);
+  assert.ok(picked.index >= 0 && picked.index < 4);
+});
+

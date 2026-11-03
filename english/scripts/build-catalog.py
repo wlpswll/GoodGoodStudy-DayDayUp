@@ -12,11 +12,13 @@ from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = ROOT.parent
+GUSHI_ROOT = REPO_ROOT / "gushi"
 OUT = ROOT / "data" / "media.json"
-MP_ROOT = ROOT / "miniprogram"
+MP_ROOT = REPO_ROOT / "miniprogram"
 MP_SHARED = MP_ROOT / "shared"
 SHARED_JS = ("catalog.js", "progress.js", "platform.js")
-SKIP_DIRS = {"css", "js", "data", "scripts", "miniprogram"}
+SKIP_DIRS = {"css", "js", "data", "scripts"}
 AUDIO_EXTS = {"mp3", "m4a", "aac", "wav", "ogg", "oga", "flac", "opus", "weba"}
 VIDEO_EXTS = {"mp4", "m4v", "webm", "ogv", "mov", "mkv"}
 
@@ -85,6 +87,41 @@ def sync_miniprogram(payload):
         shutil.copyfile(ROOT / "js" / name, MP_SHARED / name)
     media_js = "module.exports = " + json.dumps(payload, ensure_ascii=False, indent=2) + ";\n"
     (MP_SHARED / "media-data.js").write_text(media_js, encoding="utf-8")
+
+    policy = REPO_ROOT / "shared" / "offline-policy.js"
+    if policy.exists():
+        shutil.copyfile(policy, MP_SHARED / "offline-policy.js")
+
+    gushi_catalog = GUSHI_ROOT / "js" / "gushi-catalog.js"
+    if gushi_catalog.exists():
+        shutil.copyfile(gushi_catalog, MP_SHARED / "gushi-catalog.js")
+
+    poems_json = GUSHI_ROOT / "data" / "poems.json"
+    if poems_json.exists():
+        raw_poems = json.loads(poems_json.read_text(encoding="utf-8"))
+        compact_poems = []
+        for p in raw_poems.get("poems", []):
+            compact_poems.append({
+                "id": p.get("id"),
+                "no": p.get("no"),
+                "title": p.get("title"),
+                "titlePinyins": p.get("titlePinyins", []),
+                "dynasty": p.get("dynasty", ""),
+                "author": p.get("author", ""),
+                "lines": p.get("lines", []),
+                "linePinyins": p.get("linePinyins", []),
+                "image": p.get("image", ""),
+                "audio": p.get("audio", ""),
+                "lineTimes": p.get("lineTimes", []),
+                "audioDuration": p.get("audioDuration", 0),
+            })
+        poems_payload = {
+            "version": raw_poems.get("meta", {}).get("version", 1),
+            "poemCount": len(compact_poems),
+            "poems": compact_poems,
+        }
+        poems_js = "module.exports = " + json.dumps(poems_payload, ensure_ascii=False, separators=(",", ":")) + ";\n"
+        (MP_SHARED / "poems-data.js").write_text(poems_js, encoding="utf-8")
 
 
 if __name__ == "__main__":

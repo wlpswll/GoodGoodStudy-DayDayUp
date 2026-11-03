@@ -1,0 +1,303 @@
+<view class="app">
+  <!-- ==================== 1. 列表页 (Library View · 与 H5 一致) ==================== -->
+  <view wx:if="{{view === 'library'}}" class="view library">
+    <view class="lib-head">
+      <view class="cover-seal">英</view>
+      <view class="lib-copy">
+        <text class="lib-h1">英语跟读</text>
+        <text class="lib-sub">{{libSub}}</text>
+      </view>
+      <view class="top-btn top-btn-icon lib-home" hover-class="btn-press" bindtap="goHome">⌂</view>
+    </view>
+
+    <!-- 继续播放卡片 -->
+    <view
+      wx:if="{{hasResume}}"
+      class="resume-card"
+      hover-class="btn-press"
+      bindtap="onResumeTap"
+    >
+      <text class="resume-tag">继续播放</text>
+      <text class="resume-title">{{resumeTitle}}</text>
+      <text class="resume-time">{{resumeTime}}</text>
+    </view>
+
+    <!-- 搜索框 -->
+    <view class="catalog-search">
+      <text class="search-ico">⌕</text>
+      <input
+        class="search-input"
+        type="text"
+        placeholder="搜课名或文件夹"
+        placeholder-style="color:#a89a84"
+        value="{{libraryQuery}}"
+        bindinput="onLibrarySearch"
+      />
+    </view>
+
+    <!-- 分类折叠列表 -->
+    <scroll-view scroll-y="true" class="catalog-list">
+      <block wx:for="{{groups}}" wx:key="kind">
+        <view class="kind-block">
+          <view class="kind-h3">
+            <text class="kind-label {{item.kind === 'video' ? 'k-video' : 'k-audio'}}">{{item.label}}</text>
+            <text class="kind-em">{{item.count}}</text>
+          </view>
+          <block wx:for="{{item.folders}}" wx:for-item="folder" wx:key="name">
+            <view class="cat-group {{folder.folded ? 'is-folded' : ''}}">
+              <view
+                class="cat-fold"
+                data-fold="{{folder.foldKey}}"
+                bindtap="onToggleFold"
+              >
+                <text>{{folder.name}}</text>
+                <text class="chev">{{folder.folded ? '▸' : '▾'}}</text>
+              </view>
+              <view wx:if="{{!folder.folded}}" class="cat-grid">
+                <view
+                  class="cat-item {{currentId === media.id ? 'current' : ''}}"
+                  hover-class="btn-press"
+                  wx:for="{{folder.items}}"
+                  wx:for-item="media"
+                  wx:key="id"
+                  data-id="{{media.id}}"
+                  bindtap="onPick"
+                >
+                  <text class="badge {{media.kind === 'video' ? 'b-video' : 'b-audio'}}">{{media.badgeText}}</text>
+                  <view class="meta">
+                    <text class="t">{{media.title}}</text>
+                    <text class="a">{{media.extUpper}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </block>
+      <view wx:if="{{!groups.length}}" class="cat-empty">没有找到相关内容</view>
+    </scroll-view>
+  </view>
+
+  <!-- ==================== 2. 播放器页 (Player View · 与 H5 一致) ==================== -->
+  <view wx:else class="view player">
+    <view class="topbar">
+      <view class="top-btn" hover-class="btn-press" bindtap="openCatalog">
+        <text class="top-ico">☰</text>
+        <text>目录</text>
+      </view>
+      <text class="counter">{{counter}}</text>
+      <view
+        wx:if="{{isVideo}}"
+        class="top-btn top-btn-icon"
+        hover-class="btn-press"
+        bindtap="onMax"
+      >⛶</view>
+      <view class="top-btn top-btn-icon" hover-class="btn-press" bindtap="showLibrary">▤</view>
+      <view class="top-btn top-btn-icon" hover-class="btn-press" bindtap="goHome">⌂</view>
+    </view>
+
+    <!-- 视频或水墨旋转唱片舞台 -->
+    <view
+      class="stage {{isVideo ? 'is-video' : 'is-audio'}} {{videoFitted ? 'is-fitted' : ''}} {{playing ? 'playing' : ''}}"
+      style="{{videoFitted ? 'width:' + stageWidth + 'px;height:' + stageHeight + 'px;' : ''}}"
+      bindtap="onTogglePlay"
+    >
+      <view wx:if="{{isVideo && mediaStatus === 'loading'}}" class="stage-fallback">
+        <text class="stage-fallback-text">加载中…</text>
+      </view>
+      <view wx:elif="{{isVideo && mediaStatus === 'error'}}" class="stage-fallback is-error" catchtap="onRetryMedia">
+        <text class="stage-fallback-text">{{mediaError}}</text>
+        <text class="stage-retry">点此重试</text>
+      </view>
+      <video
+        wx:if="{{isVideo && videoSrc && mediaStatus !== 'error'}}"
+        id="english-video"
+        class="stage-video"
+        style="{{videoFitted ? 'width:' + stageWidth + 'px;height:' + stageHeight + 'px;' : ''}}"
+        src="{{videoSrc}}"
+        initial-time="{{videoInitial}}"
+        object-fit="contain"
+        controls="{{false}}"
+        show-center-play-btn="{{false}}"
+        show-play-btn="{{false}}"
+        show-fullscreen-btn="{{false}}"
+        show-progress="{{false}}"
+        enable-progress-gesture="{{false}}"
+        bindloadedmetadata="onVideoLoadedMeta"
+        bindtimeupdate="onVideoTime"
+        bindplay="onVideoPlay"
+        bindpause="onVideoPause"
+        bindended="onVideoEnded"
+        bindwaiting="onVideoWaiting"
+        binderror="onVideoError"
+        bindfullscreenchange="onFullScreenChange"
+      ></video>
+      <view wx:if="{{!isVideo}}" class="stage-audio">
+        <view class="disc {{playing ? 'spinning' : ''}}">
+          <view class="disc-core">英</view>
+        </view>
+        <view wx:if="{{mediaStatus === 'loading'}}" class="stage-float">加载中…</view>
+        <view wx:elif="{{mediaStatus === 'error'}}" class="stage-float is-error" catchtap="onRetryMedia">
+          <text class="stage-float-text">{{mediaError}}</text>
+          <text class="stage-retry">点此重试</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 当前播放标题区 -->
+    <view class="now">
+      <text class="now-kind">{{kind}}</text>
+      <text class="now-h2">{{title}}</text>
+      <text class="now-folder">{{folder}}</text>
+      <text wx:if="{{mediaStatus === 'loading'}}" class="resume-hint">加载中…</text>
+      <text wx:elif="{{restoredHint}}" class="resume-hint">已回到上次播放的位置</text>
+      <text wx:if="{{offlineNote}}" class="resume-hint">{{offlineNote}}</text>
+      <text wx:if="{{mediaError}}" class="media-error">{{mediaError}}</text>
+    </view>
+
+    <!-- 底部控制栏（与 H5 布局完全一致：上一课/播放暂停/下一课 + 模式Icon/进度条/倍速菜单） -->
+    <view class="controls">
+      <view class="transport">
+        <view
+          class="step-btn {{prevDisabled ? 'disabled' : ''}}"
+          hover-class="btn-press"
+          bindtap="onPrev"
+        >
+          <view class="skip-bar"></view>
+          <view class="tri-left"></view>
+        </view>
+
+        <view
+          class="play-btn {{playing ? 'playing' : ''}}"
+          hover-class="btn-press"
+          bindtap="onTogglePlay"
+        >
+          <view wx:if="{{!playing}}" class="ico-play"></view>
+          <view wx:else class="ico-pause">
+            <view class="pause-bar"></view>
+            <view class="pause-bar"></view>
+          </view>
+        </view>
+
+        <view
+          class="step-btn {{nextDisabled ? 'disabled' : ''}}"
+          hover-class="btn-press"
+          bindtap="onNext"
+        >
+          <view class="tri-right"></view>
+          <view class="skip-bar"></view>
+        </view>
+      </view>
+
+      <view class="seek-row">
+        <view
+          class="mode-btn {{playMode !== 'sequence' ? 'active' : ''}}"
+          hover-class="btn-press"
+          bindtap="onCyclePlayMode"
+        >
+          <text class="mode-ico">{{playModeIcon}}</text>
+        </view>
+
+        <text class="time">{{curClock}}</text>
+        <slider
+          class="seek"
+          min="0"
+          max="{{seekMax}}"
+          step="1"
+          value="{{seekValue}}"
+          disabled="{{duration <= 0}}"
+          activeColor="#9c6b3f"
+          backgroundColor="#d9cbb3"
+          block-color="#9c6b3f"
+          block-size="22"
+          catchtouchmove="noop"
+          bindtouchstart="onSeekStart"
+          bindchanging="onSeekChanging"
+          bindchange="onSeekChange"
+        />
+        <text class="time">{{durClock}}</text>
+
+        <view class="speed-wrap">
+          <view
+            class="speed-btn {{rate !== 1 ? 'active' : ''}}"
+            hover-class="btn-press"
+            bindtap="toggleSpeedMenu"
+          >{{rateLabel}}</view>
+          <view wx:if="{{speedMenuOpen}}" class="speed-menu">
+            <view
+              class="speed-opt {{rate === item ? 'selected' : ''}}"
+              wx:for="{{rates}}"
+              wx:key="*this"
+              data-rate="{{item}}"
+              bindtap="onRate"
+            >{{item}}×</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ==================== 3. 侧滑目录抽屉 (Catalog Drawer · 与 H5 一致) ==================== -->
+  <view wx:if="{{catalogOpen}}" class="catalog" bindtap="onMaskTap">
+    <view class="catalog-panel" catchtap="noop">
+      <view class="catalog-head">
+        <view class="cat-head-title">
+          <text class="cat-h3">目录</text>
+          <text class="cat-em">{{totalCount}} 个</text>
+        </view>
+        <view class="close-btn" bindtap="closeCatalog">✕</view>
+      </view>
+      <view class="catalog-search">
+        <text class="search-ico">⌕</text>
+        <input
+          class="search-input"
+          type="text"
+          placeholder="搜课名或文件夹"
+          placeholder-style="color:#a89a84"
+          value="{{catalogQuery}}"
+          bindinput="onCatalogSearch"
+        />
+      </view>
+      <scroll-view scroll-y="true" class="catalog-list">
+        <block wx:for="{{catalogGroups}}" wx:key="kind">
+          <view class="kind-block">
+            <view class="kind-h3">
+              <text class="kind-label {{item.kind === 'video' ? 'k-video' : 'k-audio'}}">{{item.label}}</text>
+              <text class="kind-em">{{item.count}}</text>
+            </view>
+            <block wx:for="{{item.folders}}" wx:for-item="folder" wx:key="name">
+              <view class="cat-group {{folder.folded ? 'is-folded' : ''}}">
+                <view
+                  class="cat-fold"
+                  data-fold="{{folder.foldKey}}"
+                  bindtap="onToggleFold"
+                >
+                  <text>{{folder.name}}</text>
+                  <text class="chev">{{folder.folded ? '▸' : '▾'}}</text>
+                </view>
+                <view wx:if="{{!folder.folded}}" class="cat-grid">
+                  <view
+                    class="cat-item {{currentId === media.id ? 'current' : ''}}"
+                    hover-class="btn-press"
+                    wx:for="{{folder.items}}"
+                    wx:for-item="media"
+                    wx:key="id"
+                    data-id="{{media.id}}"
+                    bindtap="onPick"
+                  >
+                    <text class="badge {{media.kind === 'video' ? 'b-video' : 'b-audio'}}">{{media.badgeText}}</text>
+                    <view class="meta">
+                      <text class="t">{{media.title}}</text>
+                      <text class="a">{{media.extUpper}}</text>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </block>
+        <view wx:if="{{!catalogGroups.length}}" class="cat-empty">没有找到相关内容</view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

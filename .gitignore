@@ -1,3 +1,12 @@
 .DS_Store
 verification_report.txt
 node_modules/
+
+# web-inspection (local secrets & runtime)
+.web-inspection/config.local.yaml
+.web-inspection/.case-review.lock
+.web-inspection-reports/
+.web-inspection/playwright/.auth/
+.web-inspection/playwright/node_modules/
+.web-inspection/playwright/test-results/
+.web-inspection/playwright/playwright-report/

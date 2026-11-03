@@ -1,0 +1,7 @@
+# 登录态与运行产物（勿提交 Cookie）
+.auth/
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/

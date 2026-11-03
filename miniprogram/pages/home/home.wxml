@@ -1,0 +1,88 @@
+<view class="page">
+  <view class="mist-bg"></view>
+
+  <view class="hero">
+    <view class="sun"></view>
+    <view class="seal">学</view>
+    <view class="motto">
+      <view class="glyphs">
+        <text class="ch c1">好</text>
+        <text class="ch c2">好</text>
+        <text class="ch c3">学</text>
+        <text class="ch c4">习</text>
+      </view>
+      <view class="gap"></view>
+      <view class="glyphs">
+        <text class="ch c5">天</text>
+        <text class="ch c6">天</text>
+        <text class="ch c7">向</text>
+        <text class="ch c8">上</text>
+      </view>
+    </view>
+    <text class="sub">一年级的小书房 · 念古诗，练英语，学累了再玩一盘</text>
+    <view class="rule"></view>
+  </view>
+
+  <view class="doors">
+    <view class="door gushi" hover-class="door-hover" bindtap="goGushi">
+      <text class="badge">诗</text>
+      <text class="door-title">必背古诗</text>
+      <text class="door-desc">一年级 70 首，看图、听朗读、逐句拼音点读。</text>
+      <view class="go">
+        <text>去念诗</text>
+        <text class="arrow">→</text>
+      </view>
+    </view>
+
+    <view class="door english" hover-class="door-hover" bindtap="goEnglish">
+      <text class="badge">英</text>
+      <text class="door-title">英语跟读</text>
+      <text class="door-desc">课本音频和视频，倍速、断点记忆，一课一课接着读。</text>
+      <view class="go">
+        <text>去跟读</text>
+        <text class="arrow">→</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="fun">
+    <view class="fun-head">
+      <text class="fun-title">轻松一刻</text>
+      <text class="fun-sub">学累了，下盘棋、弹首曲再回来</text>
+    </view>
+    <view class="fun-grid">
+      <view
+        class="game {{item.wide ? 'piano-card' : ''}}"
+        hover-class="game-hover"
+        wx:for="{{games}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onOpenGame"
+      >
+        <view class="game-top">
+          <view class="chip">
+            <view class="chip-medal m-{{item.id}}">{{item.shortLabel || item.icon}}</view>
+            <text class="chip-title">{{item.name}}</text>
+          </view>
+          <text class="tag">{{item.badge}}</text>
+        </view>
+        <text class="note">{{item.note}}</text>
+        <view class="game-actions">
+          <text class="play-now">入局开玩 →</text>
+          <view
+            wx:if="{{item.appId}}"
+            class="miniapp-btn"
+            data-id="{{item.id}}"
+            data-appid="{{item.appId}}"
+            catchtap="onJumpMiniApp"
+          >微信「{{item.externalName}}」↗</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="foot">
+    <text>好好学习，天天向上 · </text>
+    <text class="em">玩要尽兴，学要专心</text>
+  </view>
+</view>

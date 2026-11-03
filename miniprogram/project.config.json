@@ -1,5 +1,5 @@
 {
-  "description": "一年级上册英语跟读小程序",
+  "description": "好好学习 · 天天向上（必背古诗 70 首 & 英语跟读）小程序",
   "packOptions": {
     "ignore": [],
     "include": []
@@ -22,15 +22,21 @@
     "useCompilerPlugins": false,
     "condition": false,
     "swc": false,
-    "disableSWC": true
+    "disableSWC": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
   },
   "compileType": "miniprogram",
-  "libVersion": "3.3.5",
-  "appid": "touristappid",
-  "projectname": "english-followup",
+  "libVersion": "3.7.10",
+  "appid": "wx54e825fb9d1e9396",
+  "projectname": "goodgoodstudy-daydayup",
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  }
+  },
+  "simulatorPluginLibVersion": {}
 }

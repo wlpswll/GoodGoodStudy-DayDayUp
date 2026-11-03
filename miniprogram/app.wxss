@@ -1,0 +1,38 @@
+/* 东方童趣水墨书房 · 全局样式变量与基础重置 */
+page {
+  --paper: #f3ead7;
+  --paper-light: #fbf6ec;
+  --paper-deep: #e8dac0;
+  --ink: #2f2a24;
+  --ink-soft: #6b6154;
+  --ink-muted: #9a8970;
+  --seal: #b4452f;
+  --accent: #9c6b3f;
+  --accent-deep: #7d4f22;
+  --jade: #3f6b62;
+  --line: #d8c9ac;
+  --serif: "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif;
+  --kai: "Kaiti SC", "STKaiti", "KaiTi", "Songti SC", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+
+  background-color: #f3ead7;
+  color: #2f2a24;
+  font-family: var(--serif);
+}
+
+/* 移除微信小程序原生 button 的丑陋灰框和伪元素边框 */
+button.clean-btn {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  line-height: inherit;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}
+button.clean-btn::after {
+  border: none;
+  display: none;
+}

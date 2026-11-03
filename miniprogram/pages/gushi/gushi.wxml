@@ -1,0 +1,188 @@
+<view class="app">
+  <!-- 封面 -->
+  <view wx:if="{{view === 'cover'}}" class="view cover">
+    <view class="cover-wash"></view>
+    <view class="cover-clouds">
+      <view class="cloud c1"></view>
+      <view class="cloud c2"></view>
+      <view class="cloud c3"></view>
+    </view>
+    <view class="cover-home" hover-class="btn-press" bindtap="goHome">⌂ 书房首页</view>
+    <view class="cover-inner">
+      <view class="cover-seal">诗</view>
+      <view class="cover-title">古诗<text class="num">70</text>首</view>
+      <text class="cover-sub">一年级必背 · 看图 · 听朗读</text>
+      <view class="cover-rule"></view>
+      <view class="start-btn" hover-class="start-press" bindtap="onStart">开始诵读</view>
+      <text class="cover-hint">上滑翻下一首，下滑回到上一首</text>
+    </view>
+    <text class="cover-foot">共 {{total}} 首 · 点目录可快速选诗</text>
+  </view>
+
+  <!-- 诗页 -->
+  <view wx:else class="view poem scene-{{poem.scene}}">
+    <view class="scene-decor"></view>
+
+    <view class="topbar">
+      <view class="top-btn" hover-class="btn-press" bindtap="openCatalog">
+        <text class="top-ico">☰</text>
+        <text>目录</text>
+      </view>
+      <text class="counter">{{index + 1}} / {{total}}</text>
+      <view class="top-actions">
+        <view class="top-btn" hover-class="btn-press" bindtap="goCover">封面</view>
+        <view class="top-btn" hover-class="btn-press" bindtap="goHome">⌂ 首页</view>
+      </view>
+    </view>
+
+    <scroll-view
+      scroll-y="true"
+      class="poem-scroll"
+      bindtouchstart="onTouchStart"
+      bindtouchend="onTouchEnd"
+    >
+      <view class="scroll-inner">
+        <view class="artwork" wx:if="{{poem.imageUrl}}">
+          <image class="art-blur" src="{{poem.imageUrl}}" mode="aspectFill" />
+          <image class="art-img" src="{{poem.imageUrl}}" mode="aspectFit" />
+        </view>
+
+        <view class="poem-body">
+          <view class="poem-title">
+            <view class="ruby {{item.py ? '' : 'is-punct'}}" wx:for="{{poem.titleTokens}}" wx:key="index">
+              <text class="rt" wx:if="{{item.py}}">{{item.py}}</text>
+              <text class="rt rt-hold" wx:else>·</text>
+              <text class="rb">{{item.ch}}</text>
+            </view>
+          </view>
+          <text class="poem-author">{{poem.authorLabel}}</text>
+          <text wx:if="{{offlineNote}}" class="poem-note">{{offlineNote}}</text>
+
+          <view class="poem-lines">
+            <view
+              class="line {{activeLine === lineIdx ? 'active' : ''}}"
+              wx:for="{{poem.lineTokens}}"
+              wx:for-item="tokens"
+              wx:for-index="lineIdx"
+              wx:key="lineIdx"
+              data-index="{{lineIdx}}"
+              bindtap="onLineTap"
+            >
+              <view class="ruby {{tok.py ? '' : 'is-punct'}}" wx:for="{{tokens}}" wx:for-item="tok" wx:key="index">
+                <text class="rt" wx:if="{{tok.py}}">{{tok.py}}</text>
+                <text class="rt rt-hold" wx:else>·</text>
+                <text class="rb">{{tok.ch}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="controls">
+      <view class="transport">
+        <view
+          class="circle-step {{prevDisabled ? 'disabled' : ''}}"
+          hover-class="btn-press"
+          bindtap="onPrev"
+        >
+          <view class="skip-bar"></view>
+          <view class="tri-left"></view>
+        </view>
+
+        <view
+          class="circle-play {{playing ? 'playing' : ''}}"
+          hover-class="play-press"
+          bindtap="onTogglePlay"
+        >
+          <view wx:if="{{!playing}}" class="ico-play"></view>
+          <view wx:else class="ico-pause">
+            <view class="pause-bar"></view>
+            <view class="pause-bar"></view>
+          </view>
+        </view>
+
+        <view
+          class="circle-step {{nextDisabled ? 'disabled' : ''}}"
+          hover-class="btn-press"
+          bindtap="onNext"
+        >
+          <view class="tri-right"></view>
+          <view class="skip-bar"></view>
+        </view>
+      </view>
+
+      <view class="seek-row">
+        <view
+          class="mode-btn {{playMode !== 'sequence' ? 'active' : ''}}"
+          hover-class="btn-press"
+          bindtap="onCyclePlayMode"
+        >
+          <text class="mode-ico">{{playModeIcon}}</text>
+        </view>
+        <text class="time">{{curClock}}</text>
+        <slider
+          class="seek"
+          min="0"
+          max="{{duration || 100}}"
+          step="0.1"
+          value="{{currentTime}}"
+          activeColor="#9c6b3f"
+          backgroundColor="rgba(120,100,75,0.25)"
+          block-color="#9c6b3f"
+          block-size="16"
+          bindchanging="onSeekChanging"
+          bindchange="onSeekChange"
+        />
+        <text class="time">{{durClock}}</text>
+        <view class="speed-btn {{rate !== 1 ? 'active' : ''}}" bindtap="onCycleRate">{{rateLabel}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 目录侧边栏 -->
+  <view wx:if="{{catalogOpen}}" class="catalog" bindtap="onMaskTap">
+    <view class="catalog-panel" catchtap="noop">
+      <view class="catalog-head">
+        <view class="cat-head-left">
+          <text class="cat-title">目录</text>
+          <text class="cat-count">{{total}} 首</text>
+        </view>
+        <view class="close-btn" bindtap="closeCatalog">✕</view>
+      </view>
+      <view class="catalog-search">
+        <text class="search-ico">⌕</text>
+        <input
+          class="search-input"
+          type="text"
+          placeholder="搜诗名、作者或朝代"
+          placeholder-style="color:#a89a84"
+          value="{{query}}"
+          bindinput="onSearchInput"
+        />
+      </view>
+      <scroll-view scroll-y="true" class="catalog-list">
+        <block wx:for="{{groups}}" wx:key="name">
+          <view class="cat-group">
+            <text class="cat-dynasty">{{item.name}}</text>
+            <view class="cat-grid">
+              <view
+                class="cat-item {{poemItem.index === index ? 'current' : ''}}"
+                wx:for="{{item.items}}"
+                wx:for-item="poemItem"
+                wx:key="no"
+                data-index="{{poemItem.index}}"
+                bindtap="onPickPoem"
+              >
+                <text class="n">{{poemItem.no}}</text>
+                <text class="t">{{poemItem.title}}</text>
+                <text class="a">{{poemItem.author}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view wx:if="{{!groups.length}}" class="cat-empty">没有找到相关的诗</view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

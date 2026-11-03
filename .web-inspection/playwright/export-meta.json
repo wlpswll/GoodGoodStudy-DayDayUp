@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-11-03T17:25:57+08:00",
+  "generator": "web-inspection/export-playwright",
+  "summary": {
+    "base_url": "http://127.0.0.1:8765",
+    "env": "local",
+    "modules": [
+      {
+        "id": "english-offline",
+        "file": "english-offline.spec.ts",
+        "cases": 1,
+        "skipped": [],
+        "device": null
+      },
+      {
+        "id": "gushi-offline",
+        "file": "gushi-offline.spec.ts",
+        "cases": 1,
+        "skipped": [],
+        "device": null
+      }
+    ],
+    "exported_cases": 2,
+    "skipped_modules": []
+  },
+  "note": "GENERATED — 勿手改 tests/；改 SOP 后重新导出"
+}

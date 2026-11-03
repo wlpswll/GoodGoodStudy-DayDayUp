@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/gushi/gushi",
+    "pages/player/player",
+    "pages/games/games"
+  ],
+  "window": {
+    "navigationBarTitleText": "好好学习 · 天天向上",
+    "navigationBarBackgroundColor": "#f3ead7",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6efe0"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
