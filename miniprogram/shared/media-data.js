@@ -1,7 +1,7 @@
 module.exports = {
   "version": 1,
   "title": "一年级上册英语跟读",
-  "generatedAt": "2026-11-03 11:39:15",
+  "generatedAt": "2026-11-04 16:21:40",
   "items": [
     {
       "id": "一上英语课本跟读mp3/P8 Extend.mp4",
@@ -130,6 +130,14 @@ module.exports = {
       "ext": "mp3",
       "folder": "一上英语课本跟读mp3",
       "src": "一上英语课本跟读mp3/p20 Story.mp3"
+    },
+    {
+      "id": "一上英语课本跟读mp3/U4 Extend.MP3",
+      "title": "U4 Extend",
+      "kind": "audio",
+      "ext": "mp3",
+      "folder": "一上英语课本跟读mp3",
+      "src": "一上英语课本跟读mp3/U4 Extend.MP3"
     },
     {
       "id": "一上英语课本跟读mp3/U4 Ready go.MP3",

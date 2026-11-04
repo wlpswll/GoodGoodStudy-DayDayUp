@@ -59,6 +59,16 @@ function createMiniOffline(options) {
       writeIndex(readIndex().filter(function (entry) { return entry.id !== id; }));
       return '';
     },
+    /* 文件还在但真机解码不了时，把这条缓存彻底清掉，改走网络地址。 */
+    forget: function (id) {
+      if (!id) return false;
+      var entries = readIndex();
+      var hit = entries.filter(function (entry) { return entry.id === id; })[0];
+      if (!hit) return false;
+      removeFile(hit.path);
+      writeIndex(entries.filter(function (entry) { return entry.id !== id; }));
+      return true;
+    },
     retain: function (id, url, meta) {
       if (!id || !url || !wxApi || typeof wxApi.downloadFile !== 'function') return Promise.resolve('');
       var existing = readIndex().filter(function (entry) { return entry.id === id; })[0];

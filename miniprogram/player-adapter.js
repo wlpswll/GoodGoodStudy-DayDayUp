@@ -63,6 +63,14 @@
       }
     }
 
+    function attachVideo() {
+      if (mode !== 'video' || !wxApi || typeof wxApi.createVideoContext !== 'function') return false;
+      if (video) return true;
+      video = wxApi.createVideoContext(opts.videoId || 'english-video', opts.pageContext);
+      applyRate();
+      return Boolean(video);
+    }
+
     return {
       load: function (media) {
         if (!media) return;
@@ -76,6 +84,8 @@
           }
           destroyAudio();
           audio = wxApi.createInnerAudioContext();
+          /* iOS 真机静音键会让 InnerAudioContext 静音，跟读音频同样要忽略它 */
+          try { audio.obeyMuteSwitch = false; } catch (err) {}
           audio.src = srcOf(media);
           audio.autoplay = false;
           if (typeof audio.onPlay === 'function') {
@@ -131,13 +141,7 @@
         video = null;
         if (opts.onVideoSrc) opts.onVideoSrc(srcOf(media));
       },
-      attachVideo: function () {
-        if (mode !== 'video' || !wxApi || typeof wxApi.createVideoContext !== 'function') return false;
-        if (video) return true;
-        video = wxApi.createVideoContext(opts.videoId || 'english-video');
-        applyRate();
-        return Boolean(video);
-      },
+      attachVideo: attachVideo,
       play: function () {
         if (mode === 'audio' && audio) {
           applyRate();
@@ -156,14 +160,24 @@
         else if (video) video.pause();
         note(true);
       },
+      /* 拖动进度条时可能还没走到 onVideoLoadedMeta，这里保证 VideoContext 已绑定。
+       * 返回是否真的把位置交给了播放器，页面据此决定要不要用页面级 context 兜底。 */
       seek: function (time) {
         var next = Math.max(0, Number(time) || 0);
-        if (mode === 'audio' && audio && typeof audio.seek === 'function') audio.seek(next);
-        if (mode === 'video') {
+        var applied = false;
+        if (mode === 'audio' && audio && typeof audio.seek === 'function') {
+          audio.seek(next);
+          applied = true;
+        } else if (mode === 'video') {
+          if (!video) attachVideo();
           videoTime = next;
-          if (video && typeof video.seek === 'function') video.seek(next);
+          if (video && typeof video.seek === 'function') {
+            video.seek(next);
+            applied = true;
+          }
         }
         note(true);
+        return applied;
       },
       setRate: function (nextRate) {
         rate = progress ? progress.normalizeRate(nextRate) : nextRate;

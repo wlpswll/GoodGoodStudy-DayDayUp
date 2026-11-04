@@ -6,7 +6,7 @@ const catalog = require('../english/js/catalog.js');
 
 function fakeWx() {
   const calls = [];
-  return {
+  const wxApi = {
     calls: calls,
     createInnerAudioContext: function () {
       const audio = {
@@ -21,11 +21,13 @@ function fakeWx() {
         onTimeUpdate: function (fn) { audio._tick = fn; },
         onEnded: function (fn) { audio._ended = fn; }
       };
+      wxApi.lastAudio = audio;
       calls.push('audio');
       return audio;
     },
-    createVideoContext: function (id) {
+    createVideoContext: function (id, pageContext) {
       calls.push('video:' + id);
+      calls.push('video-page:' + Boolean(pageContext));
       return {
         play: function () { calls.push('video-play'); },
         pause: function () { calls.push('video-pause'); },
@@ -36,6 +38,7 @@ function fakeWx() {
       };
     }
   };
+  return wxApi;
 }
 
 test('小程序音频会话能播放、跳转、改倍速并写出同一份进度', function () {
@@ -57,6 +60,7 @@ test('小程序音频会话能播放、跳转、改倍速并写出同一份进�
     src: '一上英语课本跟读mp3/p9 Letters-1.mp3'
   };
   session.load(item);
+  assert.equal(wxApi.lastAudio.obeyMuteSwitch, false, '真机静音开关不该拦住跟读音频');
   session.play();
   session.seek(6.5);
   const rate = session.setRate(1.5);
@@ -73,9 +77,11 @@ test('小程序音频会话能播放、跳转、改倍速并写出同一份进�
 
 test('小程序视频用页面回调记住时间，非法倍速保持为 1', function () {
   const wxApi = fakeWx();
+  const pageContext = {};
   let videoSrc = '';
   const session = adapter.createMiniProgramPlayer({
     wx: wxApi,
+    pageContext: pageContext,
     progress: progress,
     catalog: catalog,
     videoId: 'english-video',
@@ -95,10 +101,37 @@ test('小程序视频用页面回调记住时间，非法倍速保持为 1', fun
   assert.match(videoSrc, /U1/);
   assert.equal(videoSrc.indexOf(' '), -1);
   assert.ok(wxApi.calls.some(function (call) { return call === 'video:english-video'; }));
+  assert.ok(wxApi.calls.indexOf('video-page:true') >= 0);
   assert.equal(session.setMaxWindow(true), true);
   assert.equal(session.setMaxWindow(false), true);
   assert.ok(wxApi.calls.indexOf('full:0') >= 0);
   assert.ok(wxApi.calls.indexOf('exit-full') >= 0);
+});
+
+test('小程序视频未绑定上下文时，拖动进度条会自动绑定并跳转', function () {
+  const wxApi = fakeWx();
+  const snapshots = [];
+  const session = adapter.createMiniProgramPlayer({
+    wx: wxApi,
+    pageContext: {},
+    progress: progress,
+    catalog: catalog,
+    videoId: 'english-video',
+    mediaBaseUrl: 'https://cdn.example/english',
+    onProgress: function (snapshot) { snapshots.push(snapshot); }
+  });
+  session.load({
+    id: '一上英语课本跟读视频/U2跟读.mp4',
+    kind: 'video',
+    src: '一上英语课本跟读视频/U2跟读.mp4'
+  });
+  assert.equal(wxApi.calls.indexOf('video:english-video'), -1);
+  assert.equal(session.seek(120), true);
+  assert.ok(wxApi.calls.indexOf('video:english-video') >= 0, '应自动创建 VideoContext');
+  assert.ok(wxApi.calls.indexOf('video-seek:120') >= 0, '应把目标时间交给播放器');
+  assert.equal(session.getCurrentTime(), 120);
+  assert.equal(snapshots[snapshots.length - 1].currentTime, 120);
+  session.destroy();
 });
 
 test('小程序页面可直接被微信环境加载，且不跨越小程序目录边界', function () {
@@ -116,14 +149,22 @@ test('小程序页面可直接被微信环境加载，且不跨越小程序目�
 
   const appJson = JSON.parse(fs.readFileSync(path.join(mpRoot, 'app.json'), 'utf8'));
   assert.deepEqual(appJson.pages, ['pages/home/home', 'pages/gushi/gushi', 'pages/player/player', 'pages/games/games']);
-  assert.equal(appJson.lazyCodeLoading, undefined);
+  assert.equal(appJson.lazyCodeLoading, 'requiredComponents');
+  const projectConfig = JSON.parse(fs.readFileSync(path.join(mpRoot, 'project.config.json'), 'utf8'));
+  assert.equal(projectConfig.setting.es6, false);
 
   const pageSrc = fs.readFileSync(path.join(mpRoot, 'pages', 'player', 'player.js'), 'utf8');
   assert.equal(pageSrc.indexOf('require(\'../../../'), -1);
+  assert.match(pageSrc, /select\('#english-video'\)/);
+  assert.match(pageSrc, /query\.context/);
   const playerWxml = fs.readFileSync(path.join(mpRoot, 'pages', 'player', 'player.wxml'), 'utf8');
   assert.match(playerWxml, /mediaStatus === 'loading'/);
   assert.match(playerWxml, /onRetryMedia/);
-  assert.match(playerWxml, /step="1"/);
+  assert.match(playerWxml, /<slider/);
+  assert.match(playerWxml, /bindchange="onSeekChange"/);
+  assert.match(playerWxml, /videoMounted/);
+  assert.match(playerWxml, /class="now-main"/);
+  assert.match(playerWxml, /class="now-meta"/);
   assert.match(playerWxml, /videoFitted/);
   assert.equal(playerWxml.indexOf('cover-view'), -1);
   const gushiWxml = fs.readFileSync(path.join(mpRoot, 'pages', 'gushi', 'gushi.wxml'), 'utf8');
@@ -203,6 +244,66 @@ test('小程序页面可直接被微信环境加载，且不跨越小程序目�
     assert.equal(state.playMode, 'loop-all');
     ctx.onPick({ currentTarget: { dataset: { id: '一上英语课本跟读视频/U1跟读.mp4' } } });
     assert.equal(state.view, 'player');
+    // 拖动进度条：不管有没有本机缓存，都直接 seek 当前视频，
+    // 不下载整段视频、不换播放地址、不暂停、不回退进度。
+    const remoteSrc = 'https://cdn.example/english/U2跟读.mp4';
+    function makeSeekCtx(hasLocalFile) {
+      const calls = [];
+      const seekState = Object.assign({}, pageConfig.data, {
+        isVideo: true,
+        playing: true,
+        duration: 100,
+        currentTime: 2,
+        videoSrc: remoteSrc,
+        offlineNote: '正在使用本机缓存'
+      });
+      const seekCtx = Object.assign({}, pageConfig, {
+        data: seekState,
+        currentItem: { id: 'u2', kind: 'video' },
+        offline: {
+          lookup: function () { return hasLocalFile ? 'wxfile://saved-u2.mp4' : ''; },
+          retain: function () { calls.push('download'); return Promise.resolve(''); }
+        },
+        _remoteSrc: remoteSrc,
+        _retainPromises: {},
+        _mountedVideoContext: {
+          seek: function (time) { calls.push('ctx-seek:' + time); }
+        },
+        session: {
+          attachVideo: function () { calls.push('attach'); return true; },
+          seek: function (time) { calls.push('seek:' + time); return true; },
+          pause: function () { calls.push('session-pause'); },
+          noteVideoTime: function () {}
+        },
+        setData: function (patch, callback) {
+          Object.assign(seekState, patch);
+          if (callback) callback();
+        }
+      });
+      return { ctx: seekCtx, state: seekState, calls: calls };
+    }
+
+    [false, true].forEach(function (hasLocalFile) {
+      const env = makeSeekCtx(hasLocalFile);
+      env.ctx.onSeekChange({ detail: { value: 42 } });
+      assert.ok(env.calls.indexOf('seek:42') >= 0, '应直接跳转当前 VideoContext');
+      assert.equal(env.calls.indexOf('download'), -1, '跳转不应触发整段视频下载');
+      assert.equal(env.calls.indexOf('session-pause'), -1, '跳转不应暂停视频');
+      assert.equal(env.state.videoSrc, remoteSrc, '跳转不应切换播放地址');
+      assert.equal(env.state.currentTime, 42);
+      assert.equal(env.state.curClock, '0:42');
+      assert.equal(env.state.seekPercent, 42);
+      assert.equal(env.state.playing, true, '应保持原来的播放状态');
+      assert.equal(env.state.seekingVideo, false);
+      assert.equal(env.state.offlineNote, '正在使用本机缓存');
+    });
+
+    // 会话层没拿到上下文时，退回页面级 VideoContext 再试一次
+    const fallback = makeSeekCtx(false);
+    fallback.ctx.session.seek = function () { return false; };
+    assert.equal(fallback.ctx.seekVideo(42), true);
+    assert.ok(fallback.calls.indexOf('ctx-seek:42') >= 0);
+    assert.equal(fallback.state.offlineNote, '正在使用本机缓存');
     ctx.showLibrary();
     assert.equal(state.view, 'library');
 

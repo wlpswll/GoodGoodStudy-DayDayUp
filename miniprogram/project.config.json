@@ -6,7 +6,7 @@
   },
   "setting": {
     "urlCheck": false,
-    "es6": true,
+    "es6": false,
     "enhance": true,
     "postcss": true,
     "minified": true,
@@ -31,12 +31,13 @@
   },
   "compileType": "miniprogram",
   "libVersion": "3.7.10",
-  "appid": "wx54e825fb9d1e9396",
+  "appid": "wx6fed76e3c7f49458",
   "projectname": "goodgoodstudy-daydayup",
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
   },
-  "simulatorPluginLibVersion": {}
+  "simulatorPluginLibVersion": {},
+  "isGameTourist": false
 }

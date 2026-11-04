@@ -42,6 +42,8 @@ Page({
     isVideo: false,
     videoSrc: '',
     videoInitial: 0,
+    videoMounted: true,
+    seekingVideo: false,
     stageHeight: 280,
     counter: '音频 0 / 0',
     prevDisabled: true,
@@ -57,6 +59,7 @@ Page({
     duration: 0,
     seekValue: 0,
     seekMax: 1,
+    seekPercent: 0,
     curClock: '0:00',
     durClock: '0:00',
     videoFitted: false,
@@ -79,6 +82,9 @@ Page({
     this.storage = storage;
     this.saved = saved;
     this.scrubbing = false;
+    this._scrubAt = 0;
+    this.seekHoldUntil = 0;
+    this._retainPromises = {};
     this.offline = offlineStore.createMiniOffline({ wx: typeof wx !== 'undefined' ? wx : null });
 
     var initRate = saved ? saved.playbackRate : progress.DEFAULT_RATE;
@@ -86,6 +92,7 @@ Page({
 
     this.session = adapter.createMiniProgramPlayer({
       wx: typeof wx !== 'undefined' ? wx : null,
+      pageContext: this,
       progress: progress,
       catalog: catalog,
       mediaBaseUrl: this.data.mediaBaseUrl,
@@ -112,7 +119,7 @@ Page({
         }
       },
       onTimeUpdate: function (cur, dur) {
-        if (self.scrubbing) return;
+        if (self.scrubbing || self.seekEcho(cur)) return;
         var knownDur = dur || self.data.duration || 0;
         var patch = self.clockPatch(cur, knownDur);
         if ((knownDur > 0 || cur > 0) && self.data.mediaStatus === 'loading') {
@@ -124,7 +131,8 @@ Page({
       },
       onEnded: function () {
         self.scrubbing = false;
-        self.setData({ playing: false, currentTime: 0, seekValue: 0, curClock: '0:00' });
+        self.seekHoldUntil = 0;
+        self.setData({ playing: false, currentTime: 0, seekValue: 0, seekPercent: 0, curClock: '0:00' });
         self.step(1, true);
       },
       onError: function () {
@@ -279,8 +287,11 @@ Page({
     if (!localSrc && isVideo && resolvedSrc && this.data.mediaStatus === 'error') {
       resolvedSrc += (resolvedSrc.indexOf('?') >= 0 ? '&' : '?') + '_=' + Date.now();
     }
+    this.scrubbing = false;
+    this.seekHoldUntil = 0;
+    this._seekRect = null;
+    this._seekDraft = 0;
     var self = this;
-
     this.setData({
       view: opts.stayLibrary ? 'library' : 'player',
       currentId: item.id,
@@ -290,11 +301,14 @@ Page({
       isVideo: isVideo,
       videoSrc: isVideo ? resolvedSrc : '',
       videoInitial: safeSeek,
+      videoMounted: true,
+      seekingVideo: false,
       playing: Boolean(opts.autoplay),
       currentTime: safeSeek,
       duration: 0,
       seekValue: Math.round(safeSeek),
       seekMax: 1,
+      seekPercent: 0,
       curClock: progress.formatClock(safeSeek),
       durClock: '0:00',
       videoFitted: false,
@@ -337,6 +351,7 @@ Page({
     var text = tip || '加载失败，请检查网络后重试';
     this.setData({
       playing: false,
+      seekingVideo: false,
       mediaStatus: 'error',
       mediaError: text
     });
@@ -368,7 +383,6 @@ Page({
     var run = function () {
       self.session.attachVideo();
       if (autoplay || self.data.playing) self.session.play();
-      if (self.pendingVideoSeek > 0.2) self.session.seek(self.pendingVideoSeek);
     };
     if (typeof wx !== 'undefined' && typeof wx.nextTick === 'function') wx.nextTick(run);
     else run();
@@ -478,7 +492,7 @@ Page({
 
     if (decision.replay) {
       this.session.seek(0);
-      this.setData({ currentTime: 0, seekValue: 0, curClock: '0:00', playing: true });
+      this.setData({ currentTime: 0, seekValue: 0, seekPercent: 0, curClock: '0:00', playing: true });
       this.session.play();
       return;
     }
@@ -500,50 +514,154 @@ Page({
   },
 
   clockPatch: function (cur, dur) {
-    var known = Number(dur) || 0;
-    var patch = {
+    var known = Number(dur) || this.data.duration || 0;
+    var seekMax = Math.max(1, Math.round(known) || 1);
+    return {
       currentTime: cur,
       duration: known,
+      seekMax: seekMax,
+      seekValue: Math.min(seekMax, Math.max(0, Math.round(cur))),
+      seekPercent: this.seekPercentOf(cur, known),
       curClock: progress.formatClock(cur),
       durClock: progress.formatClock(known)
     };
-    if (!this.scrubbing) {
-      patch.seekMax = Math.max(1, Math.round(known) || 1);
-      patch.seekValue = Math.min(patch.seekMax, Math.max(0, Math.round(cur)));
-    }
-    return patch;
   },
 
-  retainCurrent: function () {
-    if (!this.offline || !this.currentItem || !this._remoteSrc) return;
-    var self = this;
-    this.offline.retain(this.currentItem.id, this._remoteSrc, {
-      app: 'english',
-      kind: this.currentItem.kind
-    }).then(function (path) {
-      if (path) self.setData({ offlineNote: '已保存到本机，断网后仍可播放' });
+  seekPercentOf: function (cur, dur) {
+    var duration = Number(dur) || 0;
+    var time = Number(cur) || 0;
+    if (!(duration > 0)) return 0;
+    return Math.round(Math.min(1, Math.max(0, time / duration)) * 10000) / 100;
+  },
+
+  seekEcho: function (time) {
+    if (!this.seekHoldUntil) return false;
+    if (Date.now() >= this.seekHoldUntil) {
+      this.seekHoldUntil = 0;
+      return false;
+    }
+    if (Math.abs((Number(time) || 0) - (Number(this.seekHoldTime) || 0)) <= 1.5) {
+      this.seekHoldUntil = 0;
+      return false;
+    }
+    return true;
+  },
+
+  commitSeek: function (val) {
+    var duration = Number(this.data.duration) || 0;
+    var target = Math.min(duration || val, Math.max(0, val));
+    this.scrubbing = false;
+    this._scrubAt = 0;
+    this.seekHoldTime = target;
+    /* 只压住跳转后播放器回传的旧进度，1.2 秒后照常跟随真实时间 */
+    this.seekHoldUntil = Date.now() + 1200;
+    this.setData({
+      currentTime: target,
+      seekValue: Math.round(target),
+      seekPercent: this.seekPercentOf(target, duration),
+      curClock: progress.formatClock(target),
+      seekingVideo: false
     });
+    if (this.data.isVideo) this.seekVideo(target);
+    else this.session.seek(target);
   },
 
   onSeekStart: function () {
-    if (this.data.duration > 0) this.scrubbing = true;
+    if (Number(this.data.duration) > 0) {
+      this.scrubbing = true;
+      this._scrubAt = Date.now();
+    }
   },
 
   onSeekChanging: function (event) {
-    this.scrubbing = true;
+    /* 部分基础库点击或拖动不会先给 touchstart，这里兜底进入拖动状态，
+       让拖动过程中的时间显示跟着手指走 */
+    if (!this.scrubbing) {
+      if (!(Number(this.data.duration) > 0)) return;
+      this.scrubbing = true;
+    }
+    this._scrubAt = Date.now();
     var val = Number(event.detail && event.detail.value) || 0;
-    this.setData({ curClock: progress.formatClock(val) });
+    this.setData({
+      seekValue: val,
+      seekPercent: this.seekPercentOf(val, this.data.duration),
+      curClock: progress.formatClock(val)
+    });
   },
 
   onSeekChange: function (event) {
     var val = Number(event.detail && event.detail.value) || 0;
-    this.scrubbing = false;
-    this.session.seek(val);
-    this.setData({
-      currentTime: val,
-      seekValue: val,
-      curClock: progress.formatClock(val)
+    this.commitSeek(val, this.data.currentTime);
+  },
+
+  retainCurrent: function () {
+    if (!this.offline || !this.currentItem || !this._remoteSrc) return Promise.resolve('');
+    var item = this.currentItem;
+    var remoteSrc = this._remoteSrc;
+    if (this._retainPromises[item.id]) return this._retainPromises[item.id];
+    var self = this;
+    var promise = this.offline.retain(item.id, remoteSrc, {
+      app: 'english',
+      kind: item.kind
+    }).then(function (path) {
+      if (path && self.currentItem && self.currentItem.id === item.id) {
+        self.setData({ offlineNote: '已保存到本机，断网后仍可播放' });
+      }
+      return path;
+    }).then(function (path) {
+      delete self._retainPromises[item.id];
+      return path;
+    }, function () {
+      delete self._retainPromises[item.id];
+      return '';
     });
+    this._retainPromises[item.id] = promise;
+    return promise;
+  },
+
+  /* 拖动进度条 = 对当前 video 组件直接 seek。
+   * 不下载整段视频、不换 src、不重建节点、不暂停，也不等 bindtimeupdate 回传确认。
+   * 离线缓存仍由 retainCurrent 后台完成，只服务于「下次打开可以离线播」。 */
+  seekVideo: function (target) {
+    var item = this.currentItem;
+    if (!item || item.kind !== 'video') return false;
+    var applied = false;
+    if (this.session && typeof this.session.attachVideo === 'function') this.session.attachVideo();
+    if (this.session && typeof this.session.seek === 'function') {
+      applied = this.session.seek(target) !== false;
+    }
+    if (!applied) {
+      var context = this.resolveVideoContext();
+      if (context && typeof context.seek === 'function') {
+        try { context.seek(target); applied = true; } catch (err) { applied = false; }
+      }
+    }
+    if (!applied) this.setData({ offlineNote: '跳转失败，请重试' });
+    return applied;
+  },
+
+  /* selectorQuery.context 是异步的，提前预热缓存，作为页面级兜底通道 */
+  warmVideoContext: function () {
+    var self = this;
+    if (typeof wx === 'undefined' || typeof wx.createSelectorQuery !== 'function') return;
+    var query = wx.createSelectorQuery().in(this).select('#english-video');
+    if (!query || typeof query.context !== 'function') return;
+    query.context(function (result) {
+      var found = result && result.context;
+      if (found && typeof found.seek === 'function') self._mountedVideoContext = found;
+    }).exec();
+  },
+
+  resolveVideoContext: function () {
+    if (this._mountedVideoContext && typeof this._mountedVideoContext.seek === 'function') {
+      return this._mountedVideoContext;
+    }
+    if (typeof wx !== 'undefined' && typeof wx.createVideoContext === 'function') {
+      try { this._mountedVideoContext = wx.createVideoContext('english-video', this); }
+      catch (err) { return null; }
+    }
+    return this._mountedVideoContext && typeof this._mountedVideoContext.seek === 'function'
+      ? this._mountedVideoContext : null;
   },
 
   fitVideoFrame: function (videoWidth, videoHeight) {
@@ -584,22 +702,24 @@ Page({
     this.markMediaReady();
     if (dur > 0) this.setData(this.clockPatch(this.data.currentTime, dur));
     if (!this.data.videoFitted) this.fitVideoFrame(detail.width, detail.height);
-    if (this.pendingVideoSeek && this.pendingVideoSeek > 0.2) {
-      var target = progress.clampResumeTime(this.pendingVideoSeek, dur);
-      this.pendingVideoSeek = 0;
-      if (target > 0.2) this.session.seek(target);
-    }
-    if (this.data.playing) {
-      this.session.attachVideo();
-      this.session.play();
-    }
+    this.session.attachVideo();
+    this.warmVideoContext();
+    /* 打开视频时的断点恢复由 <video initial-time> 负责，这里只清掉标记 */
+    if (this.pendingVideoSeek && this.pendingVideoSeek > 0.2) this.pendingVideoSeek = 0;
+    if (this.data.playing) this.session.play();
   },
 
   onVideoTime: function (event) {
-    if (this.scrubbing) return;
+    if (this.scrubbing) {
+      /* 拖动意外中断时（没收到 bindchange）不让时间显示一直卡住 */
+      if (this._scrubAt && Date.now() - this._scrubAt < 1500) return;
+      this.scrubbing = false;
+      this._scrubAt = 0;
+    }
     var detail = (event && event.detail) || {};
     var time = Number(detail.currentTime) || 0;
     var dur = Number(detail.duration) || this.data.duration || 0;
+    if (this.seekEcho(time)) return;
     this.session.noteVideoTime(time, dur);
     var patch = this.clockPatch(time, dur);
     if (dur > 0 && this.data.mediaStatus === 'loading') {
@@ -607,6 +727,7 @@ Page({
       patch.mediaError = '';
       this.clearLoadWatch();
     }
+    if (this.data.seekingVideo) patch.seekingVideo = false;
     this.setData(patch);
   },
 
@@ -627,7 +748,8 @@ Page({
 
   onVideoEnded: function () {
     this.scrubbing = false;
-    this.setData({ playing: false, currentTime: 0, seekValue: 0, curClock: '0:00' });
+    this.seekHoldUntil = 0;
+    this.setData({ playing: false, currentTime: 0, seekValue: 0, seekPercent: 0, curClock: '0:00' });
     this.step(1, true);
   },
 

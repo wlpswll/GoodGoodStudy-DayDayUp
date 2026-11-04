@@ -57,6 +57,7 @@
           </view>
           <text class="poem-author">{{poem.authorLabel}}</text>
           <text wx:if="{{offlineNote}}" class="poem-note">{{offlineNote}}</text>
+          <text wx:if="{{audioError}}" class="poem-note poem-note-error" bindtap="onRetryAudio">{{audioError}} · 点此重试</text>
 
           <view class="poem-lines">
             <view
@@ -121,19 +122,18 @@
           <text class="mode-ico">{{playModeIcon}}</text>
         </view>
         <text class="time">{{curClock}}</text>
-        <slider
+        <view
           class="seek"
-          min="0"
-          max="{{duration || 100}}"
-          step="0.1"
-          value="{{currentTime}}"
-          activeColor="#9c6b3f"
-          backgroundColor="rgba(120,100,75,0.25)"
-          block-color="#9c6b3f"
-          block-size="16"
-          bindchanging="onSeekChanging"
-          bindchange="onSeekChange"
-        />
+          catchtouchstart="onSeekTouchStart"
+          catchtouchmove="onSeekTouchMove"
+          catchtouchend="onSeekTouchEnd"
+          catchtouchcancel="onSeekTouchEnd"
+        >
+          <view class="seek-track">
+            <view class="seek-fill" style="width: {{seekPercent}}%;"></view>
+            <view class="seek-thumb" style="left: {{seekPercent}}%;"></view>
+          </view>
+        </view>
         <text class="time">{{durClock}}</text>
         <view class="speed-btn {{rate !== 1 ? 'active' : ''}}" bindtap="onCycleRate">{{rateLabel}}</view>
       </view>

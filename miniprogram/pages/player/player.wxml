@@ -110,7 +110,7 @@
         <text class="stage-retry">点此重试</text>
       </view>
       <video
-        wx:if="{{isVideo && videoSrc && mediaStatus !== 'error'}}"
+        wx:if="{{isVideo && videoMounted && videoSrc && mediaStatus !== 'error'}}"
         id="english-video"
         class="stage-video"
         style="{{videoFitted ? 'width:' + stageWidth + 'px;height:' + stageHeight + 'px;' : ''}}"
@@ -132,6 +132,10 @@
         binderror="onVideoError"
         bindfullscreenchange="onFullScreenChange"
       ></video>
+      <view wx:if="{{isVideo && seekingVideo}}" class="seek-transition">
+        <view class="seek-transition-mark">英</view>
+        <text class="seek-transition-text">正在跳转…</text>
+      </view>
       <view wx:if="{{!isVideo}}" class="stage-audio">
         <view class="disc {{playing ? 'spinning' : ''}}">
           <view class="disc-core">英</view>
@@ -146,13 +150,17 @@
 
     <!-- 当前播放标题区 -->
     <view class="now">
-      <text class="now-kind">{{kind}}</text>
-      <text class="now-h2">{{title}}</text>
-      <text class="now-folder">{{folder}}</text>
-      <text wx:if="{{mediaStatus === 'loading'}}" class="resume-hint">加载中…</text>
-      <text wx:elif="{{restoredHint}}" class="resume-hint">已回到上次播放的位置</text>
-      <text wx:if="{{offlineNote}}" class="resume-hint">{{offlineNote}}</text>
-      <text wx:if="{{mediaError}}" class="media-error">{{mediaError}}</text>
+      <view class="now-main">
+        <text class="now-kind">{{kind}}</text>
+        <text class="now-h2">{{title}}</text>
+      </view>
+      <view class="now-meta">
+        <text class="now-folder">{{folder}}</text>
+        <text wx:if="{{mediaStatus === 'loading'}}" class="resume-hint">加载中…</text>
+        <text wx:elif="{{restoredHint}}" class="resume-hint">已回到上次位置</text>
+        <text wx:if="{{offlineNote}}" class="resume-hint">{{offlineNote}}</text>
+        <text wx:if="{{mediaError}}" class="media-error">{{mediaError}}</text>
+      </view>
     </view>
 
     <!-- 底部控制栏（与 H5 布局完全一致：上一课/播放暂停/下一课 + 模式Icon/进度条/倍速菜单） -->
@@ -198,24 +206,23 @@
           <text class="mode-ico">{{playModeIcon}}</text>
         </view>
 
-        <text class="time">{{curClock}}</text>
+        <text class="time time-cur">{{curClock}}</text>
         <slider
           class="seek"
           min="0"
           max="{{seekMax}}"
           step="1"
           value="{{seekValue}}"
-          disabled="{{duration <= 0}}"
+          disabled="{{seekMax <= 1}}"
           activeColor="#9c6b3f"
-          backgroundColor="#d9cbb3"
+          backgroundColor="#c9b498"
           block-color="#9c6b3f"
-          block-size="22"
-          catchtouchmove="noop"
+          block-size="20"
           bindtouchstart="onSeekStart"
           bindchanging="onSeekChanging"
           bindchange="onSeekChange"
         />
-        <text class="time">{{durClock}}</text>
+        <text class="time time-dur">{{durClock}}</text>
 
         <view class="speed-wrap">
           <view

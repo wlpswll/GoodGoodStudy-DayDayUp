@@ -242,8 +242,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 14rpx;
-  height: 96rpx;
-  padding: 0 28rpx;
+  height: 84rpx;
+  padding: 0 24rpx;
   flex: none;
 }
 .top-btn {
@@ -258,8 +258,8 @@
   background: rgba(255,255,255,0.35);
 }
 .top-btn-icon {
-  width: 68rpx;
-  height: 68rpx;
+  width: 60rpx;
+  height: 60rpx;
   padding: 0;
   justify-content: center;
   flex: none;
@@ -277,8 +277,8 @@
   position: relative;
   flex: 1 1 0;
   min-height: 0;
-  margin: 0 32rpx;
-  border-radius: 36rpx;
+  margin: 0 24rpx;
+  border-radius: 30rpx;
   overflow: hidden;
   background: #1c1814;
   display: flex;
@@ -290,6 +290,38 @@
   height: 100%;
   background: #111;
   display: block;
+}
+.seek-transition {
+  position: absolute;
+  z-index: 12;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #f3ead7;
+  color: #7d4f22;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.seek-transition-mark {
+  width: 72rpx;
+  height: 72rpx;
+  border: 3rpx solid #b4452f;
+  border-radius: 14rpx;
+  color: #b4452f;
+  font-family: var(--kai);
+  font-size: 40rpx;
+  line-height: 72rpx;
+  text-align: center;
+  transform: rotate(-5deg);
+}
+.seek-transition-text {
+  margin-top: 22rpx;
+  font-family: var(--sans);
+  font-size: 26rpx;
 }
 .stage-float {
   position: absolute;
@@ -338,7 +370,7 @@
   flex: 1 1 auto;
   align-self: center;
   width: auto;
-  max-width: calc(100% - 48rpx);
+  max-width: calc(100% - 32rpx);
   min-height: 52vh;
 }
 .stage.is-video.is-fitted {
@@ -389,54 +421,89 @@
 
 .now {
   flex: none;
-  padding: 22rpx 36rpx 0;
-  text-align: center;
+  margin: 10rpx 32rpx 0;
+  padding: 10rpx 14rpx;
+  border-top: 2rpx solid rgba(120,100,75,0.16);
+  border-bottom: 2rpx solid rgba(120,100,75,0.12);
+  text-align: left;
+}
+.now-main {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
 }
 .now-kind {
-  display: block;
+  flex: none;
+  padding: 3rpx 10rpx;
+  border-radius: 10rpx;
+  background: rgba(156,107,63,0.12);
   font-family: var(--sans);
-  font-size: 22rpx;
-  letter-spacing: 6rpx;
-  color: #a07a4e;
+  font-size: 20rpx;
+  letter-spacing: 2rpx;
+  color: #8a5d34;
 }
 .now-h2 {
-  display: block;
-  margin: 8rpx 0;
+  flex: 1;
+  min-width: 0;
+  margin: 0;
   font-family: var(--kai);
-  font-size: 44rpx;
+  font-size: 36rpx;
   font-weight: 600;
   letter-spacing: 2rpx;
-  line-height: 1.35;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.now-meta {
+  min-width: 0;
+  min-height: 28rpx;
+  margin-top: 4rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
 }
 .now-folder {
-  display: block;
+  flex: 1;
+  min-width: 0;
   font-family: var(--sans);
-  font-size: 24rpx;
+  font-size: 21rpx;
   color: #8a7358;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .resume-hint, .media-error {
-  display: block;
-  margin-top: 12rpx;
+  flex: none;
+  max-width: 48%;
+  margin: 0;
   font-family: var(--sans);
-  font-size: 24rpx;
+  font-size: 21rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .resume-hint { color: #7d4f22; }
 .media-error { color: #b4452f; }
 
 /* ===== 底部控制器 (Controls · 与 H5 一致) ===== */
 .controls {
+  position: relative;
+  z-index: 8;
   flex: none;
-  padding: 16rpx 32rpx 36rpx;
+  padding: 8rpx 32rpx 36px;
 }
 .transport {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 56rpx;
+  gap: 48rpx;
 }
 .step-btn {
-  width: 84rpx;
-  height: 84rpx;
+  width: 74rpx;
+  height: 74rpx;
   border-radius: 50%;
   border: 2rpx solid rgba(120,100,75,0.28);
   display: flex;
@@ -471,8 +538,8 @@
 }
 
 .play-btn {
-  width: 124rpx;
-  height: 124rpx;
+  width: 108rpx;
+  height: 108rpx;
   border-radius: 50%;
   background: #9c6b3f;
   color: #fff;
@@ -500,73 +567,83 @@
   border-radius: 4rpx;
 }
 
+/* 进度条行：两端功能键同规格，时间与轨道成一组，避免一头重一头轻 */
 .seek-row {
   display: flex;
   align-items: center;
-  gap: 14rpx;
-  margin-top: 16rpx;
-}
-.mode-btn {
-  flex: none;
-  width: 64rpx;
-  height: 60rpx;
+  gap: 10rpx;
+  margin-top: 12rpx;
+  /* 常驻浅色底板：整行成为一组，不依赖倍速/播放模式状态也能一眼分辨 */
+  padding: 8rpx 14rpx;
   border-radius: 20rpx;
-  border: 2rpx solid rgba(120,100,75,0.3);
-  background: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.42);
+  border: 2rpx solid rgba(120,100,75,0.16);
+}
+.mode-btn,
+.speed-btn {
+  flex: none;
+  height: 56rpx;
+  border-radius: 18rpx;
+  border: 2rpx solid rgba(120,100,75,0.26);
+  background: rgba(255,255,255,0.62);
   color: #6b6154;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease;
 }
-.mode-btn.active {
-  background: #9c6b3f;
-  color: #fff;
-  border-color: #9c6b3f;
+.mode-btn {
+  width: 56rpx;
+  padding: 0;
+  margin-right: 6rpx;
+}
+.speed-btn {
+  min-width: 88rpx;
+  padding: 0 14rpx;
+  font-family: var(--sans);
+  font-size: 23rpx;
+}
+/* 激活态用淡底描边，不填实心，两端始终对称 */
+.mode-btn.active,
+.speed-btn.active {
+  background: rgba(156,107,63,0.12);
+  border-color: rgba(156,107,63,0.55);
+  color: #8a5d34;
+  font-weight: 600;
 }
 .mode-ico {
-  font-size: 28rpx;
+  font-size: 26rpx;
   line-height: 1;
 }
 
 .time {
+  flex: none;
+  min-width: 72rpx;
   font-family: var(--sans);
   font-size: 22rpx;
-  color: #6b6154;
-  min-width: 68rpx;
-  text-align: center;
+  line-height: 1;
+  color: #8a7358;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
+.time-cur { text-align: right; }
+.time-dur { text-align: left; }
 .seek {
   flex: 1;
-  min-width: 120rpx;
-  margin: 0 6rpx;
+  min-width: 140rpx;
+  height: 64rpx;
+  margin: 0;
 }
 
 .speed-wrap {
   position: relative;
   flex: none;
-}
-.speed-btn {
-  min-width: 92rpx;
-  height: 60rpx;
-  padding: 0 16rpx;
-  border-radius: 20rpx;
-  border: 2rpx solid rgba(120,100,75,0.3);
-  background: rgba(255,255,255,0.55);
-  font-family: var(--sans);
-  font-size: 24rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.speed-btn.active {
-  background: #9c6b3f;
-  color: #fff;
-  border-color: #9c6b3f;
+  margin-left: 6rpx;
 }
 .speed-menu {
   position: absolute;
   right: 0;
-  bottom: 72rpx;
+  bottom: 68rpx;
   display: flex;
   flex-direction: column;
   gap: 8rpx;
@@ -644,5 +721,6 @@
   font-size: 28rpx;
 }
 .btn-press {
-  transform: scale(0.96);
+  transform: scale(0.94);
+  opacity: 0.8;
 }

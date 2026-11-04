@@ -83,12 +83,16 @@ window.__withSC = function (url) {
     </div>
 
     <div class="now">
-      <p class="now-kind" id="nowKind">音频</p>
-      <h2 id="nowTitle">选择一课</h2>
-      <p class="now-folder" id="nowFolder"></p>
-      <p class="resume-hint" id="resumeHint" hidden>已回到上次播放的位置</p>
-      <p class="resume-hint" id="offlineHint" hidden></p>
-      <p class="media-error" id="mediaError" hidden></p>
+      <div class="now-main">
+        <p class="now-kind" id="nowKind">音频</p>
+        <h2 id="nowTitle">选择一课</h2>
+      </div>
+      <div class="now-meta">
+        <p class="now-folder" id="nowFolder"></p>
+        <p class="resume-hint" id="resumeHint" hidden>已回到上次位置</p>
+        <p class="resume-hint" id="offlineHint" hidden></p>
+        <p class="media-error" id="mediaError" hidden></p>
+      </div>
     </div>
 
     <footer class="controls">
@@ -111,9 +115,9 @@ window.__withSC = function (url) {
           <svg class="ico-mode ico-loop-one" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/><path d="M11 10h1v4"/></svg>
           <svg class="ico-mode ico-shuffle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
         </button>
-        <span class="time" id="curTime">0:00</span>
+        <span class="time time-cur" id="curTime">0:00</span>
         <input type="range" id="seek" min="0" max="100" value="0" step="0.1" aria-label="播放进度，可拖动">
-        <span class="time" id="durTime">0:00</span>
+        <span class="time time-dur" id="durTime">0:00</span>
         <div class="speed-wrap" id="speedWrap">
           <button type="button" class="speed-btn" id="speedBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="选择倍速，当前 1 倍">1×</button>
           <div class="speed-menu" id="speedMenu" role="listbox" aria-label="倍速" hidden></div>
@@ -142,7 +146,7 @@ window.__withSC = function (url) {
 </div>
 <script>
 (function () {
-  var files = ['../shared/offline-policy.js?v=2', '../shared/offline-media.js?v=2', 'js/platform.js', 'js/catalog.js', 'js/progress.js?v=7', 'js/app.js?v=12'];
+  var files = ['../shared/offline-policy.js?v=2', '../shared/offline-media.js?v=2', 'js/platform.js', 'js/catalog.js', 'js/progress.js?v=7', 'js/app.js?v=13'];
   function load(index) {
     if (index >= files.length) return;
     var script = document.createElement('script');

@@ -95,3 +95,14 @@ test('小程序保存本地路径，文件丢失后不再命中', async function
   assert.equal(store.lookup('poem-1'), '');
   assert.equal(wxApi.getStorageSync(mini.INDEX_KEY).length, 0);
 });
+
+test('文件还在但真机解不出来时，forget 删文件并移出索引', async function () {
+  const wxApi = fakeWx();
+  const store = mini.createMiniOffline({ wx: wxApi });
+  const path = await store.retain('poem-1', 'https://cdn.example/p1.m4a', { app: 'gushi', kind: 'audio' });
+  assert.equal(store.lookup('poem-1'), path);
+  assert.equal(store.forget('poem-1'), true);
+  assert.equal(wxApi.files[path], undefined);
+  assert.equal(store.lookup('poem-1'), '');
+  assert.equal(store.forget('poem-1'), false);
+});

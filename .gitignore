@@ -10,3 +10,6 @@ node_modules/
 .web-inspection/playwright/node_modules/
 .web-inspection/playwright/test-results/
 .web-inspection/playwright/playwright-report/
+
+# 微信开发者工具本地私有配置
+miniprogram/project.private.config.json

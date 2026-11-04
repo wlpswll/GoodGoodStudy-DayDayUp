@@ -538,8 +538,21 @@
     state.scrubbing = false;
     state.scrubTime = null;
     if (!Number.isFinite(time) || !state.current) return;
-    state.pendingSeek = time;
-    try { activeMedia().currentTime = time; } catch (err) { /* 松手时再跳一次 */ }
+    seekTo(time);
+  }
+
+  /* 拖动进度条只改 currentTime，保持当前播放地址。
+   * 离线缓存由 play 事件后台写入，只用于下次打开时离线播放，不参与跳转。 */
+  function seekTo(time) {
+    if (!state.current) return;
+    var media = activeMedia();
+    if (!media) return;
+    var now = Date.now();
+    /* pointerup 与 change 会连着上报同一次拖动，合并成一次跳转 */
+    if (state.lastSeek && state.lastSeek.time === time && now - state.lastSeek.at < 400) return;
+    state.lastSeek = { time: time, at: now };
+    state.pendingSeek = null;
+    try { media.currentTime = time; } catch (err) { /* 极少数格式不支持时保持原位 */ }
     updateProgress(time);
     saveNow(true);
   }
@@ -602,7 +615,6 @@
     el.seek.addEventListener('pointerdown', function () { state.scrubbing = true; });
     el.seek.addEventListener('input', function (event) {
       if (state.writingSeek) return;
-      if (event && event.isTrusted === false) return;
       var media = activeMedia();
       var duration = media.duration;
       if (!Number.isFinite(duration) || duration <= 0) return;
@@ -618,10 +630,19 @@
       }
       state.scrubTime = time;
       state.pendingSeek = null;
-      try { media.currentTime = time; } catch (err) { /* 缓冲不够时松手再跳 */ }
     });
-    ['change', 'pointerup', 'pointercancel', 'touchend', 'mouseup'].forEach(function (name) {
+    ['pointerup', 'pointercancel', 'touchend', 'mouseup'].forEach(function (name) {
       el.seek.addEventListener(name, finishScrub);
+    });
+    el.seek.addEventListener('change', function (event) {
+      if (state.scrubbing) return;
+      if (state.writingSeek) return;
+      var media = activeMedia();
+      var duration = media.duration;
+      if (!Number.isFinite(duration) || duration <= 0) return;
+      var time = parseFloat(el.seek.value);
+      if (!Number.isFinite(time)) return;
+      seekTo(time);
     });
 
     onMediaEvent('loadedmetadata', function () {

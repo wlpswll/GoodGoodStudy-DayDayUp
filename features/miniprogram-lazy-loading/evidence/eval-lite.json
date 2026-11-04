@@ -1,0 +1,11 @@
+{
+  "feature_id": "miniprogram-lazy-loading",
+  "status": "FAIL",
+  "release_allowed": false,
+  "verify_summary": "Summary: 7 PASS / 0 WARN / 0 FAIL / 3 SKIP (total 10)",
+  "verify_result": "Result:  PASSED",
+  "changed_files": ["english/data/media.json","harness/TASK_BOARD.md","miniprogram/app.json","miniprogram/project.config.json","miniprogram/shared/media-data.js","tests/miniprogram-adapter.test.js"],
+  "declared_scope": ["miniprogram/app.json`","`tests/miniprogram-adapter.test.js`。"],
+  "out_of_scope_files": ["english/data/media.json","harness/TASK_BOARD.md","miniprogram/app.json","miniprogram/project.config.json","miniprogram/shared/media-data.js","tests/miniprogram-adapter.test.js"],
+  "warnings": ["检测到超出 Intent Snapshot 声明范围的 diff 文件"]
+}
