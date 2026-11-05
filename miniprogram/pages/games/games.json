@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "轻松一刻 · 益智小游戏"
+  "navigationBarTitleText": "轻松一刻 · 益智小游戏",
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/index"
+  }
 }

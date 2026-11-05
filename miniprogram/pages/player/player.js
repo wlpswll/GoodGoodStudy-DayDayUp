@@ -6,6 +6,7 @@ var mediaData = require('../../shared/media-data.js');
 var config = require('../../shared/config.js');
 var adapter = require('../../player-adapter.js');
 var offlineStore = require('../../shared/offline-store.js');
+var navMetrics = require('../../shared/nav-metrics.js');
 
 var PLAY_MODE_ICONS = {
   'sequence': '⇥',
@@ -16,6 +17,7 @@ var PLAY_MODE_ICONS = {
 
 Page({
   data: {
+    navHeight: navMetrics.FALLBACK_STATUS + navMetrics.FALLBACK_CONTENT,
     mediaBaseUrl: config.ENGLISH_BASE_URL,
     view: 'library', // 'library' | 'player'
     totalCount: 0,
@@ -72,10 +74,12 @@ Page({
     playMode: progress.DEFAULT_PLAY_MODE,
     playModeLabel: progress.formatPlayMode(progress.DEFAULT_PLAY_MODE),
     playModeIcon: PLAY_MODE_ICONS[progress.DEFAULT_PLAY_MODE],
-    maxLabel: '最大窗口'
+    maxLabel: '最大窗口',
+    fullscreen: false
   },
 
   onLoad: function () {
+    this.setData({ navHeight: navMetrics.metrics().navHeight });
     var storage = platform.createStorage({ wx: typeof wx !== 'undefined' ? wx : null });
     var saved = progress.readProgress(storage);
     var self = this;
@@ -112,6 +116,7 @@ Page({
       onCanplay: function () {
         self.markMediaReady();
         self.retainCurrent();
+        self.pullBackFromTail();
       },
       onWaiting: function () {
         if (!self.data.duration && self.data.mediaStatus !== 'error') {
@@ -119,8 +124,9 @@ Page({
         }
       },
       onTimeUpdate: function (cur, dur) {
-        if (self.scrubbing || self.seekEcho(cur)) return;
         var knownDur = dur || self.data.duration || 0;
+        self.noteResumeProgress(cur, knownDur);
+        if (self.scrubbing || self.seekEcho(cur)) return;
         var patch = self.clockPatch(cur, knownDur);
         if ((knownDur > 0 || cur > 0) && self.data.mediaStatus === 'loading') {
           patch.mediaStatus = 'ready';
@@ -132,8 +138,13 @@ Page({
       onEnded: function () {
         self.scrubbing = false;
         self.seekHoldUntil = 0;
+        if (self.shouldIgnoreEnd()) {
+          self.restartFromHead();
+          return;
+        }
         self.setData({ playing: false, currentTime: 0, seekValue: 0, seekPercent: 0, curClock: '0:00' });
         self.step(1, true);
+        if (self.session && self.session.clearEnded) self.session.clearEnded();
       },
       onError: function () {
         self.failMedia('当前音频加载失败，请检查网络后重试');
@@ -291,6 +302,11 @@ Page({
     this.seekHoldUntil = 0;
     this._seekRect = null;
     this._seekDraft = 0;
+    this._headRestarts = 0;
+    this._ignoreEndUntil = 0;
+    this._pulledFromTail = false;
+    this._resumeGuard = safeSeek > 0.2;
+    this._resumeAutoplay = Boolean(opts.autoplay);
     var self = this;
     this.setData({
       view: opts.stayLibrary ? 'library' : 'player',
@@ -303,6 +319,7 @@ Page({
       videoInitial: safeSeek,
       videoMounted: true,
       seekingVideo: false,
+      fullscreen: false,
       playing: Boolean(opts.autoplay),
       currentTime: safeSeek,
       duration: 0,
@@ -352,6 +369,7 @@ Page({
     this.setData({
       playing: false,
       seekingVideo: false,
+      fullscreen: false,
       mediaStatus: 'error',
       mediaError: text
     });
@@ -488,7 +506,13 @@ Page({
     }
     var reason = fromEnded ? 'ended' : (delta < 0 ? 'prev' : 'next');
     var decision = progress.pickNextIndex(index, queue.length, this.data.playMode, reason);
-    if (decision.index < 0) return;
+    if (decision.index < 0) {
+      if (fromEnded && this.session) {
+        this.session.seek(0);
+        this.setData({ playing: false, currentTime: 0, seekValue: 0, seekPercent: 0, curClock: '0:00' });
+      }
+      return;
+    }
 
     if (decision.replay) {
       this.session.seek(0);
@@ -696,10 +720,75 @@ Page({
       });
   },
 
+  noteResumeProgress: function (cur, dur) {
+    if (!this._resumeGuard || !(dur > 1) || !(cur < dur - 1.25)) return;
+    this._resumeGuard = false;
+    this._headRestarts = 0;
+  },
+
+  shouldIgnoreEnd: function () {
+    if (this._ignoreEndUntil && Date.now() < this._ignoreEndUntil) return true;
+    return Boolean(this._resumeGuard);
+  },
+
+  /* 断点停在结尾时，从 0 重播当前课，不要马上再切到下一条。 */
+  restartFromHead: function () {
+    this._headRestarts = (this._headRestarts || 0) + 1;
+    if (this._headRestarts > 3) {
+      this._resumeGuard = false;
+      this._ignoreEndUntil = 0;
+      if (this.session && this.session.clearEnded) this.session.clearEnded();
+      if (this.session) this.session.pause();
+      this.setData({ playing: false, currentTime: 0, seekValue: 0, seekPercent: 0, curClock: '0:00', videoInitial: 0, restoredHint: false });
+      return;
+    }
+    this._resumeGuard = false;
+    this._ignoreEndUntil = Date.now() + 1200;
+    if (this.session && this.session.markEnded) this.session.markEnded();
+    this.setData({
+      currentTime: 0,
+      seekValue: 0,
+      seekPercent: 0,
+      curClock: '0:00',
+      videoInitial: 0,
+      restoredHint: false,
+      playing: Boolean(this._resumeAutoplay)
+    });
+    if (!this.session) return;
+    this.session.seek(0);
+    if (this.session.clearEnded) this.session.clearEnded();
+    if (this._resumeAutoplay) this.session.play();
+  },
+
+  pullBackFromTail: function () {
+    if (!this._resumeGuard || !this.session || !this.session.getDuration) return;
+    var dur = this.session.getDuration();
+    var cur = this.session.getCurrentTime ? this.session.getCurrentTime() : 0;
+    if (!(dur > 0) || cur <= 0.2 || cur < dur - 0.75) return;
+    this.restartFromHead();
+  },
+
   onVideoLoadedMeta: function (event) {
     var detail = (event && event.detail) || {};
     var dur = Number(detail.duration) || 0;
     this.markMediaReady();
+    if (this._pulledFromTail) {
+      this.pendingVideoSeek = 0;
+      if (dur > 0) this.setData(this.clockPatch(0, dur));
+      if (!this.data.videoFitted) this.fitVideoFrame(detail.width, detail.height);
+      this.session.attachVideo();
+      this.warmVideoContext();
+      return;
+    }
+    var start = Number(this.data.videoInitial) || Number(this.pendingVideoSeek) || 0;
+    if (dur > 0 && start > 0.2 && start >= dur - 0.75) {
+      this._pulledFromTail = true;
+      this.pendingVideoSeek = 0;
+      this._resumeGuard = true;
+      this.restartFromHead();
+      if (!this.data.videoFitted) this.fitVideoFrame(detail.width, detail.height);
+      return;
+    }
     if (dur > 0) this.setData(this.clockPatch(this.data.currentTime, dur));
     if (!this.data.videoFitted) this.fitVideoFrame(detail.width, detail.height);
     this.session.attachVideo();
@@ -719,6 +808,7 @@ Page({
     var detail = (event && event.detail) || {};
     var time = Number(detail.currentTime) || 0;
     var dur = Number(detail.duration) || this.data.duration || 0;
+    this.noteResumeProgress(time, dur);
     if (this.seekEcho(time)) return;
     this.session.noteVideoTime(time, dur);
     var patch = this.clockPatch(time, dur);
@@ -749,8 +839,15 @@ Page({
   onVideoEnded: function () {
     this.scrubbing = false;
     this.seekHoldUntil = 0;
+    if (this.shouldIgnoreEnd()) {
+      this.restartFromHead();
+      return;
+    }
+    if (this.session && this.session.markEnded) this.session.markEnded();
+    if (this.session) this.session.save();
     this.setData({ playing: false, currentTime: 0, seekValue: 0, seekPercent: 0, curClock: '0:00' });
     this.step(1, true);
+    if (this.session && this.session.clearEnded) this.session.clearEnded();
   },
 
   onVideoError: function (event) {
@@ -773,7 +870,10 @@ Page({
 
   onFullScreenChange: function (event) {
     var full = event.detail && (event.detail.fullScreen || event.detail.fullscreen);
-    this.setData({ maxLabel: full ? '还原窗口' : '最大窗口' });
+    this.setData({
+      fullscreen: Boolean(full),
+      maxLabel: full ? '还原窗口' : '最大窗口'
+    });
   },
 
   toggleSpeedMenu: function () {

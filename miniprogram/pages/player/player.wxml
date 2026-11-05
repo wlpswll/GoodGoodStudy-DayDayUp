@@ -1,6 +1,7 @@
 <view class="app">
+  <nav-bar title="英语跟读" />
   <!-- ==================== 1. 列表页 (Library View · 与 H5 一致) ==================== -->
-  <view wx:if="{{view === 'library'}}" class="view library">
+  <view wx:if="{{view === 'library'}}" class="view library" style="top: {{navHeight}}px">
     <view class="lib-head">
       <view class="cover-seal">英</view>
       <view class="lib-copy">
@@ -79,7 +80,7 @@
   </view>
 
   <!-- ==================== 2. 播放器页 (Player View · 与 H5 一致) ==================== -->
-  <view wx:else class="view player">
+  <view wx:else class="view player" style="top: {{navHeight}}px">
     <view class="topbar">
       <view class="top-btn" hover-class="btn-press" bindtap="openCatalog">
         <text class="top-ico">☰</text>
@@ -117,11 +118,11 @@
         src="{{videoSrc}}"
         initial-time="{{videoInitial}}"
         object-fit="contain"
-        controls="{{false}}"
+        controls="{{fullscreen}}"
         show-center-play-btn="{{false}}"
-        show-play-btn="{{false}}"
-        show-fullscreen-btn="{{false}}"
-        show-progress="{{false}}"
+        show-play-btn="{{fullscreen}}"
+        show-fullscreen-btn="{{fullscreen}}"
+        show-progress="{{fullscreen}}"
         enable-progress-gesture="{{false}}"
         bindloadedmetadata="onVideoLoadedMeta"
         bindtimeupdate="onVideoTime"

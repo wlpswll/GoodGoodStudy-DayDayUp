@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "一年级必背古诗 70 首",
-  "disableScroll": true
+  "disableScroll": true,
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/index"
+  }
 }

@@ -1,0 +1,18 @@
+<view class="nav-bar" style="height:{{navHeight}}px;background:{{bg}}">
+  <view class="nav-inner" style="margin-top:{{statusBarHeight}}px;height:{{contentHeight}}px">
+    <view class="nav-side" style="width:{{sideWidth}}px">
+      <view
+        wx:if="{{showHome}}"
+        class="nav-home"
+        hover-class="nav-home-press"
+        hover-stay-time="80"
+        bindtap="onHome"
+      >
+        <text class="nav-home-ico">⌂</text>
+        <text class="nav-home-txt">{{homeLabel}}</text>
+      </view>
+    </view>
+    <text class="nav-title">{{title}}</text>
+    <view class="nav-side" style="width:{{sideWidth}}px"></view>
+  </view>
+</view>

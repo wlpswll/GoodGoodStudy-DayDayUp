@@ -1,0 +1,63 @@
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.nav-side {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.nav-home {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border-radius: 15px;
+  border: 1px solid rgba(120, 100, 75, 0.18);
+  color: #2f2a24;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", sans-serif;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.nav-home-press {
+  background: rgba(120, 100, 75, 0.14);
+}
+
+.nav-home-ico {
+  font-size: 17px;
+  margin-right: 4px;
+}
+
+.nav-home-txt {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.nav-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #2f2a24;
+  font-family: "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif;
+  /* 左右占位要避开胶囊，中间可用宽度约 160px，字号不能再大，否则长标题会被截 */
+  font-size: 28rpx;
+  font-weight: 600;
+}

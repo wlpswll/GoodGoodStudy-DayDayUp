@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "英语跟读",
-  "disableScroll": true
+  "disableScroll": true,
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/index"
+  }
 }

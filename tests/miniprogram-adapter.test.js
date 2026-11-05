@@ -161,6 +161,7 @@ test('小程序页面可直接被微信环境加载，且不跨越小程序目�
   assert.match(playerWxml, /mediaStatus === 'loading'/);
   assert.match(playerWxml, /onRetryMedia/);
   assert.match(playerWxml, /<slider/);
+  assert.match(playerWxml, /controls="{{fullscreen}}"/);
   assert.match(playerWxml, /bindchange="onSeekChange"/);
   assert.match(playerWxml, /videoMounted/);
   assert.match(playerWxml, /class="now-main"/);
@@ -368,5 +369,42 @@ test('小程序页面可直接被微信环境加载，且不跨越小程序目�
     delete global.getCurrentPages;
     delete global.Page;
   }
+});
+
+test('播放结束后上一条进度记为 0，再打开不会停在结尾', function () {
+  const wxApi = fakeWx();
+  const snapshots = [];
+  const session = adapter.createMiniProgramPlayer({
+    wx: wxApi,
+    progress: progress,
+    catalog: catalog,
+    mediaBaseUrl: 'https://cdn.example/english',
+    onProgress: function (snapshot) { snapshots.push(snapshot); }
+  });
+  session.load({ id: 'a.mp3', kind: 'audio', src: 'a.mp3', title: 'A' });
+  wxApi.lastAudio.currentTime = 59.8;
+  wxApi.lastAudio._ended();
+  assert.equal(snapshots[snapshots.length - 1].mediaId, 'a.mp3');
+  assert.equal(snapshots[snapshots.length - 1].currentTime, 0);
+
+  session.load({ id: 'b.mp3', kind: 'audio', src: 'b.mp3', title: 'B' });
+  const finished = snapshots.filter(function (snap) { return snap.mediaId === 'a.mp3'; });
+  assert.equal(finished[finished.length - 1].currentTime, 0);
+  session.save();
+  assert.equal(snapshots[snapshots.length - 1].mediaId, 'b.mp3');
+  assert.equal(snapshots[snapshots.length - 1].currentTime, 0);
+
+  session.load({
+    id: '一上英语课本跟读视频/U1跟读.mp4',
+    kind: 'video',
+    src: '一上英语课本跟读视频/U1跟读.mp4'
+  });
+  session.noteVideoTime(99.5, 100);
+  session.save();
+  assert.equal(snapshots[snapshots.length - 1].currentTime, 99.5);
+  session.markEnded();
+  session.save();
+  assert.equal(snapshots[snapshots.length - 1].currentTime, 0);
+  session.destroy();
 });
 

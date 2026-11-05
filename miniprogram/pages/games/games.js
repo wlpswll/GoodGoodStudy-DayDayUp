@@ -1,8 +1,10 @@
 /* 轻松一刻 · 5 合 1 益智小游戏页面（支持 9/13/19 路真木纹 Canvas 围棋、13/15 路五子棋、三级难度 AI 与精选外部平台） */
 var engine = require('../../shared/games-engine.js');
+var navMetrics = require('../../shared/nav-metrics.js');
 
 Page({
   data: {
+    navHeight: navMetrics.FALLBACK_STATUS + navMetrics.FALLBACK_CONTENT,
     games: engine.GAMES,
     difficulties: engine.DIFFICULTIES,
     activeGame: 'weiqi',
@@ -54,6 +56,7 @@ Page({
   },
 
   onLoad: function (options) {
+    this.setData({ navHeight: navMetrics.metrics().navHeight });
     var targetId = (options && options.id) || 'weiqi';
     var exists = engine.GAMES.some(function (g) { return g.id === targetId; });
     if (!exists) targetId = 'weiqi';

@@ -131,6 +131,7 @@
   }
 
   function saveTime() {
+    if (state.reportZero) return 0;
     if (state.scrubbing && Number.isFinite(state.scrubTime)) return state.scrubTime;
     if (state.pendingSeek != null) return state.pendingSeek;
     try {
@@ -342,6 +343,10 @@
     if (time <= 0.2) {
       state.pendingSeek = null;
       state.seekAttempts = 0;
+      state.reportZero = true;
+      saveNow(true);
+      state.reportZero = false;
+      updateProgress(0);
       return;
     }
     if (Math.abs((media.currentTime || 0) - time) <= 0.5) {
@@ -405,6 +410,7 @@
     var opts = options || {};
     var same = state.current && state.current.id === item.id && activeMedia().getAttribute('src');
     if (state.current && state.current.id !== item.id) saveNow(true);
+    state.reportZero = false;
     var seekTime = opts.seekTime;
     if (seekTime == null) seekTime = progressApi.timeFor(progressApi.readProgress(state.storage), item.id);
     state.current = item;
@@ -435,7 +441,13 @@
     }
     var reason = fromEnded ? 'ended' : (delta < 0 ? 'prev' : 'next');
     var decision = progressApi.pickNextIndex(index, queue.length, state.playMode, reason);
-    if (decision.index < 0) return;
+    if (decision.index < 0) {
+      if (fromEnded) {
+        try { activeMedia().currentTime = 0; } catch (err) {}
+        updateProgress(0);
+      }
+      return;
+    }
     if (decision.replay) {
       var media = activeMedia();
       try { media.currentTime = 0; } catch (err) {}
@@ -683,8 +695,10 @@
     onMediaEvent('ended', function () {
       setPlaying(false);
       updateProgress(0);
+      state.reportZero = true;
       saveNow(true);
       step(1, true);
+      state.reportZero = false;
     });
     onMediaEvent('error', function () {
       setMediaLoading(false);

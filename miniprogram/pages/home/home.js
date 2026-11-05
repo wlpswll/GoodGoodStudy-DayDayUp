@@ -1,9 +1,15 @@
 /* 好好学习 · 天天向上 小程序首页 */
 var gamesEngine = require('../../shared/games-engine.js');
+var navMetrics = require('../../shared/nav-metrics.js');
 
 Page({
   data: {
-    games: gamesEngine.GAMES
+    games: gamesEngine.GAMES,
+    navHeight: navMetrics.FALLBACK_STATUS + navMetrics.FALLBACK_CONTENT
+  },
+
+  onLoad: function () {
+    this.setData({ navHeight: navMetrics.metrics().navHeight });
   },
 
   goGushi: function () {

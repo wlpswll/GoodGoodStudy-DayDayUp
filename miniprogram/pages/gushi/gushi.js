@@ -4,6 +4,7 @@ var poemsData = require('../../shared/poems-data.js');
 var platform = require('../../shared/platform.js');
 var config = require('../../shared/config.js');
 var offlineStore = require('../../shared/offline-store.js');
+var navMetrics = require('../../shared/nav-metrics.js');
 
 var RATE_KEY = 'gushi_rate';
 var PLAY_MODE_KEY = 'gushi_play_mode';
@@ -68,10 +69,12 @@ Page({
     query: '',
     groups: [],
     offlineNote: '',
-    audioError: ''
+    audioError: '',
+    navHeight: navMetrics.FALLBACK_STATUS + navMetrics.FALLBACK_CONTENT
   },
 
   onLoad: function (options) {
+    this.setData({ navHeight: navMetrics.metrics().navHeight });
     var storage = platform.createStorage({ wx: typeof wx !== 'undefined' ? wx : null });
     this.storage = storage;
     this.offline = offlineStore.createMiniOffline({ wx: typeof wx !== 'undefined' ? wx : null });

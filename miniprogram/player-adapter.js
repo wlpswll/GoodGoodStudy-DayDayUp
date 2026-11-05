@@ -22,6 +22,8 @@
     var videoTime = 0;
     var videoDuration = 0;
     var lastTick = 0;
+    /* 自然结束后播放器仍停在结尾。记进度前先把它当成 0，避免切回来立刻再次结束。 */
+    var reportZero = false;
 
     function srcOf(media) {
       if (media && media.offlineSrc) return media.offlineSrc;
@@ -45,6 +47,7 @@
     }
 
     function currentTime() {
+      if (reportZero) return 0;
       if (mode === 'audio' && audio) return Number(audio.currentTime) || 0;
       return videoTime;
     }
@@ -75,6 +78,7 @@
       load: function (media) {
         if (!media) return;
         note(true);
+        reportZero = false;
         item = media;
         videoTime = 0;
         videoDuration = 0;
@@ -121,6 +125,8 @@
           }
           if (typeof audio.onEnded === 'function') {
             audio.onEnded(function () {
+              reportZero = true;
+              videoTime = 0;
               note(true);
               if (opts.onStateChange) opts.onStateChange(false);
               if (opts.onEnded) opts.onEnded();
@@ -213,6 +219,13 @@
       getPlayMode: function () { return playMode; },
       getItem: function () { return item; },
       save: function () { note(true); },
+      markEnded: function () {
+        reportZero = true;
+        videoTime = 0;
+      },
+      clearEnded: function () {
+        reportZero = false;
+      },
       destroy: function () {
         note(true);
         destroyAudio();

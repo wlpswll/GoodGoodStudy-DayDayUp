@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "好好学习 · 天天向上"
+  "navigationBarTitleText": "好好学习 · 天天向上",
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/index"
+  }
 }

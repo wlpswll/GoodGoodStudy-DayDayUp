@@ -1,6 +1,7 @@
 <view class="app">
+  <nav-bar title="一年级必背古诗 70 首" />
   <!-- 封面 -->
-  <view wx:if="{{view === 'cover'}}" class="view cover">
+  <view wx:if="{{view === 'cover'}}" class="view cover" style="top: {{navHeight}}px">
     <view class="cover-wash"></view>
     <view class="cover-clouds">
       <view class="cloud c1"></view>
@@ -20,7 +21,7 @@
   </view>
 
   <!-- 诗页 -->
-  <view wx:else class="view poem scene-{{poem.scene}}">
+  <view wx:else class="view poem scene-{{poem.scene}}" style="top: {{navHeight}}px">
     <view class="scene-decor"></view>
 
     <view class="topbar">
