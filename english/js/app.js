@@ -430,6 +430,42 @@
     else updateMaxButton();
     if (opts.autoplay && same) tryPlay();
     saveNow(true);
+    if (!opts.fromRoute) setLessonHash(item.id);
+  }
+
+  function setLessonHash(id) {
+    var nextId = id ? String(id) : '';
+    var current = catalog.parseLessonHash(location.hash);
+    if (nextId && current.id === nextId) return;
+    if (!nextId && (location.hash === '#/' || location.hash === '#')) return;
+    var path = catalog.lessonHash(nextId);
+    try { history.pushState(null, '', location.pathname + location.search + path); }
+    catch (err) { location.hash = path; }
+  }
+
+  function route() {
+    if (!state.items.length) return;
+    var parsed = catalog.parseLessonHash(location.hash);
+    if (parsed.type === 'item') {
+      var item = catalog.findLesson(state.items, parsed.id);
+      if (item) {
+        if (state.current && state.current.id === item.id) return;
+        var time = progressApi.timeFor(progressApi.readProgress(state.storage), item.id);
+        openItem(item, {
+          seekTime: time,
+          restored: time > 0.2,
+          autoplay: false,
+          fromRoute: true
+        });
+        return;
+      }
+    }
+    if (state.current) {
+      saveNow(true);
+      try { activeMedia().pause(); } catch (err) { /* 尚未加载 */ }
+      exitMax();
+    }
+    showLibrary();
   }
 
   function step(delta, fromEnded) {
@@ -588,6 +624,7 @@
       saveNow(true);
       exitMax();
       try { activeMedia().pause(); } catch (err) { /* 尚未加载 */ }
+      setLessonHash('');
       showLibrary();
     });
     el.maxBtn.addEventListener('click', function (event) {
@@ -742,6 +779,17 @@
       else if (event.key === 'ArrowRight') step(1);
     });
 
+    var routeQueued = false;
+    function queueRoute() {
+      if (routeQueued) return;
+      routeQueued = true;
+      setTimeout(function () {
+        routeQueued = false;
+        route();
+      }, 0);
+    }
+    window.addEventListener('popstate', queueRoute);
+    window.addEventListener('hashchange', queueRoute);
     function warm() {
       try { el.audio.load(); el.video.load(); } catch (err) { /* 预热失败不影响点播 */ }
     }
@@ -768,8 +816,15 @@
     applyPlayMode(state.playMode, false);
     renderLists();
     updateResumeCard();
-    if (resume && resume.media) {
-      openItem(resume.media, { seekTime: resume.currentTime, restored: true, autoplay: false });
+    var parsed = catalog.parseLessonHash(location.hash);
+    var linked = parsed.type === 'item' ? catalog.findLesson(state.items, parsed.id) : null;
+    if (linked) {
+      var linkedTime = progressApi.timeFor(saved, linked.id);
+      openItem(linked, { seekTime: linkedTime, restored: linkedTime > 0.2, autoplay: false, fromRoute: true });
+    } else if (!location.hash || location.hash === '#') {
+      if (resume && resume.media) {
+        openItem(resume.media, { seekTime: resume.currentTime, restored: true, autoplay: false });
+      }
     }
     el.loading.classList.add('hide');
   }

@@ -50,6 +50,22 @@ test('地址按路径分段编码，保留目录斜杠', function () {
   );
 });
 
+test('地址可以打开指定的一课，课名唯一时也能对上', function () {
+  const items = [
+    { id: '一上英语课本跟读视频/U1跟读.mp4', title: 'U1跟读', kind: 'video' },
+    { id: '一上英语课本跟读mp3/U4 Story.MP3', title: 'U4 Story', kind: 'audio' },
+    { id: '一上英语课本跟读mp3/U4 Extend.MP3', title: 'U4 Extend', kind: 'audio' }
+  ];
+  const hash = catalog.lessonHash(items[0].id);
+  assert.equal(hash.indexOf('#/m/'), 0);
+  assert.equal(catalog.parseLessonHash(hash).id, items[0].id);
+  assert.equal(catalog.findLesson(items, items[0].id).title, 'U1跟读');
+  assert.equal(catalog.findLesson(items, 'U4 Story').id, items[1].id);
+  assert.equal(catalog.findLesson(items, '没有这一课'), null);
+  assert.equal(catalog.parseLessonHash('#/').type, 'library');
+  assert.equal(catalog.parseLessonHash('').type, 'library');
+});
+
 test('搜索能匹配课名和文件夹', function () {
   const item = { title: 'U1跟读', folder: '一上英语课本跟读视频', ext: 'mp4', kind: 'video' };
   assert.equal(catalog.matchesQuery(item, 'u1'), true);

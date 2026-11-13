@@ -78,8 +78,14 @@ Page({
     fullscreen: false
   },
 
-  onLoad: function () {
+  onLoad: function (options) {
     this.setData({ navHeight: navMetrics.metrics().navHeight });
+    this._linkedId = '';
+    if (options && options.id) {
+      var rawId = String(options.id);
+      try { this._linkedId = rawId.indexOf('%') >= 0 ? decodeURIComponent(rawId) : rawId; }
+      catch (err) { this._linkedId = rawId; }
+    }
     var storage = platform.createStorage({ wx: typeof wx !== 'undefined' ? wx : null });
     var saved = progress.readProgress(storage);
     var self = this;
@@ -187,7 +193,11 @@ Page({
     this.refreshLists();
     this.updateResumeCard();
 
-    if (resume && resume.media) {
+    var linked = this._linkedId ? catalog.findLesson(items, this._linkedId) : null;
+    if (linked) {
+      var linkedTime = progress.timeFor(this.saved, linked.id);
+      this.open(linked, linkedTime, { autoplay: false, restored: linkedTime > 0.2, stayLibrary: false });
+    } else if (resume && resume.media) {
       this.open(resume.media, resume.currentTime, { autoplay: false, restored: resume.currentTime > 0.2, stayLibrary: false });
     }
   },

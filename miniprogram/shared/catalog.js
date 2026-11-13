@@ -87,6 +87,41 @@
     return blob.indexOf(q) >= 0;
   }
 
+  /* 和古诗 #/p/编号 一样：#/m/课的 id。课名全站唯一时也可以写课名。 */
+  function lessonHash(id) {
+    if (!id) return '#/';
+    return '#/m/' + encodeURIComponent(String(id));
+  }
+
+  function parseLessonHash(hash) {
+    var text = String(hash || '');
+    if (text.charAt(0) === '#') text = text.slice(1);
+    if (!text || text === '/') return { type: 'library', id: '' };
+    var match = text.match(/^\/m\/(.*)$/);
+    if (!match) return { type: 'library', id: '' };
+    var raw = match[1];
+    try { raw = decodeURIComponent(raw); } catch (err) { /* 地址里有坏掉的百分号时保留原文 */ }
+    return raw ? { type: 'item', id: raw } : { type: 'library', id: '' };
+  }
+
+  function findLesson(items, key) {
+    var wanted = String(key || '');
+    if (!wanted) return null;
+    var titleHits = [];
+    var found = null;
+    (items || []).some(function (item) {
+      if (!item) return false;
+      if (item.id === wanted) {
+        found = item;
+        return true;
+      }
+      if (item.title === wanted) titleHits.push(item);
+      return false;
+    });
+    if (found) return found;
+    return titleHits.length === 1 ? titleHits[0] : null;
+  }
+
   function resolveSrc(item, baseUrl) {
     var src = String(item && item.src || '');
     var encoded = src.split('/').filter(function (part) { return part.length; }).map(function (part) {
@@ -105,6 +140,9 @@
     groupCatalog: groupCatalog,
     flattenKind: flattenKind,
     matchesQuery: matchesQuery,
+    lessonHash: lessonHash,
+    parseLessonHash: parseLessonHash,
+    findLesson: findLesson,
     resolveSrc: resolveSrc
   };
 });
