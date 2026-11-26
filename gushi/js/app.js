@@ -367,26 +367,7 @@
     }
   }
 
-  /* ---------- 手势与事件 ---------- */
-  var tsY = 0, tsX = 0;
-  function bindTouch() {
-    el.poemScroll.addEventListener('touchstart', function (e) {
-      if (e.touches.length !== 1) { tsY = 0; return; }
-      tsY = e.touches[0].clientY;
-      tsX = e.touches[0].clientX;
-    }, { passive: true });
-    el.poemScroll.addEventListener('touchend', function (e) {
-      if (!tsY) return;
-      var cy = e.changedTouches[0].clientY, cx = e.changedTouches[0].clientX;
-      var dy = tsY - cy, dx = tsX - cx;
-      tsY = 0;
-      if (Math.abs(dy) < 55 || Math.abs(dy) < Math.abs(dx) * 1.3) return;
-      var atTop = el.poemScroll.scrollTop <= 1;
-      var atBottom = el.poemScroll.scrollTop + el.poemScroll.clientHeight >= el.poemScroll.scrollHeight - 2;
-      if (dy > 0) { if (atBottom) navNext(); }
-      else { if (atTop) navPrev(); }
-    }, { passive: true });
-  }
+  /* 上下滑曾经用来翻上一首/下一首，但和诗卷滚动抢手势。暂时只保留底部按钮。 */
 
   function bind() {
     el.startBtn.addEventListener('click', function () { navTo(0, 'next', true); });
@@ -498,7 +479,6 @@
       navNext(true);
     });
 
-    bindTouch();
     document.addEventListener('keydown', function (e) {
       if (state.catalogOpen) { if (e.key === 'Escape') closeCatalog(); return; }
       if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); navNext(); }

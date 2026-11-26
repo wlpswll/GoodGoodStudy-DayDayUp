@@ -15,7 +15,7 @@
       <text class="cover-sub">一年级必背 · 看图 · 听朗读</text>
       <view class="cover-rule"></view>
       <view class="start-btn" hover-class="start-press" bindtap="onStart">开始诵读</view>
-      <text class="cover-hint">上滑翻下一首，下滑回到上一首</text>
+      <text class="cover-hint">用底部按钮切换上一首、下一首</text>
     </view>
     <text class="cover-foot">共 {{total}} 首 · 点目录可快速选诗</text>
   </view>
@@ -39,8 +39,6 @@
     <scroll-view
       scroll-y="true"
       class="poem-scroll"
-      bindtouchstart="onTouchStart"
-      bindtouchend="onTouchEnd"
     >
       <view class="scroll-inner">
         <view class="artwork" wx:if="{{poem.imageUrl}}">

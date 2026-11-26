@@ -580,24 +580,6 @@ Page({
     }
   },
 
-  onTouchStart: function (event) {
-    var touch = event.touches && event.touches[0];
-    if (!touch) return;
-    this.tsY = touch.clientY;
-    this.tsX = touch.clientX;
-  },
-
-  onTouchEnd: function (event) {
-    var touch = event.changedTouches && event.changedTouches[0];
-    if (!touch || !this.tsY) return;
-    var dy = this.tsY - touch.clientY;
-    var dx = this.tsX - touch.clientX;
-    this.tsY = 0;
-    if (Math.abs(dy) < 60 || Math.abs(dy) < Math.abs(dx) * 1.3) return;
-    if (dy > 0) this.onNext();
-    else this.onPrev();
-  },
-
   onHide: function () {
     if (this.audio && this.data.playing) {
       try { this.audio.pause(); } catch (e) {}
